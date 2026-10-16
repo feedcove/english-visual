@@ -11,6 +11,8 @@ export type Route =
   | { name: 'settings' }
   | { name: 'method' }
   | { name: 'mine' }
+  | { name: 'stories'; topic?: string; s?: number; f?: number }
+  | { name: 'kit' }
   | { name: 'gallery'; id?: string; focus?: string; view?: string }
 
 export function parseRoute(hash: string): Route {
@@ -34,6 +36,12 @@ export function parseRoute(hash: string): Route {
       return { name: 'method' }
     case 'mine':
       return { name: 'mine' }
+    case 'stories': {
+      const num = (k: string) => (params.has(k) ? Number(params.get(k)) : undefined)
+      return { name: 'stories', topic: parts[1], s: num('s'), f: num('f') }
+    }
+    case 'kit':
+      return { name: 'kit' }
     case 'gallery':
       return { name: 'gallery', id: parts[1], focus: params.get('focus') ?? undefined, view: params.get('view') ?? undefined }
     default:
@@ -51,6 +59,8 @@ export function href(route: Route): string {
       return `#/session/${route.kind}${route.topic ? `?topic=${encodeURIComponent(route.topic)}` : ''}`
     case 'gallery':
       return `#/gallery${route.id ? `/${route.id}` : ''}`
+    case 'stories':
+      return `#/stories${route.topic ? `/${route.topic}` : ''}`
     default:
       return `#/${route.name}`
   }

@@ -1,0 +1,130 @@
+/* Плеер картинок-историй. Префикс st-/story- уникален для иллюстраций. */
+.story {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+  outline: none;
+}
+
+.story:focus-visible {
+  outline: 2px solid var(--c1);
+  outline-offset: 4px;
+  border-radius: var(--r-card);
+}
+
+.story-title {
+  font-size: 17px;
+  line-height: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.story-scene {
+  all: unset;
+  display: block;
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  cursor: pointer;
+  animation: story-in var(--dur) cubic-bezier(0.2, 0.8, 0.2, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.story-scene:focus-visible {
+  outline: 2px solid var(--c1);
+  outline-offset: 2px;
+}
+
+.story-scene svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@keyframes story-in {
+  from {
+    opacity: 0;
+    transform: translateX(calc(10px * var(--m-move, 1)));
+  }
+}
+
+.story-caption {
+  display: grid;
+  gap: 4px;
+  min-height: 48px;
+}
+
+.story-en {
+  font-size: 19px;
+  line-height: 28px;
+  font-weight: 500;
+}
+
+.story-ru {
+  font-size: 15px;
+  line-height: 21px;
+  color: var(--c2);
+}
+
+.story[data-compact] .story-en {
+  font-size: 17px;
+  line-height: 25px;
+}
+
+.story[data-compact] .story-ru {
+  font-size: 14px;
+  line-height: 19px;
+}
+
+.story-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.story-arrow {
+  all: unset;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--n2);
+  color: var(--c1);
+  cursor: pointer;
+  --k-icon: 18px;
+}
+
+.story-arrow:disabled {
+  background: transparent;
+  color: var(--c4);
+  cursor: default;
+}
+
+.story-arrow:focus-visible {
+  outline: 2px solid var(--c1);
+}
+
+.story-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.story-dot {
+  all: unset;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--n4);
+  cursor: pointer;
+}
+
+.story-dot[data-on] {
+  background: var(--c1);
+}
+
+.story-dot:focus-visible {
+  outline: 2px solid var(--c1);
+  outline-offset: 2px;
+}

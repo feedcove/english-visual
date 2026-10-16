@@ -18,6 +18,8 @@ import { href, navigate } from '../router'
 import { Button, Progress } from '../ui/kit'
 import { Icon } from '../ui/icons'
 import { Sentence } from '../ui/Sentence'
+import { storiesFor } from '../illustrations'
+import { StoryPlayer } from '../illustrations/StoryPlayer'
 import { Visual } from '../visuals'
 
 const lookup = { topics, itemById }
@@ -221,6 +223,7 @@ function TopicIntro({ topicId, onStart }: { topicId: string; onStart: () => void
       <p className="session-phase">Новая тема · {topic.level}</p>
       <h1 className="page-title">{topic.title}</h1>
       <p className="intro-summary">{topic.summary}</p>
+      {storiesFor(topic.id)[0] && <StoryPlayer story={storiesFor(topic.id)[0]!} />}
       <Visual id={topic.visual} />
       {rules.map((r) =>
         r.kind === 'rule' ? (

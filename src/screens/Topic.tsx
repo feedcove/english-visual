@@ -7,6 +7,8 @@ import { href } from '../router'
 import { Glyph } from '../ui/Glyph'
 import { Icon } from '../ui/icons'
 import { Progress } from '../ui/kit'
+import { storiesFor } from '../illustrations'
+import { StoryPlayer } from '../illustrations/StoryPlayer'
 import { RefBlocks } from '../ui/RefBlocks'
 
 export function TopicScreen({ id }: { id: string }) {
@@ -57,6 +59,16 @@ export function TopicScreen({ id }: { id: string }) {
           )}
         </div>
       </div>
+      {storiesFor(topic.id).length > 0 && (
+        <section className="section">
+          <h2 className="section-title">Картинки</h2>
+          {storiesFor(topic.id).map((story) => (
+            <div key={story.id} className="card">
+              <StoryPlayer story={story} />
+            </div>
+          ))}
+        </section>
+      )}
       <RefBlocks topic={topic} />
       <section className="section">
         <h2 className="section-title">Навыки темы</h2>

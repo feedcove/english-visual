@@ -1,8 +1,10 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { parseSentence, renderText } from '../content/sentence'
 import type { Item, Topic, Variant } from '../content/types'
 import type { Format } from '../engine/store'
 import { speak } from '../engine/tts'
+import { storyForFocus } from '../illustrations'
+import { StoryPlayer } from '../illustrations/StoryPlayer'
 import { href } from '../router'
 import { Button } from '../ui/kit'
 import { Icon } from '../ui/icons'
@@ -28,6 +30,9 @@ export function Feedback({ item, variant, topic, format, result, voice, onNext, 
   const text = variant.s ? renderText(parseSentence(variant.s)) : ''
   const why = variant.why ?? item.why
   const partial = result.score !== undefined && result.score > 0 && result.score < 1
+  const story = storyForFocus(topic.id, item.focus)
+  // После ошибки картинка-объяснение раскрыта сразу, после верного ответа — по кнопке.
+  const [showStory, setShowStory] = useState(!result.ok)
 
   useEffect(() => {
     if (voice.on && text && lang === 'en') speak(text, { voiceName: voice.name, rate: voice.rate })
@@ -67,7 +72,13 @@ export function Feedback({ item, variant, topic, format, result, voice, onNext, 
       )}
       <p className="fb-skill">{item.skill}</p>
       {why && <p className="fb-why">{why}</p>}
-      {showVisual && item.focus && <Visual id={topic.visual} focus={item.focus} compact />}
+      {story && showStory && <StoryPlayer story={story} compact />}
+      {showVisual && item.focus && !(story && showStory) && <Visual id={topic.visual} focus={item.focus} compact />}
+      {story && !showStory && (
+        <button type="button" className="fb-story" onClick={() => setShowStory(true)}>
+          <Icon name="play" /> Почему — картинкой
+        </button>
+      )}
       <div className="fb-actions">
         {result.typo && onTypo && (
           <Button variant="soft" size="lg" onClick={onTypo}>

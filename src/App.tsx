@@ -7,6 +7,7 @@ import type { Route } from './router'
 import { Gallery } from './screens/Gallery'
 import { Method } from './screens/Method'
 import { Mine } from './screens/Mine'
+import { Kit, Stories } from './screens/Stories'
 import { ProgressScreen } from './screens/Progress'
 import { Session } from './screens/Session'
 import { Settings } from './screens/Settings'
@@ -69,6 +70,10 @@ function Screen({ route }: { route: Route }) {
       return <Method />
     case 'mine':
       return <Mine />
+    case 'stories':
+      return <Stories topic={route.topic} s={route.s} f={route.f} />
+    case 'kit':
+      return <Kit />
     case 'gallery':
       return <Gallery only={route.id} focus={route.focus} view={route.view} />
   }

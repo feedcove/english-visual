@@ -1,0 +1,305 @@
+/* Набор иллюстраций: один стиль на все сцены. Префикс st- уникален. */
+.st {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-family: var(--font-ui);
+}
+
+.st-bg {
+  /* Сцена темнее карточки (--n1) и обведена тонкой линией — видна граница кадра. */
+  fill: var(--n0);
+  stroke: var(--s1);
+  stroke-width: 1;
+}
+
+.st-ground {
+  stroke: var(--s2);
+  stroke-width: 1.25;
+  stroke-linecap: round;
+}
+
+.st-thing,
+.st-thing2,
+.st-void,
+.st-body,
+.st-head {
+  stroke: var(--c2);
+  stroke-width: 1.75;
+  stroke-linejoin: round;
+}
+
+.st-thing {
+  fill: var(--n3);
+}
+
+/* Вторая деталь предмета (крыша, крышка, колесо) — на ступень светлее. */
+.st-thing2 {
+  fill: var(--n4);
+}
+
+/* Отверстие, пустота (дупло, пустой стакан, проём) — цвет фона сцены. */
+.st-void {
+  fill: var(--n0);
+}
+
+/* Жидкость, вода, стекло с водой: полупрозрачный светлый слой без обводки. */
+.st-liquid {
+  fill: var(--c4);
+}
+
+/* Мелкая сплошная деталь: глаз, пуговица, точка. */
+.st-solid {
+  fill: var(--c2);
+}
+
+/* Знак на предмете (галочка, «?»): толстая линия цветом текста. */
+.st-mark {
+  fill: none;
+  stroke: var(--c1);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.st-line {
+  fill: none;
+  stroke: var(--c2);
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Конечность человечка: обводка (st-limb-o) снизу, цвет тела (stroke из tone) сверху. */
+.st-limb-o,
+.st-limb {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.st-limb-o {
+  stroke: var(--c2);
+  stroke-width: 7.5;
+}
+
+.st-limb {
+  stroke-width: 4;
+}
+
+.st-hand {
+  stroke: none;
+}
+
+.st-hair {
+  fill: var(--n1);
+  stroke: var(--c2);
+  stroke-width: 1.75;
+  stroke-linejoin: round;
+}
+
+.st-eye {
+  fill: var(--n0);
+}
+
+.st-eye-line {
+  fill: none;
+  stroke: var(--n0);
+  stroke-width: 1.75;
+  stroke-linecap: round;
+}
+
+/* Выделение: обводка и заливка цветом части речи. Одно на кадр. */
+.st-hl .st-thing,
+.st-hl .st-body,
+.st-hl .st-head {
+  stroke: var(--pc);
+  stroke-width: 2.5;
+}
+
+.st-hl .st-thing2,
+.st-hl .st-void,
+.st-hl .st-limb-o,
+.st-hl .st-hair {
+  stroke: var(--pc);
+}
+
+.st-hl .st-thing {
+  fill: color-mix(in oklab, var(--pc) 28%, var(--n1));
+}
+
+.st-hl .st-thing2 {
+  fill: color-mix(in oklab, var(--pc) 45%, var(--n1));
+}
+
+.st-hl .st-solid {
+  fill: var(--pt);
+}
+
+.st-hl .st-mark {
+  stroke: var(--pt);
+}
+
+.st-hl .st-body,
+.st-hl .st-head,
+.st-hl .st-hand {
+  fill: color-mix(in oklab, var(--pc) 40%, var(--n2));
+}
+
+.st-hl .st-limb {
+  stroke: color-mix(in oklab, var(--pc) 40%, var(--n2));
+}
+
+.st-hl .st-line {
+  stroke: var(--pc);
+}
+
+.st-dim {
+  opacity: 0.38;
+}
+
+.st-label {
+  fill: var(--c1);
+  font-family: var(--font-ui);
+}
+
+.st-label-pos {
+  fill: var(--pt);
+}
+
+.st-muted {
+  fill: var(--c3);
+}
+
+.st-spot {
+  fill: none;
+  stroke: var(--pc);
+  stroke-width: 2;
+  stroke-dasharray: 4 4;
+}
+
+.st-cross {
+  fill: none;
+  stroke: var(--danger-text);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.st-check {
+  fill: none;
+  stroke: var(--c1);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.st-arrow path {
+  stroke: var(--c2);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.st-arrow-action path {
+  stroke: var(--pc);
+  stroke-width: 2.75;
+}
+
+.st-arrow-dim path {
+  stroke: var(--c4);
+}
+
+.st-arrow-motion path {
+  stroke: var(--c1);
+  stroke-dasharray: 2 6;
+}
+
+.st-bubble rect,
+.st-bubble path,
+.st-bubble circle {
+  fill: var(--n2);
+  stroke: var(--s2);
+  stroke-width: 1.5;
+}
+
+.st-frame rect {
+  fill: none;
+  stroke: var(--pc, var(--s2));
+  stroke-width: 1.75;
+}
+
+/* Время: ось, NOW, символы аспекта (как в схеме timeline), закрытый период. */
+.st-axis {
+  fill: none;
+  stroke: var(--c3);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.st-now {
+  stroke: var(--c1);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+.st-sym-fill {
+  fill: var(--c2);
+}
+
+.st-sym-line {
+  fill: none;
+  stroke: var(--c2);
+  stroke-width: 2.75;
+  stroke-linecap: round;
+}
+
+.st-sym-span {
+  stroke: var(--c2);
+  stroke-width: 7;
+  stroke-linecap: round;
+}
+
+.st-sym.st-hl .st-sym-fill {
+  fill: var(--pc);
+}
+
+.st-sym.st-hl .st-sym-line,
+.st-sym.st-hl .st-sym-span {
+  stroke: var(--pc);
+}
+
+.st-zone rect {
+  fill: var(--n2);
+  stroke: var(--s2);
+  stroke-width: 1.5;
+}
+
+.st-zone-hl rect {
+  fill: color-mix(in oklab, var(--pc) 22%, var(--n0));
+  stroke: var(--pc);
+}
+
+.st-hand-h {
+  stroke: var(--c1);
+  stroke-width: 3;
+}
+
+.st-hand-m {
+  stroke: var(--c1);
+  stroke-width: 2;
+}
+
+.st-cal-head {
+  fill: var(--c1);
+  font-family: var(--font-ui);
+}
+
+.st-cal-day {
+  fill: var(--c1);
+  font-family: var(--font-ui);
+}
+
+.st-cal.st-hl .st-cal-day {
+  fill: var(--pt);
+}
