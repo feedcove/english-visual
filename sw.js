@@ -1,5 +1,5 @@
-const CACHE = 'english-1naeug2'
-const FILES = ["./","./assets/index-6Rvwpx1N.js","./assets/index-DjEfmzNt.css"]
+const CACHE = 'english-dyykud'
+const FILES = ["./","./assets/index-CjO-v0g0.js","./assets/index-aapIAAO5.css"]
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(FILES)).then(() => self.skipWaiting()))
 })
