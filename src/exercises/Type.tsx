@@ -8,7 +8,7 @@ import { Prompt } from './Prompt'
 import type { ExerciseProps } from './types'
 
 /** Воспроизведение: впиши слово в пропуск. Сокращения и регистр не важны: isn't = is not. */
-export function Type({ item, variant, colorHints, showSkill, noHints, done, onDone }: ExerciseProps) {
+export function Type({ variant, colorHints, noHints, done, onDone }: ExerciseProps) {
   const tokens = useMemo(() => parseSentence(variant.s ?? ''), [variant.s])
   const gap = gapToken(tokens)
   const answers = useMemo(() => [gap?.text ?? '', ...(variant.accept ?? [])], [gap, variant.accept])
@@ -29,7 +29,7 @@ export function Type({ item, variant, colorHints, showSkill, noHints, done, onDo
   const first = (gap?.text ?? '').slice(0, 1)
   return (
     <div className="ex">
-      <Prompt item={item} variant={variant} showSkill={showSkill} fallback="Впиши слово" />
+      <Prompt variant={variant} fallback="Впиши слово" />
       <p className="ex-sentence">
         <Sentence
           tokens={tokens}

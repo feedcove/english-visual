@@ -8,7 +8,7 @@ import type { ExerciseProps } from './types'
 const MAX_ERRORS = 2
 
 /** Найди слово: верные слова помечены {так} в разметке. С образцом — «та же роль, что выделенное». */
-export function Pick({ item, variant, showSkill, layout, done, onDone }: ExerciseProps) {
+export function Pick({ variant, layout, done, onDone }: ExerciseProps) {
   const tokens = useMemo(() => parseSentence(variant.s ?? ''), [variant.s])
   const targets = useMemo(() => tokens.flatMap((t, i) => (t.mark ? [i] : [])), [tokens])
   // В задании цель не подсвечиваем: убираем пометку из отображаемых токенов.
@@ -31,7 +31,7 @@ export function Pick({ item, variant, showSkill, layout, done, onDone }: Exercis
 
   return (
     <div className="ex">
-      <Prompt item={item} variant={variant} showSkill={showSkill} fallback="Найди слово" />
+      <Prompt variant={variant} fallback="Найди слово" />
       {variant.model && (
         <p className="ex-model">
           <span className="ex-model-label">Образец</span>

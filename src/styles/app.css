@@ -846,11 +846,6 @@ a.k-row:hover {
   color: var(--c1);
 }
 
-.ex-skill {
-  font-size: 13px;
-  line-height: 18px;
-  color: var(--c3);
-}
 
 .ex-sentence {
   font-size: var(--t-sentence);
@@ -1252,6 +1247,14 @@ a.k-row:hover {
 
 .fb-given s {
   color: var(--danger-text);
+}
+
+.fb-skill {
+  margin-bottom: -8px;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 600;
+  color: var(--c2);
 }
 
 .fb-why {

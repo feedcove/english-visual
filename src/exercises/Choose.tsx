@@ -12,7 +12,7 @@ import type { ExerciseProps } from './types'
 import { useKeys } from './useKeys'
 
 /** Выбор из вариантов: пропуск (format choose) или вопрос с ответом (format choice). */
-export function Choose({ item, variant, format, seed, colorHints, showSkill, layout, done, onDone }: ExerciseProps) {
+export function Choose({ variant, format, seed, colorHints, layout, done, onDone }: ExerciseProps) {
   const tokens = useMemo(() => (variant.s ? parseSentence(variant.s) : []), [variant.s])
   const gap = gapToken(tokens)
   const answer = format === 'choice' ? (variant.answer ?? '') : (gap?.text ?? '')
@@ -31,7 +31,7 @@ export function Choose({ item, variant, format, seed, colorHints, showSkill, lay
   const lang = variant.lang ?? 'en'
   return (
     <div className="ex">
-      <Prompt item={item} variant={variant} showSkill={showSkill} fallback={format === 'choice' ? 'Выбери ответ' : 'Вставь слово'} />
+      <Prompt variant={variant} fallback={format === 'choice' ? 'Выбери ответ' : 'Вставь слово'} />
       {variant.visual && <Visual id={variant.visual.id} focus={variant.visual.focus} quiz />}
       {layout === 'cascade' && variant.graph && tokens.length > 0 && (
         <Cascade source={variant.s ?? ''} graph={variant.graph} lang={lang} paint={colorHints ? 'target' : 'none'} labels={Boolean(done)} />

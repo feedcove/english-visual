@@ -1,11 +1,10 @@
-import type { Item, Variant } from '../content/types'
+import type { Variant } from '../content/types'
 
-/** Строка-задание над упражнением. Тема навыка показывается только при знакомстве — в повторах её не подсказываем. */
-export function Prompt({ item, variant, showSkill, fallback }: { item: Item; variant: Variant; showSkill?: boolean; fallback: string }) {
+/** Строка-задание над упражнением. Навык до ответа не называем: он часто содержит сам ответ (him — после глагола). */
+export function Prompt({ variant, fallback }: { variant: Variant; fallback: string }) {
   return (
     <div className="ex-prompt">
       <p className="ex-q">{variant.q ?? fallback}</p>
-      {showSkill && <p className="ex-skill">{item.skill}</p>}
     </div>
   )
 }

@@ -21,7 +21,7 @@ interface Step {
 const ASK_RELS: Rel[] = ['obj', 'attr', 'adv', 'compl']
 
 /** Собери граф: сказуемое → подлежащее → к какому слову относится ещё одно-два слова. */
-export function Graph({ item, variant, seed, showSkill, noHints, done, onDone }: ExerciseProps) {
+export function Graph({ variant, seed, noHints, done, onDone }: ExerciseProps) {
   const tokens = useMemo(() => parseSentence(variant.s ?? ''), [variant.s])
   const graph = useMemo(() => buildGraph(tokens, variant.graph ?? ''), [tokens, variant.graph])
   const steps = useMemo<Step[]>(() => {
@@ -74,7 +74,7 @@ export function Graph({ item, variant, seed, showSkill, noHints, done, onDone }:
   if (done) {
     return (
       <div className="ex">
-        <Prompt item={item} variant={variant} showSkill={showSkill} fallback="Граф предложения" />
+        <Prompt variant={variant} fallback="Граф предложения" />
         <SentenceGraph source={variant.s ?? ''} graph={variant.graph ?? ''} lang={lang} view="tree" />
         <SentenceGraph source={variant.s ?? ''} graph={variant.graph ?? ''} lang={lang} view="members" />
         <Cascade source={variant.s ?? ''} graph={variant.graph ?? ''} lang={lang} />
@@ -85,7 +85,7 @@ export function Graph({ item, variant, seed, showSkill, noHints, done, onDone }:
 
   return (
     <div className="ex">
-      <Prompt item={item} variant={variant} showSkill={showSkill} fallback="Собери граф предложения" />
+      <Prompt variant={variant} fallback="Собери граф предложения" />
       <div className="ex-steps" aria-label="Шаги">
         {steps.map((_, i) => (
           <span key={i} className="ex-step" data-state={i < results.length ? (results[i] ? 'right' : 'wrong') : i === index ? 'now' : undefined} />

@@ -65,6 +65,7 @@ export function Feedback({ item, variant, topic, format, result, voice, onNext, 
           Ответ: <b>{variant.answer}</b>
         </p>
       )}
+      <p className="fb-skill">{item.skill}</p>
       {why && <p className="fb-why">{why}</p>}
       {showVisual && item.focus && <Visual id={topic.visual} focus={item.focus} compact />}
       <div className="fb-actions">

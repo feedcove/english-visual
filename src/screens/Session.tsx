@@ -191,7 +191,6 @@ function TaskView({ step, seed, result, exam, onAnswer, onNext, onTypo }: { step
         format={step.format}
         seed={seed}
         colorHints={settings.colorHints && !exam}
-        showSkill={step.phase === 'new'}
         layout={layoutFor(step, seed)}
         noHints={exam}
         done={result ?? undefined}

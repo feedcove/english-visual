@@ -14,7 +14,7 @@ interface Tile {
 }
 
 /** Сборка предложения из плиток. С variant.from — склейка двух коротких фраз в одну (sentence combining). */
-export function Order({ item, variant, seed, showSkill, done, onDone }: ExerciseProps) {
+export function Order({ variant, seed, done, onDone }: ExerciseProps) {
   const tokens = useMemo(() => parseSentence(variant.s ?? ''), [variant.s])
   const target = useMemo(() => tilesOf(tokens), [tokens])
   const punct = trailingPunct(tokens)
@@ -44,7 +44,7 @@ export function Order({ item, variant, seed, showSkill, done, onDone }: Exercise
   const free = pool.filter((t) => !placed.includes(t))
   return (
     <div className="ex">
-      <Prompt item={item} variant={variant} showSkill={showSkill} fallback={variant.from ? 'Склей в одно предложение' : 'Собери предложение'} />
+      <Prompt variant={variant} fallback={variant.from ? 'Склей в одно предложение' : 'Собери предложение'} />
       {variant.from && (
         <div className="ex-from">
           {variant.from.map((f) => (

@@ -10,7 +10,7 @@ import type { ExerciseProps } from './types'
 import { useKeys } from './useKeys'
 
 /** Раскрась предложение: каждому слову — часть речи. Слова идут по очереди, к любому можно вернуться. */
-export function Tag({ item, variant, showSkill, done, onDone }: ExerciseProps) {
+export function Tag({ variant, done, onDone }: ExerciseProps) {
   const tokens = useMemo(() => parseSentence(variant.s ?? ''), [variant.s])
   const words = useMemo(() => tokens.map((t, i) => ({ t, i })).filter((w) => !w.t.punct), [tokens])
   const [marks, setMarks] = useState<Record<number, Pos>>({})
@@ -35,7 +35,7 @@ export function Tag({ item, variant, showSkill, done, onDone }: ExerciseProps) {
   const families: Family[] = ['things', 'actions', 'links']
   return (
     <div className="ex">
-      <Prompt item={item} variant={variant} showSkill={showSkill} fallback="Определи часть речи каждого слова" />
+      <Prompt variant={variant} fallback="Определи часть речи каждого слова" />
       <p className="ex-sentence ex-words" lang={variant.lang ?? 'en'}>
         {tokens.map((t, i) => {
           if (t.punct) return <span key={i}>{t.text}</span>
