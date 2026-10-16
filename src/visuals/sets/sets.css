@@ -1,0 +1,1235 @@
+/* Семья sets: наборы и правила (части речи, артикли, число, количество, there/it, ’s). Префикс vst-.
+   Цвет — только от data-pos. Выделение: .data-on (цвет + обводка), остальное data-dim (приглушено, но читается). */
+.vs {
+  container-type: inline-size;
+  display: grid;
+  gap: 8px;
+  font-size: 15px;
+  line-height: 20px;
+}
+
+/* .visual svg из app.css растягивает любую svg на 100 % — возвращаем размер глифам */
+.vs .glyph {
+  display: inline-block;
+  width: auto;
+  height: auto;
+  vertical-align: middle;
+}
+
+.vs ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vs h3,
+.vs p {
+  margin: 0;
+}
+
+.vs small {
+  font-size: 12px;
+  line-height: 15px;
+  color: var(--c2);
+}
+
+/* Общее выделение: подсвеченный блок */
+.vs [data-on] {
+  background: color-mix(in oklab, var(--pc) 22%, var(--lv));
+  box-shadow: inset 0 0 0 2px var(--pc);
+}
+
+.vs [data-dim] {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--sep);
+  color: var(--c3);
+}
+
+/* Спрятанный ответ в режиме quiz */
+.vst-q {
+  display: inline-grid;
+  place-items: center;
+  min-width: 26px;
+  height: 24px;
+  padding: 0 6px;
+  border-radius: 8px;
+  background: var(--f4);
+  color: var(--c1);
+  font-weight: 600;
+  line-height: 24px;
+}
+
+/* ============ pos-shapes ============ */
+.vst-pos-map {
+  gap: 14px;
+}
+
+.vst-fam {
+  display: grid;
+  gap: 6px;
+}
+
+.vst-fam-head {
+  display: grid;
+  gap: 1px;
+  padding: 0 2px;
+  font-weight: 400;
+}
+
+.vst-fam-head b {
+  color: var(--c1);
+  font-size: 13px;
+  line-height: 17px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.vst-fam-head span {
+  color: var(--c3);
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.vst-pos-list {
+  display: grid;
+  gap: 4px;
+}
+
+.vst-pos {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+  padding: 8px 10px 9px;
+  border-radius: 12px;
+  background: var(--f2);
+  transition: background-color var(--dur), box-shadow var(--dur);
+}
+
+.vst-pos > .glyph {
+  margin-top: 1px;
+}
+
+.vst-pos-body {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.vst-pos-name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 8px;
+}
+
+.vst-pos-name b {
+  color: var(--pt);
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+.vst-pos-name span {
+  color: var(--c3);
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.vst-pos-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0 12px;
+  font-size: 13px;
+  line-height: 19px;
+}
+
+.vst-pos-q {
+  color: var(--c2);
+}
+
+.vst-pos-ex {
+  color: var(--c1);
+  font-size: 14px;
+  margin-left: auto;
+}
+
+.vst-pos[data-on] .vst-pos-name span,
+.vst-pos[data-on] .vst-pos-q {
+  color: var(--c1);
+}
+
+.vst-pos[data-dim] .vst-pos-name b,
+.vst-pos[data-dim] .vst-pos-q,
+.vst-pos[data-dim] .vst-pos-name span,
+.vst-pos[data-dim] .vst-pos-ex {
+  color: var(--c3);
+}
+
+.vst-pos[data-dim] > .glyph {
+  opacity: 0.6;
+}
+
+/* focus questions: подсвечены вопросы, примеры спокойнее */
+.vst-pos-map[data-mode='questions'] .vst-pos-q {
+  color: var(--pt);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.vst-pos-map[data-mode='questions'] .vst-pos-ex {
+  color: var(--c3);
+}
+
+/* мини */
+.vst-pos-mini {
+  gap: 6px;
+}
+
+.vst-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+
+.vst-strip-name {
+  flex: 0 0 100%;
+  color: var(--c3);
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.vst-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 28px;
+  padding: 0 9px;
+  border-radius: 14px;
+  background: var(--f2);
+  color: var(--pt);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* выбранная фишка не обводится: выделение одно — карточка ниже */
+.vst-chip[data-on] {
+  background: var(--f2);
+  box-shadow: none;
+}
+
+.vst-chip[data-dim] {
+  color: var(--c3);
+}
+
+.vst-chip[data-dim] .glyph {
+  opacity: 0.6;
+}
+
+.vst-pos-detail {
+  margin-top: 2px;
+}
+
+/* ============ article-tree ============ */
+.vst-at {
+  /* .vst-at сам контейнер, @container его не перестроит: дерево и устойчивые случаи переносятся через flex-wrap */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.vst-tree {
+  flex: 1 1 300px;
+  max-width: 360px;
+  margin-inline: auto;
+}
+
+.vst-at > .vst-fixed {
+  flex: 1 1 200px;
+}
+
+/* Глифы внутри SVG: размер задаём здесь, width:auto для вложенного svg значит 100 % */
+.vst-tree .glyph {
+  width: 16px;
+  height: 16px;
+}
+
+.vst-node rect {
+  fill: var(--f2);
+  stroke: var(--s1);
+  stroke-width: 1;
+}
+
+.vst-node text {
+  font-family: var(--font-ui);
+  fill: var(--c1);
+}
+
+.vst-t-head {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.vst-t-sub {
+  font-size: 12.5px;
+  fill: var(--c2);
+}
+
+.vst-t-ex {
+  font-size: 13px;
+  fill: var(--c2);
+}
+
+.vst-t-big {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.vst-t-leaf {
+  font-size: 20px;
+  font-weight: 700;
+  fill: var(--pt);
+}
+
+.vst-leaf[data-zero] rect {
+  stroke-dasharray: 4 3;
+  stroke: var(--s2);
+}
+
+.vst-leaf[data-zero] .vst-t-leaf {
+  fill: var(--c1);
+  font-size: 26px;
+}
+
+.vst-node[data-state='path'] rect {
+  /* узел на пути — обычный, не приглушённый; цветом выделены только рёбра пути и цель */
+  stroke: var(--s2);
+}
+
+.vst-node[data-state='on'] rect {
+  fill: color-mix(in oklab, var(--pc) 22%, var(--lv));
+  stroke: var(--pc);
+  stroke-width: 2.5;
+  stroke-dasharray: none;
+}
+
+.vst-node[data-state='dim'] rect {
+  fill: transparent;
+  stroke: var(--sep);
+  stroke-dasharray: none;
+}
+
+.vst-node[data-state='dim'] text {
+  fill: var(--c3);
+}
+
+.vst-node[data-state='dim'] .glyph {
+  opacity: 0.6;
+}
+
+.vst-edge path {
+  fill: none;
+  stroke: var(--s2);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.vst-edge text {
+  font-family: var(--font-ui);
+  font-size: 12.5px;
+  font-weight: 600;
+  fill: var(--c2);
+}
+
+.vst-edge[data-state='dim'] path {
+  stroke: var(--sep);
+}
+
+.vst-edge[data-state='dim'] text {
+  fill: var(--c3);
+}
+
+.vst-edge[data-state='path'] path {
+  stroke: var(--pc);
+  stroke-width: 2.5;
+}
+
+.vst-edge[data-state='path'] text {
+  fill: var(--pt);
+}
+
+.vst-fixed {
+  display: grid;
+  gap: 4px;
+  padding: 10px 12px 12px;
+  border-radius: 14px;
+  background: var(--f2);
+}
+
+.vst-fixed h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  color: var(--c1);
+}
+
+.vst-fixed p {
+  color: var(--c2);
+  font-size: 12.5px;
+  line-height: 16px;
+}
+
+.vst-fixed ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin-top: 4px;
+  font-size: 15px;
+}
+
+.vst-fixed[data-dim] h3,
+.vst-fixed[data-dim] p {
+  color: var(--c3);
+}
+
+.vst-fixed[data-on] h3 {
+  color: var(--pt);
+}
+
+.vst-zero {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  box-shadow: inset 0 0 0 1.5px var(--s2);
+  font-size: 15px;
+  line-height: 1;
+}
+
+
+/* мини-дерево: цепочка шагов */
+.vst-at-mini {
+  gap: 8px;
+}
+
+.vst-chain {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+
+.vst-step {
+  display: grid;
+  place-items: center;
+  min-height: 44px;
+  max-width: 132px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  background: var(--f2);
+  color: var(--c2);
+  font-size: 12.5px;
+  line-height: 16px;
+  text-align: center;
+}
+
+.vst-step[data-on] {
+  color: var(--pt);
+  font-weight: 600;
+}
+
+.vst-step-leaf {
+  min-width: 56px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--pt);
+}
+
+.vst-arrow {
+  display: grid;
+  justify-items: center;
+  gap: 1px;
+  color: var(--pc);
+}
+
+.vst-arrow i {
+  font-style: normal;
+  font-size: 12.5px;
+  line-height: 14px;
+  font-weight: 600;
+  color: var(--pt);
+}
+
+.vs .vst-arrow svg {
+  width: 26px;
+  height: 8px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.vst-outs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  color: var(--c2);
+  font-size: 13px;
+}
+
+.vst-at-mini .vst-fixed {
+  gap: 2px;
+}
+
+/* ============ a-an ============ */
+.vst-aan {
+  /* дорожки рядом, когда каждой хватает места; на телефоне — одна под другой, чтобы пометки не рвались */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.vst-lane {
+  flex: 1 1 240px;
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  border-radius: 16px;
+  background: var(--f2);
+  min-width: 0;
+}
+
+.vst-lane-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--sep);
+}
+
+.vst-lane-head b {
+  color: var(--pt);
+  font-size: 22px;
+  line-height: 26px;
+  font-weight: 700;
+}
+
+.vst-lane-head span {
+  color: var(--c2);
+  font-size: 12.5px;
+  line-height: 16px;
+  flex: 1 1 60px;
+}
+
+.vst-lane-items {
+  display: grid;
+  gap: 8px;
+}
+
+.vst-snd {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 6px;
+  align-items: start;
+}
+
+.vst-ipa {
+  color: var(--c1);
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  font-family: var(--font-ui);
+}
+
+.vst-snd-word {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 8px;
+  font-size: 14px;
+  line-height: 20px;
+  padding-top: 3px;
+}
+
+.vst-snd-word small {
+  display: block;
+}
+
+.vst-lane[data-dim] .vst-lane-head b,
+.vst-lane[data-dim] .vst-lane-head span,
+.vst-lane[data-dim] .vst-ipa,
+.vst-lane[data-dim] .vst-snd-word {
+  color: var(--c3);
+}
+
+.vst-lane[data-dim] .vst-lane-head {
+  border-color: transparent;
+}
+
+.vst-lane[data-dim] .glyph {
+  opacity: 0.6;
+}
+
+.vst-lane[data-on] .vst-lane-head {
+  border-color: var(--pc);
+}
+
+.vst-aan[data-compact] .vst-lane-items {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.vst-aan[data-compact] .vst-snd {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+}
+
+/* ============ plural-rules ============ */
+.vst-plural {
+  gap: 4px;
+}
+
+.vst-rule {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 14px;
+  background: var(--f2);
+}
+
+.vst-badge {
+  display: grid;
+  place-items: center;
+  align-self: stretch;
+  padding: 2px 4px;
+  border-radius: 10px;
+  background: var(--f4);
+  color: var(--c1);
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.vst-rule[data-on] .vst-badge {
+  color: var(--pt);
+}
+
+.vst-rule[data-dim] .vst-badge {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--sep);
+  color: var(--c3);
+}
+
+.vst-rule-body {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.vst-when {
+  color: var(--c2);
+  font-size: 12.5px;
+  line-height: 16px;
+}
+
+.vst-pairs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 14px;
+}
+
+.vst-pairs li {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.vst-pair {
+  font-size: 15px;
+  line-height: 22px;
+  color: var(--c1);
+}
+
+.vst-pair i {
+  font-style: normal;
+  color: var(--c3);
+}
+
+.vst-pair b {
+  color: var(--pt);
+  font-weight: 700;
+}
+
+.vst-note {
+  font-size: 12px;
+}
+
+.vst-when-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.vst-rule[data-dim] .vst-when,
+.vst-rule[data-dim] .vst-pair,
+.vst-rule[data-dim] .vst-pair b,
+.vst-rule[data-dim] .vst-note {
+  color: var(--c3);
+}
+
+.vst-rule[data-dim] .glyph {
+  opacity: 0.6;
+}
+
+.vst-rule[data-on] .vst-when {
+  color: var(--c1);
+}
+
+
+/* ============ count-mass ============ */
+.vst-baskets {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.vst-baskets[data-one] {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.vst-basket {
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  gap: 8px;
+  padding: 10px;
+  border-radius: 16px;
+  background: var(--f2);
+  min-width: 0;
+}
+
+.vst-basket-head {
+  display: grid;
+  gap: 0;
+}
+
+.vst-basket-head b {
+  color: var(--pt);
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.vst-basket-head span {
+  color: var(--c3);
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.vst-fig {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 40px;
+}
+
+.vs .vst-vessel {
+  width: 64px;
+  height: 40px;
+}
+
+.vst-liquid {
+  fill: var(--pc);
+}
+
+.vst-cup {
+  fill: none;
+  stroke: var(--c2);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.vst-rules {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+}
+
+.vst-rules li {
+  display: grid;
+  gap: 1px;
+}
+
+.vst-rl {
+  color: var(--c3);
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.vst-ex {
+  font-size: 15px;
+  line-height: 20px;
+  color: var(--c1);
+}
+
+.vst-ex b {
+  font-weight: 700;
+}
+
+.vst-ex[data-bad] {
+  text-decoration: line-through;
+  text-decoration-color: var(--c3);
+  text-decoration-thickness: 1.5px;
+}
+
+.vst-ex[data-bad] .w-pos {
+  text-decoration-line: line-through;
+  text-decoration-color: var(--c3);
+}
+
+.vst-basket[data-dim] .vst-basket-head b,
+.vst-basket[data-dim] .vst-ex,
+.vst-basket[data-dim] .vst-rl {
+  color: var(--c3);
+}
+
+.vst-basket[data-dim] .glyph {
+  opacity: 0.6;
+}
+
+.vst-basket[data-dim] .vst-cup {
+  stroke: var(--c3);
+}
+
+.vst-basket[data-dim] .vst-liquid {
+  fill: var(--c4);
+}
+
+.vst-basket[data-on] .vst-rl {
+  color: var(--c2);
+}
+
+.vst-bridge {
+  display: grid;
+  gap: 4px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: var(--f2);
+}
+
+.vst-bridge-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 8px;
+  font-size: 12.5px;
+  line-height: 18px;
+  color: var(--c2);
+}
+
+.vst-bridge-head b {
+  color: var(--c1);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.vst-bridge ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 16px;
+  font-size: 15px;
+}
+
+.vst-bridge[data-dim] .vst-bridge-head,
+.vst-bridge[data-dim] .vst-bridge-head b {
+  color: var(--c3);
+}
+
+.vst-bridge[data-dim] li {
+  color: var(--c3);
+}
+
+.vst-cm[data-compact] .vst-fig,
+.vst-cm[data-compact] .vst-vessel {
+  height: 32px;
+}
+
+/* ============ quant-scale ============ */
+.vst-scale {
+  gap: 6px;
+  --lab: 0px;
+}
+
+.vst-scale[data-compact] {
+  --lab: 52px;
+  gap: 4px;
+}
+
+.vst-bars,
+.vst-qcells {
+  display: grid;
+  grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+  gap: 3px;
+}
+
+.vst-scale[data-compact] .vst-bars {
+  grid-template-columns: var(--lab) repeat(var(--n), minmax(0, 1fr));
+}
+
+.vst-bar {
+  display: flex;
+  align-items: flex-end;
+  height: 44px;
+  border-radius: 6px 6px 3px 3px;
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--sep);
+  overflow: hidden;
+}
+
+.vst-scale[data-compact] .vst-bar {
+  height: 26px;
+}
+
+.vst-bar i {
+  display: block;
+  width: 100%;
+  background: var(--c4);
+}
+
+.vst-bar[data-on] i {
+  background: var(--pc);
+}
+
+.vst-bar[data-on] {
+  /* столбик лишь окрашен: рамка и фон — у ячейки, выделение одно */
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--sep);
+}
+
+.vst-qrow {
+  display: grid;
+  gap: 3px;
+}
+
+.vst-scale[data-compact] .vst-qrow {
+  grid-template-columns: var(--lab) minmax(0, 1fr);
+  align-items: stretch;
+  gap: 3px;
+}
+
+.vst-qlabel {
+  color: var(--c3);
+  font-size: 12px;
+  line-height: 15px;
+  padding-left: 2px;
+}
+
+.vst-scale[data-compact] .vst-qlabel {
+  display: flex;
+  align-items: center;
+}
+
+.vst-qcell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  min-height: 52px;
+  padding: 3px 1px;
+  border-radius: 10px;
+  background: var(--f2);
+  color: var(--pt);
+  text-align: center;
+}
+
+.vst-scale[data-compact] .vst-qcell {
+  min-height: 44px;
+}
+
+.vst-qcell b {
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.vst-qcell b[data-pick='off'] {
+  color: var(--c3);
+  font-weight: 400;
+}
+
+.vst-sign {
+  font-style: normal;
+  font-size: 15px;
+  line-height: 15px;
+  font-weight: 700;
+  color: var(--c1);
+}
+
+.vst-qcell[data-dim] {
+  color: var(--c3);
+}
+
+.vst-qcell[data-dim] .vst-sign {
+  color: var(--c3);
+}
+
+.vst-signs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 16px;
+  color: var(--c2);
+  font-size: 12.5px;
+  line-height: 18px;
+}
+
+/* ============ there-it ============ */
+.vst-ti-cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  align-items: stretch;
+}
+
+.vst-ti-cols[data-one] {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.vst-side {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  padding: 10px;
+  border-radius: 16px;
+  background: var(--f2);
+  min-width: 0;
+}
+
+.vst-side-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--sep);
+}
+
+.vst-side-head b {
+  color: var(--pt);
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 700;
+}
+
+.vst-role {
+  color: var(--c2);
+  font-size: 12.5px;
+  line-height: 16px;
+}
+
+.vst-side ul {
+  display: grid;
+  gap: 4px;
+}
+
+.vst-line {
+  display: grid;
+  gap: 0;
+  padding: 4px 6px 5px;
+  margin: 0 -6px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 19px;
+}
+
+.vst-tag {
+  color: var(--c3);
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.vst-side[data-on] .vst-side-head {
+  border-color: var(--pc);
+}
+
+.vst-side[data-dim] .vst-side-head b,
+.vst-side[data-dim] .vst-role,
+.vst-side[data-dim] .vst-line {
+  color: var(--c3);
+}
+
+.vst-side[data-dim] .vst-side-head {
+  border-color: transparent;
+}
+
+.vst-side[data-dim] .glyph {
+  opacity: 0.6;
+}
+
+.vst-line[data-on] {
+  background: color-mix(in oklab, var(--pc) 22%, var(--lv));
+  box-shadow: inset 0 0 0 2px var(--pc);
+}
+
+.vst-bridge p {
+  display: grid;
+  gap: 0;
+  font-size: 15px;
+  line-height: 21px;
+}
+
+.vst-ti .vst-bridge {
+  gap: 6px;
+}
+
+/* ============ possessive-s ============ */
+.vst-poss {
+  gap: 4px;
+}
+
+.vst-poss-q {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  padding: 0 2px 4px;
+  color: var(--c2);
+  font-size: 13px;
+}
+
+.vst-poss-q b {
+  color: var(--c1);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.vst-case {
+  display: grid;
+  gap: 4px;
+  padding: 8px 10px 9px;
+  border-radius: 14px;
+  background: var(--f2);
+}
+
+.vst-case-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+}
+
+.vst-case .vst-badge {
+  align-self: auto;
+  padding: 2px 8px;
+  background: var(--f4);
+  font-size: 13px;
+}
+
+.vst-case[data-on] .vst-badge {
+  color: var(--pt);
+}
+
+.vst-case[data-dim] .vst-badge {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--sep);
+  color: var(--c3);
+}
+
+.vst-case-ex [data-pos='part'],
+.vst-case-ex [data-pos='prep'] {
+  font-weight: 700;
+}
+
+.vst-case-ex {
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--c1);
+  overflow-wrap: anywhere;
+}
+
+.vst-case[data-dim] .vst-when,
+.vst-case[data-dim] .vst-case-ex {
+  color: var(--c3);
+}
+
+.vst-case[data-on] .vst-when {
+  color: var(--c1);
+}
+
+.vst-poss[data-compact] .vst-case-ex {
+  font-size: 17px;
+}
+
+/* мини без выбранной части речи: три тесных строки без заголовков */
+.vst-pos-mini[data-all] {
+  gap: 4px;
+}
+
+.vst-pos-mini[data-all] .vst-strip {
+  flex-wrap: nowrap;
+  gap: 3px;
+}
+
+.vst-pos-mini[data-all] .vst-strip-name {
+  display: none;
+}
+
+.vst-pos-mini[data-all] .vst-chip {
+  flex: 1 1 0;
+  justify-content: center;
+  min-width: 0;
+  height: 28px;
+  padding: 0 4px;
+  gap: 3px;
+  font-size: 12px;
+}
+
+/* мини count-mass: заголовок и фигура в одной строке, правила — чипами */
+.vst-baskets[data-one] .vst-basket {
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: auto auto;
+  align-items: center;
+  gap: 6px 8px;
+}
+
+.vst-baskets[data-one] .vst-rules {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+}
+
+.vst-cm[data-compact] .vst-rl {
+  display: none;
+}
+
+.vst-rules li,
+.vst-pairs li {
+  justify-items: start;
+}
+
+
+.vst-or {
+  flex: 1 1 100%;
+  margin-top: 4px;
+  color: var(--c2);
+  font-size: 13px;
+  line-height: 18px;
+}

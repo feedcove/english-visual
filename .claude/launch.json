@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "english-dev",
+      "runtimeExecutable": "fnm",
+      "runtimeArgs": ["exec", "--using=24", "--", "npx", "vite", "--port", "5173", "--strictPort"],
+      "port": 5173
+    }
+  ]
+}

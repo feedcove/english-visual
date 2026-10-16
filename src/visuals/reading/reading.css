@@ -1,0 +1,30 @@
+/* Семья reading: демонстрация лесенки. */
+.vr {
+  display: grid;
+  gap: 12px;
+}
+
+.vr-block {
+  display: grid;
+  gap: 6px;
+  opacity: 1;
+}
+
+.vr[data-focus] .vr-block:not([data-lit]) {
+  color: var(--c3);
+}
+
+.vr-label {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--c3);
+}
+
+.vr-block[data-lit] .vr-label {
+  color: var(--c2);
+}
+
+.vr-text {
+  font-size: 17px;
+  line-height: 26px;
+}

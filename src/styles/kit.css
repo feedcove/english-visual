@@ -1,0 +1,1235 @@
+/* Сгенерировано из движка UI-кита v6 (tokens() + cssVars()) для режима:
+   тема тёмная · контраст обычный · прозрачность обычная · движение обычное ·
+   акцент голубой (OKLCH h237 c0.14 L0.70) · где акцент «действие» · текст на акценте авто ·
+   нейтраль холодная (c0.0065 h275) · форма капсула · размер md.
+   Значения не править руками: пересчитываются скриптом tools/uikit-engine/build-css.cjs */
+:root {
+  color-scheme: dark;
+  box-sizing: border-box;
+
+  /* Нейтраль: лестница n0–n10. n0 — чистый чёрный (bg0), n1–n10 — OKLCH L = .215, .265, .315, .365, .40, .435, .47, .505, .54, .575; C .0065, h 275 */
+  --n0: #000000; /* oklch(0.000 0.0000 0) */
+  --n1: #18191D; /* oklch(0.215 0.0065 275) */
+  --n2: #242528; /* oklch(0.265 0.0065 275) */
+  --n3: #303135; /* oklch(0.315 0.0065 275) */
+  --n4: #3D3E42; /* oklch(0.365 0.0065 275) */
+  --n5: #46474B; /* oklch(0.400 0.0065 275) */
+  --n6: #505155; /* oklch(0.435 0.0065 275) */
+  --n7: #5A5B5F; /* oklch(0.470 0.0065 275) */
+  --n8: #636468; /* oklch(0.505 0.0065 275) */
+  --n9: #6D6E73; /* oklch(0.540 0.0065 275) */
+  --n10: #78797D; /* oklch(0.575 0.0065 275) */
+  /* Поднятый слой (data-level="e"): n2–n8 */
+  --e0: #242528;
+  --e1: #303135;
+  --e2: #3D3E42;
+  --e3: #46474B;
+  --e4: #505155;
+  --e5: #5A5B5F;
+  --e6: #636468;
+  /* Бегунок сегмента на уровне L: n(L+3) */
+  --th0: #303135;
+  --th1: #3D3E42;
+  --th2: #46474B;
+  --th3: #505155;
+  --th4: #5A5B5F;
+  --thE: #46474B;
+
+  /* Ink (цвет содержимого): oklch(.985 .0039 275). c1–c4 — его прозрачность */
+  --k-ink: #F9FAFD;
+  --k-on-ink: #000000;
+  --knob: #F9FAFD;
+  --c1: rgb(249,250,253);
+  --c2: rgba(249,250,253,0.62);
+  --c3: rgba(249,250,253,0.4);
+  --c4: rgba(249,250,253,0.24);
+  --c2-a: 0.62;
+  /* Линии: sep — разделитель, s1 — слабая обводка, s2 — обычная, s3 — сильная (единственная проходит 3:1) */
+  --sep: rgba(249,250,253,0.16);
+  --s1: rgba(249,250,253,0.16);
+  --s2: rgba(249,250,253,0.28);
+  --s3: rgba(249,250,253,0.55);
+  --line-w: 1px;
+  --dot: rgba(249,250,253,0.15);
+
+  /* Акцент: заливка / текст на заливке / цвет текста-акцента. Акцент — oklch(.75 .14 237), текст на нём чёрный */
+  --accent: #42BAFB;
+  --on-accent: #000000;
+  --accent-text: #7CCDFF;
+  --acc-c2-a: 0.62;
+  /* Danger (в ките это роль «удаление»; цвет — h27 c.20) */
+  --danger: #C51E20;
+  --on-danger: #FFFFFF;
+  --danger-text: #FFB0A7;
+
+  /* Тени и поднятая поверхность */
+  --sh1: 0 0 0 1px rgba(255,255,255,.07);
+  --sh2: 0 18px 44px rgba(0,0,0,.65), 0 0 0 1px rgba(255,255,255,.09);
+
+  /* Радиусы: форма «капсула» */
+  --r-sm: 999px;
+  --r-md: 999px;
+  --r-lg: 999px;
+  --r-card: 22px;
+  --r-round: 999px;
+
+  /* Движение (обычное) */
+  --dur-fast: 120ms;
+  --dur: 240ms;
+  --dur-slow: 400ms;
+  --m-move: 1;
+  --m-shimmer: shimmer;
+  --m-spin: 0.8s;
+  --spring: linear(0, 0.2 6%, 0.62 16%, 0.9 27%, 1.03 38%, 1.05 46%, 1.02 60%, 1 76%, 1);
+
+  /* Стекло для навигации/таббара (.glass) */
+  --glass-bg: rgba(38,38,42,0.36);
+  --glass-blur: 12px;
+  --glass-hi: rgba(255,255,255,.18);
+  --glass-edge: rgba(255,255,255,.10);
+  --edge-blur: 6px;
+
+  /* Где акцент = «действие»: акцент только у главного действия, остальное — ink. 1 включает акцент */
+  --ax-st: 0;
+  --ax-ios: 0;
+
+  --font-ui: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+body {
+  margin: 0;
+  background: var(--lv);
+  color: var(--c1);
+  font-family: var(--font-ui);
+}
+
+/* ================= Кит: уровни (v6, строки 633–706) ================= */
+/* ---------- Кит: уровни. Заливки считаются от поверхности, на которой стоит компонент ---------- */
+/* Где акцент: флаги наследуются, решает ближайший предок с data-ascope. 0 — ink, 1 — акцент */
+[data-ascope="cta"] {
+  --ax-st: 0;
+  --ax-ios: 0;
+}
+[data-ascope="states"] {
+  --ax-st: 1;
+  --ax-ios: 0;
+}
+[data-ascope="ios"] {
+  --ax-st: 1;
+  --ax-ios: 1;
+}
+:root,
+[data-level="0"] {
+  --lv: var(--n0);
+  --f1: var(--n1);
+  --f2: var(--n2);
+  --f3: var(--n3);
+  --f4: var(--n4);
+  --f5: var(--n5);
+  --f6: var(--n6);
+  --thumb: var(--th0);
+}
+[data-level="1"] {
+  --lv: var(--n1);
+  --f1: var(--n2);
+  --f2: var(--n3);
+  --f3: var(--n4);
+  --f4: var(--n5);
+  --f5: var(--n6);
+  --f6: var(--n7);
+  --thumb: var(--th1);
+}
+[data-level="2"] {
+  --lv: var(--n2);
+  --f1: var(--n3);
+  --f2: var(--n4);
+  --f3: var(--n5);
+  --f4: var(--n6);
+  --f5: var(--n7);
+  --f6: var(--n8);
+  --thumb: var(--th2);
+}
+[data-level="3"] {
+  --lv: var(--n3);
+  --f1: var(--n4);
+  --f2: var(--n5);
+  --f3: var(--n6);
+  --f4: var(--n7);
+  --f5: var(--n8);
+  --f6: var(--n9);
+  --thumb: var(--th3);
+}
+[data-level="4"] {
+  --lv: var(--n4);
+  --f1: var(--n5);
+  --f2: var(--n6);
+  --f3: var(--n7);
+  --f4: var(--n8);
+  --f5: var(--n9);
+  --f6: var(--n10);
+  --thumb: var(--th4);
+}
+[data-level="e"] {
+  --lv: var(--e0);
+  --f1: var(--e1);
+  --f2: var(--e2);
+  --f3: var(--e3);
+  --f4: var(--e4);
+  --f5: var(--e5);
+  --f6: var(--e6);
+  --thumb: var(--thE);
+}
+/* ================= Размеры контрола (v6, 707–752) ================= */
+/* Размер контрола — плотность: высота, отступы, значок. Стиль текста берётся из системной шкалы: sm и md — subheadline 15, lg — body 17.
+   --dt — системный размер текста относительно стандартного (Dynamic Type): вместе с текстом растут высота, отступы, значок и скругление.
+   --k-hb — высота без учёта текста: по ней строится переключатель, он с текстом не растёт */
+[data-size="sm"] {
+  --k-step: 0;
+  --k-hb: 32px;
+  --k-h: calc(32px * var(--dt, 1));
+  --k-px: calc(12px * var(--dt, 1));
+  --k-gap: calc(6px * var(--dt, 1));
+  --k-icon: calc(16px * var(--dt, 1));
+  --k-font: calc(15px * var(--dt, 1));
+  --k-r: calc(var(--r-sm) * var(--dt, 1));
+}
+:root,
+[data-size="md"] {
+  --k-step: 1;
+  --k-hb: 40px;
+  --k-h: calc(40px * var(--dt, 1));
+  --k-px: calc(16px * var(--dt, 1));
+  --k-gap: calc(8px * var(--dt, 1));
+  --k-icon: calc(18px * var(--dt, 1));
+  --k-font: calc(15px * var(--dt, 1));
+  --k-r: calc(var(--r-md) * var(--dt, 1));
+}
+[data-size="lg"] {
+  --k-step: 2;
+  --k-hb: 50px;
+  --k-h: calc(50px * var(--dt, 1));
+  --k-px: calc(20px * var(--dt, 1));
+  --k-gap: calc(10px * var(--dt, 1));
+  --k-icon: calc(20px * var(--dt, 1));
+  --k-font: calc(17px * var(--dt, 1));
+  --k-r: calc(var(--r-lg) * var(--dt, 1));
+}
+/* на ступень меньше общего размера: чипы рядом с кнопками (lg → md, md → sm, sm → sm) */
+.k-down {
+  --d: max(calc(var(--k-step, 1) - 1), 0);
+  --k-hb: calc(32px + var(--d) * 8px);
+  --k-h: calc((32px + var(--d) * 8px) * var(--dt, 1));
+  --k-px: calc((12px + var(--d) * 4px) * var(--dt, 1));
+  --k-gap: calc((6px + var(--d) * 2px) * var(--dt, 1));
+  --k-icon: calc((16px + var(--d) * 2px) * var(--dt, 1));
+  --k-font: calc(15px * var(--dt, 1));
+  --k-r: calc(
+    (var(--r-sm) + (var(--r-md) - var(--r-sm)) * var(--d)) * var(--dt, 1)
+  );
+}
+/* ================= Примитивы, контролы, поля, сегмент, переключатель, флажок, прогресс, карточка, строка списка (v6, 775–1659) ================= */
+.k-surf {
+  background: var(--lv);
+  color: var(--c1);
+}
+.k-surf[data-level="e"] {
+  box-shadow: var(--sh2);
+}
+
+/* Примитивы */
+.k-icon {
+  width: var(--k-icon);
+  height: var(--k-icon);
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.k-text {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: var(--t-size, 16px);
+  line-height: var(--t-lh, 22px);
+  font-weight: var(--t-w, 400);
+  letter-spacing: var(--t-ls, -0.005em);
+  color: var(--t-color, var(--c1));
+}
+.k-text[data-style="title"] {
+  --t-size: 24px;
+  --t-lh: 30px;
+  --t-w: 700;
+  --t-ls: -0.02em;
+}
+.k-text[data-style="headline"] {
+  --t-size: 17px;
+  --t-lh: 22px;
+  --t-w: 600;
+  --t-ls: -0.01em;
+}
+.k-text[data-style="callout"] {
+  --t-size: 15px;
+  --t-lh: 20px;
+}
+.k-text[data-style="footnote"] {
+  --t-size: 13px;
+  --t-lh: 18px;
+}
+.k-text[data-level2="secondary"] {
+  --t-color: var(--c2);
+}
+.k-text[data-level2="tertiary"] {
+  --t-color: var(--c3);
+}
+.k-spinner {
+  width: var(--k-icon);
+  height: var(--k-icon);
+  flex: none;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  animation: kspin var(--m-spin, 0.8s) linear infinite;
+}
+@keyframes kspin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* Движение — токены. «Уменьшение движения» не выключает анимации: сдвиг и масштаб становятся проявлением, пружина теряет отскок, мерцание пропадает */
+[data-motion="reduced"] {
+  --m-move: 0;
+  --m-shimmer: none;
+  --m-spin: 1.6s;
+  --spring: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.glass {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+  backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+  box-shadow:
+    inset 0 1px 0 var(--glass-hi),
+    0 0 0 1px var(--glass-edge),
+    0 8px 22px rgba(0, 0, 0, 0.1);
+}
+
+/* Контрол: рецепт = заливка + обводка + содержимое */
+.k-ctl {
+  --fill: transparent;
+  --stroke: transparent;
+  --sw: 0px;
+  --tfg: color-mix(
+    in srgb,
+    var(--accent-text) calc(var(--ax-ios, 0) * 100%),
+    var(--c1)
+  );
+  --fg: var(--tfg);
+  --shadow: 0 0 #0000;
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--k-gap);
+  height: var(--k-h);
+  padding: 0 var(--k-px);
+  margin: 0;
+  border: 0;
+  border-radius: var(--k-r);
+  font: 600 var(--k-font)/1 var(--font-ui);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  cursor: pointer;
+  background: var(--fill);
+  color: var(--fg);
+  box-shadow:
+    var(--shadow),
+    inset 0 0 0 var(--sw) var(--stroke);
+  transition:
+    background-color var(--dur-fast),
+    box-shadow var(--dur-fast),
+    opacity var(--dur-fast),
+    color var(--dur-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+.k-ctl::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: max(100%, 44px);
+  height: max(100%, 44px);
+  transform: translate(-50%, -50%);
+  border-radius: inherit;
+}
+.k-ctl.icon {
+  width: var(--k-h);
+  padding: 0;
+}
+.k-ctl.round,
+.k-ctl.chip {
+  border-radius: var(--r-round, var(--k-r));
+}
+/* кольцо фокуса — ink, в режиме «как iOS» — цвет акцента */
+.k-ctl,
+.k-field,
+.k-seg,
+.k-switch,
+.k-check {
+  --ring: color-mix(
+    in srgb,
+    var(--accent-text) calc(var(--ax-ios, 0) * 100%),
+    var(--c1)
+  );
+}
+/* пункты меню и крестик в чипе остаются ink и в режиме «как iOS», как в системных меню */
+.k-ctl[role="menuitem"]:not([data-tone]),
+.k-token .k-ctl {
+  --tfg: var(--c1);
+}
+.k-ctl[data-tone="accent"] {
+  --tfg: var(--accent-text);
+}
+.k-ctl[data-tone="danger"] {
+  --tfg: var(--danger-text);
+}
+/* базовые рецепты */
+.k-ctl[data-variant="solid"] {
+  --fill: color-mix(
+    in srgb,
+    var(--accent) calc(var(--ax-ios, 0) * 100%),
+    var(--k-ink)
+  );
+  --fg: color-mix(
+    in srgb,
+    var(--on-accent) calc(var(--ax-ios, 0) * 100%),
+    var(--k-on-ink)
+  );
+}
+.k-ctl[data-variant="solid"][data-tone="accent"] {
+  --fill: var(--accent);
+  --fg: var(--on-accent);
+}
+.k-ctl[data-variant="solid"][data-tone="danger"] {
+  --fill: var(--danger);
+  --fg: var(--on-danger);
+}
+.k-ctl[data-variant="soft"] {
+  --fill: var(--f2);
+}
+.k-ctl[data-variant="surface"] {
+  --fill: var(--f1);
+  --sw: var(--line-w);
+  --stroke: var(--s1);
+}
+.k-ctl[data-variant="outline"] {
+  --sw: var(--line-w);
+  --stroke: var(--s2);
+}
+.k-ctl[data-variant="outline"][data-tone="accent"] {
+  --stroke: color-mix(in oklab, var(--accent-text) 55%, transparent);
+}
+.k-ctl[data-variant="outline"][data-tone="danger"] {
+  --stroke: color-mix(in oklab, var(--danger-text) 50%, transparent);
+}
+.k-ctl:is([data-variant="plain"], [data-variant="link"]) {
+  height: auto;
+  min-height: var(--k-icon);
+  padding: 0;
+  font-weight: 500;
+  border-radius: min(6px, var(--k-r));
+}
+.k-ctl[data-variant="link"] {
+  text-decoration: underline 1px;
+  text-decoration-color: color-mix(
+    in oklab,
+    currentColor 45%,
+    transparent
+  );
+  text-underline-offset: 3px;
+}
+.k-text .k-ctl[data-variant="link"] {
+  display: inline;
+  font: inherit;
+  font-weight: 500;
+  letter-spacing: inherit;
+  white-space: normal;
+}
+.k-ctl[data-variant="soft"][data-tone="accent"] {
+  --tint: color-mix(in oklab, var(--accent-text) 14%, var(--lv));
+  background: var(--tint);
+}
+.k-ctl[data-variant="soft"][data-tone="danger"] {
+  --tint: color-mix(in oklab, var(--danger-text) 14%, var(--lv));
+  background: var(--tint);
+}
+/* состояния нейтральных заливок: +1 и +2 ступени, pressed стоит ниже и побеждает */
+.k-ctl[data-variant="soft"]:is(:hover, [data-h]) {
+  --fill: var(--f3);
+}
+.k-ctl[data-variant="surface"]:is(:hover, [data-h]) {
+  --fill: var(--f2);
+}
+.k-ctl:is([data-variant="outline"], [data-variant="ghost"]):is(
+    :hover,
+    [data-h]
+  ) {
+  --fill: var(--f1);
+}
+.k-ctl[data-variant="soft"]:is(:active, [data-p]) {
+  --fill: var(--f4);
+}
+.k-ctl[data-variant="surface"]:is(:active, [data-p]) {
+  --fill: var(--f3);
+}
+.k-ctl:is([data-variant="outline"], [data-variant="ghost"]):is(
+    :active,
+    [data-p]
+  ) {
+  --fill: var(--f2);
+}
+/* сплошные и тонированные заливки смешиваются с цветом содержимого: 8 % и 12 % */
+.k-ctl[data-variant="solid"]:is(:hover, [data-h]) {
+  background: color-mix(in oklab, var(--fill), var(--fg) 8%);
+}
+.k-ctl[data-variant="solid"]:is(:active, [data-p]) {
+  background: color-mix(in oklab, var(--fill), var(--fg) 12%);
+}
+.k-ctl[data-variant="soft"]:is(
+    [data-tone="accent"],
+    [data-tone="danger"]
+  ):is(:hover, [data-h]) {
+  background: color-mix(in oklab, var(--tint), var(--fg) 8%);
+}
+.k-ctl[data-variant="soft"]:is(
+    [data-tone="accent"],
+    [data-tone="danger"]
+  ):is(:active, [data-p]) {
+  background: color-mix(in oklab, var(--tint), var(--fg) 12%);
+}
+/* plain: подсветка вокруг текста вместо прозрачности, контраст не падает */
+.k-ctl[data-variant="plain"]:is(:hover, [data-h]) {
+  --fill: var(--f1);
+  --shadow: 0 0 0 4px var(--fill);
+}
+.k-ctl[data-variant="link"]:is(:hover, [data-h]) {
+  text-decoration-color: currentColor;
+}
+.k-ctl:is([data-variant="plain"], [data-variant="link"]):is(
+    :active,
+    [data-p]
+  ) {
+  --fill: var(--f2);
+  --shadow: 0 0 0 4px var(--fill);
+}
+/* selected меняет рецепт на solid: ink, а в режимах «+ состояния» и «как iOS» — акцент */
+.k-ctl[data-selected][data-variant]:not(
+    [data-variant="plain"],
+    [data-variant="link"],
+    [data-tone="accent"],
+    [data-tone="danger"]
+  ) {
+  --fill: color-mix(
+    in srgb,
+    var(--accent) calc(var(--ax-st, 0) * 100%),
+    var(--k-ink)
+  );
+  --fg: color-mix(
+    in srgb,
+    var(--on-accent) calc(var(--ax-st, 0) * 100%),
+    var(--k-on-ink)
+  );
+  --sw: 0px;
+  background: var(--fill);
+}
+.k-ctl[data-selected][data-variant]:not(
+    [data-variant="plain"],
+    [data-variant="link"]
+  ):is(:hover, [data-h]) {
+  background: color-mix(in oklab, var(--fill), var(--fg) 8%);
+}
+.k-ctl[data-selected][data-variant]:not(
+    [data-variant="plain"],
+    [data-variant="link"]
+  ):is(:active, [data-p]) {
+  background: color-mix(in oklab, var(--fill), var(--fg) 12%);
+}
+.k-ctl:is([data-variant="plain"], [data-variant="link"])[data-selected] {
+  text-decoration: underline 2px;
+  text-decoration-color: currentColor;
+  text-underline-offset: 4px;
+}
+.k-ctl:is(
+    [data-variant="plain"],
+    [data-variant="link"]
+  )[data-selected]:not([data-tone]) {
+  --tfg: color-mix(
+    in srgb,
+    var(--accent-text) calc(var(--ax-st, 0) * 100%),
+    var(--c1)
+  );
+}
+/* disabled перекрывает всё, но выбор остаётся виден */
+.k-ctl:is(:disabled, [data-d]) {
+  pointer-events: none;
+  color: var(--c3) !important;
+  opacity: 1 !important;
+}
+.k-ctl:is(:disabled, [data-d]):is(
+    [data-variant="solid"],
+    [data-variant="soft"],
+    [data-variant="surface"]
+  ) {
+  background: var(--f1) !important;
+}
+.k-ctl:is(:disabled, [data-d]):is(
+    [data-variant="surface"],
+    [data-variant="outline"]
+  ) {
+  box-shadow: inset 0 0 0 var(--line-w) var(--s1) !important;
+}
+.k-ctl:is(:disabled, [data-d])[data-selected]:not(
+    [data-variant="plain"],
+    [data-variant="link"]
+  ) {
+  background: var(--f2) !important;
+  box-shadow: none !important;
+}
+.k-ctl:focus-visible,
+.k-ctl[data-f] {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+.k-ctl[data-l] {
+  pointer-events: none;
+}
+
+/* Поле */
+.k-field {
+  --fill: var(--f1);
+  --stroke: transparent;
+  --sw: 0px;
+  --fg: var(--c1);
+  --shadow: 0 0 #0000;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--k-gap);
+  height: var(--k-h);
+  padding: 0 calc(var(--k-px) - 2px);
+  border-radius: var(--k-r);
+  background: var(--fill);
+  color: var(--c2);
+  box-shadow:
+    var(--shadow),
+    inset 0 0 0 var(--sw) var(--stroke);
+  min-width: 0;
+  cursor: text;
+  transition: box-shadow var(--dur-fast);
+}
+.k-field[data-variant="outline"] {
+  --fill: transparent;
+  --sw: var(--line-w);
+  --stroke: var(--s3);
+}
+.k-field[data-variant="surface"] {
+  --fill: var(--f1);
+  --sw: var(--line-w);
+  --stroke: var(--s1);
+}
+/* состояния поля: наведение +1 к заливке или сильнее обводка, фокус — обводка c1, ошибка — красная, disabled — c3 и слабая обводка */
+.k-field:is(:hover, [data-h]):not([data-variant="outline"]) {
+  --fill: var(--f2);
+}
+.k-field[data-variant="outline"]:is(:hover, [data-h]) {
+  --stroke: var(--c2);
+}
+.k-field:is(:focus-within, [data-f]) {
+  --sw: 1.5px;
+  --stroke: var(--ring);
+}
+.k-field[data-err] {
+  --sw: 1.5px;
+  --stroke: var(--danger-text);
+}
+.k-field[data-d] {
+  --fg: var(--c3);
+  color: var(--c3);
+  pointer-events: none;
+}
+.k-field[data-d]:is([data-variant="outline"], [data-variant="surface"]) {
+  --sw: var(--line-w);
+  --stroke: var(--s1);
+}
+.k-field input {
+  all: unset;
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  font: 400 var(--k-font)/1.2 var(--font-ui);
+  color: var(--fg);
+  caret-color: color-mix(
+    in srgb,
+    var(--accent-text) calc(var(--ax-st, 0) * 100%),
+    var(--c1)
+  );
+}
+.k-field input::placeholder {
+  color: var(--c2);
+}
+.k-field[data-d] input::placeholder {
+  color: var(--c3);
+}
+.k-help {
+  margin: 0;
+  font: 400 13px/1.35 var(--font-ui);
+  color: var(--c2);
+}
+.k-help[data-tone="danger"] {
+  color: var(--danger-text);
+}
+
+/* Сегменты, переключатель */
+.k-seg {
+  position: relative;
+  display: inline-grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  flex: none;
+  height: var(--k-h);
+  padding: 2px;
+  gap: 2px;
+  border-radius: var(--k-r);
+  background: var(--f1);
+}
+.k-seg button {
+  all: unset;
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 calc(var(--k-px) - 4px);
+  border-radius: max(0px, calc(var(--k-r) - 2px));
+  font: 500 var(--k-font)/1 var(--font-ui);
+  color: var(--c1);
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color var(--dur) ease,
+    box-shadow var(--dur) ease;
+}
+/* бегунок — поднятый слой: не +2 от дорожки, а свой непрозрачный тон с тенью */
+.k-seg-thumb {
+  position: absolute;
+  z-index: 0;
+  top: 2px;
+  bottom: 2px;
+  left: 2px;
+  width: calc((100% - 4px - (var(--n, 3) - 1) * 2px) / var(--n, 3));
+  pointer-events: none;
+  transform: translateX(calc(var(--i, 0) * (100% + 2px)));
+  border-radius: max(0px, calc(var(--k-r) - 2px));
+  background: var(--thumb);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.14),
+    0 0 0 0.5px rgba(0, 0, 0, 0.05);
+  opacity: var(--m-move, 1);
+  transition: transform var(--dur) var(--spring, ease);
+}
+.k-seg button[aria-pressed="true"] {
+  font-weight: 600;
+  background: color-mix(
+    in srgb,
+    var(--thumb) calc((1 - var(--m-move, 1)) * 100%),
+    transparent
+  );
+  box-shadow: 0 1px 3px rgba(0, 0, 0, calc(0.14 * (1 - var(--m-move, 1))));
+}
+.k-seg button:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 1px;
+}
+.k-switch {
+  --sw-h: calc(var(--k-hb, var(--k-h)) * 0.66);
+  position: relative;
+  flex: none;
+  width: calc(var(--sw-h) * 1.68);
+  height: var(--sw-h);
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: var(--r-round, 999px);
+  background: var(--f2);
+  cursor: pointer;
+  transition: background-color var(--dur);
+}
+.k-switch::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: calc(var(--sw-h) - 4px);
+  height: calc(var(--sw-h) - 4px);
+  border-radius: var(--r-round, 50%);
+  background: var(--knob);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transition: transform var(--dur);
+}
+/* «вкл» — ink, а начиная с режима «+ состояния» — акцент; бегунок — цвет текста на этой заливке */
+.k-switch[aria-checked="true"] {
+  background: color-mix(
+    in srgb,
+    var(--accent) calc(var(--ax-st, 0) * 100%),
+    var(--k-ink)
+  );
+}
+.k-switch[aria-checked="true"]::after {
+  transform: translateX(calc(var(--sw-h) * 0.68));
+  background: color-mix(
+    in srgb,
+    var(--on-accent) calc(var(--ax-st, 0) * 100%),
+    var(--k-on-ink)
+  );
+}
+.k-switch:is(:focus-visible, [data-f]) {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+/* disabled: дорожка слабее, включённый — c3 вместо ink; у сегмента бегунок +2 без тени, текст c3 */
+.k-switch[data-d] {
+  pointer-events: none;
+  background: var(--f1);
+}
+.k-switch[data-d][aria-checked="true"] {
+  background: var(--c3);
+}
+.k-switch[data-d]::after {
+  box-shadow: 0 0 0 0.5px var(--s1);
+}
+.k-seg[data-f] button[aria-pressed="true"] {
+  outline: 2px solid var(--ring);
+  outline-offset: 1px;
+}
+.k-seg[data-d] {
+  --thumb: var(--f2);
+  pointer-events: none;
+}
+.k-seg[data-d] button {
+  color: var(--c3);
+}
+.k-seg[data-d] .k-seg-thumb {
+  box-shadow: none;
+}
+/* Флажок: выкл — сильная обводка (3:1), вкл — заливка ink или акцент, как у переключателя */
+.k-check {
+  --box: calc(var(--k-icon) + 2px);
+  position: relative;
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: var(--box);
+  height: var(--box);
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: min(6px, var(--k-r));
+  background: transparent;
+  color: transparent;
+  box-shadow: inset 0 0 0 calc(var(--line-w) + 0.5px) var(--s3);
+  cursor: pointer;
+  transition: background-color var(--dur-fast);
+}
+.k-check::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
+}
+.k-check .k-icon {
+  --k-icon: calc(var(--box) - 4px);
+  stroke-width: 2.6;
+}
+.k-check[aria-checked="true"] {
+  background: color-mix(
+    in srgb,
+    var(--accent) calc(var(--ax-st, 0) * 100%),
+    var(--k-ink)
+  );
+  color: color-mix(
+    in srgb,
+    var(--on-accent) calc(var(--ax-st, 0) * 100%),
+    var(--k-on-ink)
+  );
+  box-shadow: none;
+}
+.k-check:is(:focus-visible, [data-f]) {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+.k-check[data-d] {
+  pointer-events: none;
+  box-shadow: inset 0 0 0 var(--line-w) var(--s1);
+}
+.k-check[data-d][aria-checked="true"] {
+  background: var(--f2);
+  color: var(--c3);
+  box-shadow: none;
+}
+.chk-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font: 400 15px/1.3 var(--font-ui);
+  color: var(--c1);
+  cursor: pointer;
+}
+/* Прогресс: дорожка +2, заполнение ink или акцент */
+.k-progress {
+  position: relative;
+  width: 100%;
+  height: 4px;
+  border-radius: var(--r-round, 999px);
+  background: var(--f2);
+  overflow: hidden;
+}
+.k-progress > i {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--v, 0%);
+  border-radius: inherit;
+  background: color-mix(
+    in srgb,
+    var(--accent) calc(var(--ax-st, 0) * 100%),
+    var(--k-ink)
+  );
+}
+
+/* Поверхность-рецепт (карточки) */
+.k-box {
+  --fill: transparent;
+  --sw: 0px;
+  --stroke: transparent;
+  --fg: var(--c1);
+  --shadow: 0 0 #0000;
+  display: grid;
+  gap: 2px;
+  padding: 12px 14px;
+  border-radius: var(--r-card);
+  background: var(--fill);
+  color: var(--fg);
+  box-shadow:
+    var(--shadow),
+    inset 0 0 0 var(--sw) var(--stroke);
+  font-family: var(--font-ui);
+  text-align: left;
+}
+.k-box[data-variant="solid"] {
+  --fill: var(--k-ink);
+  --fg: var(--k-on-ink);
+}
+.k-box[data-variant="soft"] {
+  --fill: var(--f2);
+}
+.k-box[data-variant="surface"] {
+  --fill: var(--f1);
+  --sw: var(--line-w);
+  --stroke: var(--s1);
+}
+.k-box[data-variant="outline"] {
+  --sw: var(--line-w);
+  --stroke: var(--s2);
+}
+.k-box[data-variant="accent"] {
+  --fill: var(--accent);
+  --fg: var(--on-accent);
+}
+.k-box b {
+  font: 600 14px/1.25 var(--font-ui);
+}
+/* подпись — та же доля, что у c2 (62 %, при повышенном контрасте 78 %), но от цвета содержимого: работает и на ink */
+.k-box span {
+  font: 400 12.5px/1.35 var(--font-ui);
+  opacity: var(--c2-a, 0.62);
+}
+/* на насыщенном цвете подпись плотнее: доля подобрана под 4,5:1 */
+.k-box[data-variant="accent"] span {
+  opacity: var(--acc-c2-a, 1);
+}
+
+/* Паттерны */
+.k-list {
+  display: grid;
+}
+.k-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  min-height: 60px;
+  padding: 10px 16px;
+  font-family: var(--font-ui);
+}
+.k-row + .k-row::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 64px;
+  right: 0;
+  border-top: var(--line-w) solid var(--sep);
+}
+.k-row-text {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+}
+.k-row-text .k-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.k-avatar {
+  width: 38px;
+  height: 38px;
+  flex: none;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--f2);
+  color: var(--c1);
+  font: 600 13.5px/1 var(--font-ui);
+}
+.k-row-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: min(8px, var(--r-card));
+  display: grid;
+  place-items: center;
+  background: var(--f2);
+  color: var(--c1);
+  --k-icon: 17px;
+}
+.k-group {
+  border-radius: var(--r-card);
+  overflow: hidden;
+}
+.k-menu {
+  display: grid;
+  gap: 2px;
+  padding: 6px;
+  border-radius: calc(var(--r-card) - 2px);
+  min-width: 210px;
+}
+.k-menu .k-ctl {
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 12px;
+  font-weight: 500;
+  border-radius: max(0px, calc(var(--r-card) - 8px));
+}
+.k-menu hr {
+  width: 100%;
+  margin: 4px 0;
+  border: 0;
+  border-top: var(--line-w) solid var(--sep);
+}
+.k-empty {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 16px;
+  padding: 44px 24px;
+}
+.k-empty-text {
+  display: grid;
+  gap: 6px;
+  justify-items: center;
+  max-width: 30ch;
+}
+.k-empty-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--f1);
+  color: var(--c2);
+  --k-icon: 26px;
+}
+.k-empty-icon.danger {
+  color: var(--danger-text);
+}
+.k-more {
+  display: grid;
+  place-items: center;
+  padding: 14px;
+  color: var(--c2);
+}
+.is-placeholder .k-text {
+  color: transparent !important;
+  width: fit-content;
+  max-width: 100%;
+  border-radius: 6px;
+  background: linear-gradient(
+      90deg,
+      var(--f2) 0%,
+      var(--f1) 50%,
+      var(--f2) 100%
+    )
+    0 0 / 300% 100%;
+  animation: var(--m-shimmer, shimmer) 1.4s linear infinite;
+}
+.is-placeholder .k-avatar {
+  background: var(--f2);
+  color: transparent;
+}
+@keyframes shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+
+/* ================= Вложенность и токен-чип (v6, 2311–2334) ================= */
+/* ---------- Вложенность: элемент, который сам +1 и задаёт уровень детям ---------- */
+.k-nest {
+  background: var(--lv);
+}
+.k-field.k-nest {
+  background: var(--lv);
+}
+.k-token {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  height: 26px;
+  padding: 0 2px 0 10px;
+  border-radius: var(--r-round, 6px);
+  flex: none;
+  box-shadow: inset 0 0 0 var(--line-w) var(--s2);
+  font: 500 13px/1 var(--font-ui);
+  color: var(--c1);
+}
+.k-token .k-ctl {
+  --k-h: 22px;
+  --k-icon: 13px;
+}
+
+/* ================= Материал-контейнер (v6, 2418–2437) ================= */
+/* Материал — один для раздела и каталога. На материале фон неизвестен: шаги остаются полупрозрачными и складываются сами */
+.k-mat {
+  background: var(--mat-bg, var(--lv));
+  box-shadow: var(--mat-shadow, none);
+}
+.k-mat[data-material]:not([data-material="opaque"]) {
+  --lv: transparent;
+  --f1: var(--a1);
+  --f2: var(--a2);
+  --f3: var(--a3);
+  --f4: var(--a4);
+  --f5: var(--a5);
+  --f6: var(--a6);
+  --thumb: var(--mat-thumb);
+  -webkit-backdrop-filter: blur(var(--mat-blur, 0px));
+  backdrop-filter: blur(var(--mat-blur, 0px));
+}
+.k-mat[data-material]:not([data-material="opaque"]) .k-nest {
+  background: var(--f1);
+}
+
+/* ---------- Материалы (тёмная тема, обычная прозрачность) ----------
+   Берутся из paintMaterial() v6. Панель: class="k-mat" data-material="thin". Шаги заливки полупрозрачные (--a1…--a6 = ink 7…32 %),
+   поэтому внутри панели уровни data-level не нужны. clear считается как тёмная тема и лежит на фото с затемнением 35 % под ним (.k-dim). */
+.k-mat[data-material="thick"] {
+  --mat-bg: rgba(24,25,29,0.8);
+  --mat-blur: 26px;
+  --a1: rgba(249,250,253,0.07);
+  --a2: rgba(249,250,253,0.12);
+  --a3: rgba(249,250,253,0.17);
+  --a4: rgba(249,250,253,0.22);
+  --a5: rgba(249,250,253,0.27);
+  --a6: rgba(249,250,253,0.32);
+  --mat-thumb: #46474B;
+  --mat-shadow: 0 0 0 .5px rgba(0,0,0,.14), 0 12px 32px rgba(0,0,0,.16);
+}
+.k-mat[data-material="regular"] {
+  --mat-bg: rgba(24,25,29,0.64);
+  --mat-blur: 22px;
+  --a1: rgba(249,250,253,0.07);
+  --a2: rgba(249,250,253,0.12);
+  --a3: rgba(249,250,253,0.17);
+  --a4: rgba(249,250,253,0.22);
+  --a5: rgba(249,250,253,0.27);
+  --a6: rgba(249,250,253,0.32);
+  --mat-thumb: #46474B;
+  --mat-shadow: 0 0 0 .5px rgba(0,0,0,.14), 0 12px 32px rgba(0,0,0,.16);
+}
+.k-mat[data-material="thin"] {
+  --mat-bg: rgba(24,25,29,0.48);
+  --mat-blur: 18px;
+  --a1: rgba(249,250,253,0.07);
+  --a2: rgba(249,250,253,0.12);
+  --a3: rgba(249,250,253,0.17);
+  --a4: rgba(249,250,253,0.22);
+  --a5: rgba(249,250,253,0.27);
+  --a6: rgba(249,250,253,0.32);
+  --mat-thumb: #46474B;
+  --mat-shadow: 0 0 0 .5px rgba(0,0,0,.14), 0 12px 32px rgba(0,0,0,.16);
+}
+.k-mat[data-material="ultrathin"] {
+  --mat-bg: rgba(24,25,29,0.3);
+  --mat-blur: 14px;
+  --a1: rgba(249,250,253,0.07);
+  --a2: rgba(249,250,253,0.12);
+  --a3: rgba(249,250,253,0.17);
+  --a4: rgba(249,250,253,0.22);
+  --a5: rgba(249,250,253,0.27);
+  --a6: rgba(249,250,253,0.32);
+  --mat-thumb: #46474B;
+  --mat-shadow: 0 0 0 .5px rgba(0,0,0,.14), 0 12px 32px rgba(0,0,0,.16);
+}
+.k-mat[data-material="glass"] {
+  --mat-bg: rgba(24,25,29,0.42);
+  --mat-blur: 10px;
+  --a1: rgba(249,250,253,0.07);
+  --a2: rgba(249,250,253,0.12);
+  --a3: rgba(249,250,253,0.17);
+  --a4: rgba(249,250,253,0.22);
+  --a5: rgba(249,250,253,0.27);
+  --a6: rgba(249,250,253,0.32);
+  --mat-thumb: #46474B;
+  --mat-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 0 0 1px rgba(255,255,255,.22), 0 12px 32px rgba(0,0,0,.2);
+}
+.k-mat[data-material="clear"] {
+  --mat-bg: rgba(255,255,255,0.1);
+  --mat-blur: 4px;
+  --a1: rgba(249,250,253,0.07);
+  --a2: rgba(249,250,253,0.12);
+  --a3: rgba(249,250,253,0.17);
+  --a4: rgba(249,250,253,0.22);
+  --a5: rgba(249,250,253,0.27);
+  --a6: rgba(249,250,253,0.32);
+  --mat-thumb: #46474B;
+  --mat-shadow: inset 0 1px 0 rgba(255,255,255,.5), 0 0 0 1px rgba(255,255,255,.22), 0 12px 32px rgba(0,0,0,.2);
+}
+.k-mat[data-material="opaque"] {
+  --mat-bg: var(--lv);
+  --mat-blur: 0px;
+  --mat-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 14px 40px rgba(0,0,0,.5);
+}
+/* затемнение 35 % под clear */
+.k-dim { background: rgba(0,0,0,.35); }
+
+/* Адаптация (в ките этого нет, отражает те же системные настройки): уменьшение движения и прозрачности */
+@media (prefers-reduced-motion: reduce) {
+  :root { --m-move: 0; --m-shimmer: none; --m-spin: 1.6s; --spring: cubic-bezier(0.2, 0.8, 0.2, 1); }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .k-mat[data-material]:not([data-material="opaque"]) { --mat-bg: var(--n2); --mat-blur: 0px; -webkit-backdrop-filter: none; backdrop-filter: none; }
+}

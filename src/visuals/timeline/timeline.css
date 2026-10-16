@@ -1,0 +1,464 @@
+/* Семья timeline: ось времени, карта 12 времён, Present Perfect vs Past Simple, формы будущего.
+   Цвет — от data-pos (события и вспомогательные — verb/aux), форма — Glyph в каждом чипе. */
+.vt {
+  display: grid;
+  gap: 12px;
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.vt-compact {
+  gap: 6px;
+}
+
+.vt-head {
+  display: grid;
+  gap: 6px;
+  justify-items: start;
+}
+
+.vt-title {
+  color: var(--c1);
+  font-size: 17px;
+  line-height: 22px;
+  font-weight: 600;
+}
+
+.vt-title-sm {
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.vt-sub {
+  color: var(--c2);
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.vt-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+}
+
+.vt-ex {
+  margin: 0;
+  color: var(--c1);
+}
+
+/* ---------- Ось (SVG) ---------- */
+.vt-svg {
+  color: var(--pc);
+  font-family: var(--font-ui);
+}
+
+.vt > .vt-svg,
+.vt-row > .vt-svg,
+.vt-plate > .vt-svg {
+  max-width: 460px;
+}
+
+.vt-svg text {
+  fill: var(--c2);
+  font-size: 14px;
+  line-height: 1;
+}
+
+.vt-axis {
+  fill: none;
+  stroke: var(--s3);
+  stroke-linecap: round;
+}
+
+.vt-axis-head {
+  fill: var(--s3);
+}
+
+.vt-nowline {
+  stroke: var(--c1);
+  stroke-linecap: round;
+}
+
+.vt-moment {
+  stroke: var(--c2);
+}
+
+.vt-svg text.vt-now {
+  fill: var(--c1);
+  font-weight: 600;
+}
+
+.vt-svg text.vt-zone {
+  fill: var(--c3);
+}
+
+.vt-svg text.vt-symlbl {
+  fill: var(--pt);
+  font-weight: 600;
+}
+
+.vt-svg text.vt-ink {
+  fill: var(--c1);
+}
+
+.vt-svg text.vt-faint,
+.vt-svg tspan.vt-faint {
+  fill: var(--c3);
+}
+
+.vt-svg text.vt-pt {
+  fill: var(--pt);
+  font-weight: 600;
+}
+
+.vt-span {
+  fill: var(--f2);
+}
+
+.vt-svg svg.glyph {
+  width: 14px;
+  height: 14px;
+}
+
+/* Приглушённое состояние: символы и подписи серые, форма остаётся читаемой */
+[data-dim] .vt-sym,
+.vt-svg[data-dim] .vt-sym {
+  color: var(--c3);
+}
+
+[data-dim] .vt-svg text,
+[data-dim] .vt-svg text.vt-now,
+[data-dim] .vt-svg text.vt-ink,
+[data-dim] .vt-svg text.vt-symlbl {
+  fill: var(--c3);
+}
+
+[data-dim] .vt-nowline {
+  stroke: var(--c3);
+}
+
+[data-dim] .vt-span {
+  fill: var(--f1);
+}
+
+/* ---------- Чипы формул и маркеров ---------- */
+.vt-formula {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+
+.vt-plus {
+  color: var(--c3);
+  font-size: 13px;
+}
+
+.vt-tok {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px 3px 7px;
+  border-radius: 10px;
+  background: var(--f2);
+  color: var(--pt);
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.vt-tok .w-pos {
+  text-decoration: none;
+}
+
+.vt-tok .glyph {
+  width: 12px;
+  height: 12px;
+  vertical-align: baseline;
+}
+
+.vt-tok[data-mini] {
+  gap: 3px;
+  padding: 1px 6px 1px 4px;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.vt-tok[data-hot] {
+  box-shadow: inset 0 0 0 2px var(--pc);
+  background: color-mix(in oklab, var(--pc) 22%, var(--lv));
+}
+
+.vt-q {
+  padding: 3px 12px;
+  color: var(--c2);
+}
+
+[data-dim] .vt-tok {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--sep);
+  color: var(--c3);
+}
+
+[data-dim] .vt-tok .w-pos {
+  color: var(--c3);
+}
+
+[data-dim] .vt-tok .glyph {
+  color: var(--c3) !important;
+}
+
+/* ---------- Плашки (строки, блоки, ячейки) ---------- */
+.vt-row,
+.vt-plate,
+.vt-tile,
+.vt-cell {
+  border-radius: 14px;
+  background: var(--f1);
+}
+
+.vt-row,
+.vt-plate {
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+}
+
+.vt-row[data-on],
+.vt-plate[data-on],
+.vt-cell[data-on] {
+  background: color-mix(in oklab, var(--pc) 22%, var(--lv));
+}
+
+.vt-plate[data-exact],
+.vt-cell[data-exact] {
+  box-shadow: inset 0 0 0 2px var(--pc);
+}
+
+.vt-plate[data-dim],
+.vt-cell[data-dim],
+.vt-tile[data-dim] {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--sep);
+  color: var(--c3);
+}
+
+.vt-rowhead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 8px;
+}
+
+.vt-rowhead b {
+  color: var(--c1);
+  font-weight: 600;
+}
+
+.vt-rowhead span {
+  color: var(--c2);
+  font-size: 13px;
+}
+
+.vt-plate-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 10px;
+}
+
+.vt-markers {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding: 6px;
+  margin: 0 -6px -6px;
+  border-radius: 12px;
+}
+
+.vt-markers[data-on] {
+  background: color-mix(in oklab, var(--pc) 22%, var(--lv));
+  box-shadow: inset 0 0 0 2px var(--pc);
+}
+
+.vt-markers-label {
+  color: var(--c3);
+  font-size: 12px;
+  line-height: 16px;
+  padding-right: 2px;
+}
+
+[data-dim] .vt-markers-label {
+  color: var(--c3);
+}
+
+.vt-pp[data-compact] .vt-plate {
+  gap: 6px;
+  padding: 8px 10px;
+}
+
+/* ---------- Словарь аспектов ---------- */
+.vt-tiles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.vt-tile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  min-width: 0;
+}
+
+.vt-tile .vt-svg {
+  flex: none;
+  width: 64px;
+}
+
+.vt-tilename {
+  display: grid;
+  min-width: 0;
+  font-size: 13px;
+  line-height: 16px;
+}
+
+.vt-tilename b {
+  color: var(--c1);
+  font-weight: 600;
+}
+
+.vt-tilename span {
+  color: var(--c2);
+  font-size: 12px;
+}
+
+[data-dim] .vt-tilename b,
+[data-dim] .vt-tilename span {
+  color: var(--c3);
+}
+
+/* ---------- Карта 12 времён ---------- */
+.vt-cols {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.vt-colhead {
+  display: grid;
+  gap: 0;
+  text-align: center;
+  color: var(--c3);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.vt-colhead b {
+  color: var(--c2);
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 600;
+}
+
+.vt-colhead[data-lit] b,
+.vt-colhead[data-lit] {
+  color: var(--pt);
+}
+
+.vt-maprow {
+  display: grid;
+  gap: 4px;
+}
+
+.vt-rowlabel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 8px;
+  color: var(--c2);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.vt-rowlabel b {
+  color: var(--c1);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+.vt-rowlabel[data-lit],
+.vt-rowlabel[data-lit] b {
+  color: var(--pt);
+}
+
+.vt-cells,
+.vt-minis {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.vt-minis[data-cols='2'] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.vt-cell {
+  display: grid;
+  align-content: start;
+  gap: 4px;
+  padding: 6px 5px;
+  min-width: 0;
+  transition: background-color var(--dur);
+}
+
+.vt-cell .vt-formula {
+  gap: 2px 3px;
+}
+
+.vt-compact .vt-cell {
+  gap: 2px;
+  padding: 4px 5px;
+}
+
+.vt-celltitle,
+.vt-cellname {
+  color: var(--c2);
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+}
+
+.vt-cell[data-dim] .vt-celltitle,
+.vt-cell[data-dim] .vt-cellname {
+  color: var(--c3);
+}
+
+.vt-cell[data-on] .vt-celltitle,
+.vt-cell[data-on] .vt-cellname {
+  color: var(--pt);
+}
+
+.vt-cell .vt-svg {
+  width: 100%;
+}
+
+.vt-compact .vt-cell .vt-formula {
+  justify-content: flex-start;
+}
+
+[data-dim] .vt-title,
+[data-dim] .vt-sub,
+[data-dim] .vt-plus {
+  color: var(--c3);
+}
+
+[data-dim] .vt-ex .w-pos {
+  color: var(--c3);
+  text-decoration-color: var(--c4);
+}

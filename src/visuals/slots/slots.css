@@ -1,0 +1,360 @@
+/* Семья slots: слоты-«вагоны» и формулы (порядок слов, место наречия, вспомогательные, прилагательные).
+   Цвет — от data-pos элемента; подсветка — заливка и рамка цвета части речи, остальное приглушено. */
+.vs {
+  display: grid;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.vs .glyph {
+  width: 12px;
+  height: 12px;
+}
+
+.vsl-cap,
+.vsl-subcap {
+  color: var(--c3);
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.vsl-cap {
+  font-weight: 500;
+}
+
+/* ---------- плитка ---------- */
+.vsl-tile {
+  display: inline-grid;
+  justify-items: center;
+  align-content: start;
+  gap: 1px;
+  min-width: 0;
+  padding: 4px 8px 5px;
+  border-radius: 10px;
+  background: var(--f1);
+  color: var(--c1);
+  text-align: center;
+  transition: background-color var(--dur), color var(--dur), transform calc(var(--dur-slow) * var(--m-move, 1)) var(--spring);
+}
+
+.vsl-role {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  min-height: 15px;
+  color: var(--c3);
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.vsl-word {
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.vsl-tile[data-pos] .vsl-word {
+  color: var(--pt);
+}
+
+.vsl-tile[data-ghost] {
+  outline: 1px dashed var(--s3);
+  outline-offset: -1px;
+}
+
+.vsl-tile[data-on] {
+  background: color-mix(in oklab, var(--pc) 22%, var(--lv));
+  box-shadow: inset 0 0 0 2px var(--pc);
+}
+
+.vsl-tile[data-dim],
+.vsl-line[data-dim] .vsl-tile,
+.vsl-group[data-dim] .vsl-tile {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--sep);
+}
+
+.vsl-tile[data-dim] .vsl-word,
+.vsl-group[data-dim] .vsl-word,
+.vsl-line[data-dim] .vsl-word {
+  color: var(--c3);
+}
+
+.vsl-tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+/* ---------- word-train ---------- */
+.vsl-train {
+  --car-h: 108px;
+  --car-gap: 3px;
+  --car-w: calc((100% - 5 * var(--car-gap)) / 6);
+}
+
+.vsl-train[data-compact] {
+  --car-h: 60px;
+}
+
+.vsl-rail {
+  position: relative;
+  height: var(--car-h);
+}
+
+/* Сцепки: тонкая линия за вагонами. */
+.vsl-rail::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  background: var(--sep);
+}
+
+.vsl-car {
+  position: absolute;
+  top: 0;
+  left: calc(var(--i) * (var(--car-w) + var(--car-gap)));
+  width: var(--car-w);
+  height: var(--car-h);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  justify-items: center;
+  gap: 2px;
+  padding: 6px 2px;
+  border-radius: 12px;
+  background: var(--f2);
+  text-align: center;
+  transition: left calc(var(--dur-slow) * var(--m-move, 1)) var(--spring), background-color var(--dur);
+}
+
+.vsl-car-head {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.vsl-car-head b {
+  color: var(--pt);
+  font-weight: 700;
+}
+
+.vsl-car-word {
+  align-self: center;
+  color: var(--c1);
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.vsl-car-q {
+  min-height: 30px;
+  letter-spacing: -0.2px;
+  color: var(--c3);
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.vsl-car[data-on] {
+  background: color-mix(in oklab, var(--pc) 22%, var(--lv));
+  box-shadow: inset 0 0 0 2px var(--pc);
+}
+
+.vsl-car[data-on] .vsl-car-word {
+  color: var(--pt);
+}
+
+.vsl-car[data-dim] {
+  background: var(--lv);
+  box-shadow: inset 0 0 0 1px var(--sep);
+}
+
+.vsl-car[data-dim] .vsl-car-word,
+.vsl-car[data-dim] .vsl-car-head b {
+  color: var(--c3);
+}
+
+.vsl-car[data-dim] .glyph {
+  color: var(--c3) !important;
+}
+
+.vsl-foot {
+  display: flex;
+  align-items: center;
+  min-height: 24px;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.vsl-play {
+  justify-self: start;
+}
+
+/* ---------- adv-slots, aux-formula: строки и группы ---------- */
+.vsl-line,
+.vsl-group {
+  display: grid;
+  gap: 4px;
+  padding: 6px 8px 8px;
+  border-radius: 14px;
+  background: var(--f1);
+}
+
+.vsl-group[data-on] {
+  background: color-mix(in oklab, var(--pc) 22%, var(--lv));
+  box-shadow: inset 0 0 0 2px var(--pc);
+}
+
+/* В adv-slots рамка только у наречия, строка лишь слегка подкрашена. */
+.vsl-line[data-on] {
+  background: color-mix(in oklab, var(--pc) 14%, var(--lv));
+}
+
+.vsl-line[data-on] .vsl-cap,
+.vsl-group[data-on] .vsl-cap {
+  color: var(--pt);
+}
+
+.vsl-line[data-dim],
+.vsl-group[data-dim] {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--sep);
+}
+
+/* В подсвеченной строке плитки на фоне заливки — полностью прозрачные, рамку несёт строка. */
+.vsl-group[data-on] .vsl-tile {
+  background: var(--f1);
+}
+
+.vsl-adv .vsl-line[data-on] .vsl-tile:not([data-on]) {
+  background: var(--f1);
+}
+
+.vsl-adv .vsl-tile[data-on] {
+  background: color-mix(in oklab, var(--pc) 30%, var(--lv));
+  box-shadow: inset 0 0 0 2px var(--pc);
+}
+
+.vsl-grouphead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.vsl-subrow {
+  display: grid;
+  gap: 2px;
+}
+
+.vsl-short {
+  display: grid;
+  gap: 2px;
+  font-size: 15px;
+  line-height: 24px;
+}
+
+.vsl-group[data-dim] .vsl-short {
+  color: var(--c3);
+}
+
+.vs[data-compact] .vsl-line,
+.vs[data-compact] .vsl-group {
+  padding-bottom: 6px;
+}
+
+/* ---------- adj-order ---------- */
+.vsl-grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.vsl-slot {
+  display: grid;
+  align-content: start;
+  gap: 0;
+  min-width: 0;
+  min-height: 70px;
+  padding: 6px 8px 8px;
+  border-radius: 12px;
+  background: var(--f1);
+}
+
+.vsl-slot .vsl-role {
+  gap: 4px;
+  color: var(--c2);
+  font-weight: 600;
+}
+
+.vsl-slot .vsl-role b {
+  color: var(--c3);
+  font-weight: 600;
+}
+
+.vsl-ru {
+  color: var(--c3);
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.vsl-slotword {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+  color: var(--pt);
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 600;
+}
+
+.vsl-slot[data-empty] {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--s1);
+}
+
+.vsl-slot[data-empty] .vsl-slotword {
+  color: var(--c4);
+}
+
+.vsl-slot[data-on] {
+  background: color-mix(in oklab, var(--pc) 22%, var(--lv));
+  box-shadow: inset 0 0 0 2px var(--pc);
+}
+
+.vsl-slot[data-on] .vsl-role {
+  color: var(--pt);
+}
+
+.vsl-slot[data-dim]:not([data-empty]) {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--sep);
+}
+
+.vsl-slot[data-dim] .vsl-slotword,
+.vsl-slot[data-dim] .vsl-role {
+  color: var(--c3);
+}
+
+.vsl-slot[data-dim] .glyph {
+  color: var(--c3) !important;
+}
+
+.vsl-sentence {
+  margin: 0;
+  padding: 0 2px;
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.vsl-adj[data-compact] .vsl-slot {
+  min-height: 50px;
+}

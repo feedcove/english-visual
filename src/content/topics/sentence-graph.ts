@@ -1,0 +1,302 @@
+import type { TopicBody } from '../types'
+
+// Граф предложения: сказуемое в корне, остальные слова висят на хозяине. Русские и английские предложения вперемешку.
+
+const MEMBER_Q = 'Каким членом предложения является выделенное слово?'
+
+export default {
+  summary: 'Сказуемое — корень предложения; остальные слова висят на своём хозяине и отвечают на вопрос: кто? что? какой? где?',
+  ref: [
+    { kind: 'visual', visual: { id: 'sentence-graph', focus: 'root' }, caption: 'Сказуемое наверху; от него стрелки к подлежащему, дополнению и обстоятельствам' },
+    {
+      kind: 'rule',
+      title: 'Сказуемое — корень графа',
+      text: 'Сначала найди сказуемое — главное слово, на котором держится предложение. Потом каждому слову задай вопрос: на ком оно висит? Подлежащее отвечает «кто? что?» при сказуемом, дополнение — «кого? что?», обстоятельство — «где? когда? как?».',
+      examples: [
+        { s: 'Tom_N opened_V the_D window_N .', tr: 'Том открыл окно.' },
+        { s: 'Анна_N вчера_R купила_V сумку_N .', tr: 'Anna bought a bag yesterday.', lang: 'ru' },
+      ],
+    },
+    {
+      kind: 'table',
+      title: 'Основные связи',
+      head: ['Связь', 'Вопрос', 'Слово → хозяин'],
+      rows: [
+        ['подлежащее (subj)', 'кто? что?', 'Anna_N → sleeps_V'],
+        ['дополнение (obj)', 'кого? что?', 'book_N → reads_V'],
+        ['определение (attr)', 'какой? чей?', 'old_J → man_N'],
+        ['обстоятельство (adv)', 'где? когда? как?', 'slowly_R → speaks_V'],
+        ['вспомогательный (aux)', 'помогает глаголу', 'can_A → swim_V'],
+        ['предлог (prep)', 'к своему существительному', 'in_I → London_N'],
+      ],
+    },
+    {
+      kind: 'rule',
+      title: 'После be и без связки',
+      text: 'В английском be обязателен и сам становится корнем: Kate is a doctor (is — корень, doctor — часть сказуемого). В русском связки нет, и корнем становится само слово: Она врач. Артикль и прилагательное висят на существительном.',
+      examples: [
+        { s: 'Kate_N is_V a_D doctor_N .', tr: 'Кейт — врач.' },
+        { s: 'Она_P врач_N .', tr: 'She is a doctor.', lang: 'ru' },
+      ],
+    },
+    {
+      kind: 'contrast',
+      title: 'Как в русском',
+      ru: 'Мама_N передвинула_V стол_N .',
+      en: 'Mum_N moved_V the_D table_N .',
+      note: 'Граф у знаменательных слов один и тот же: мама → передвинула, стол → передвинула. В английском добавился артикль, он висит на существительном. В русском порядок слов свободный, в английском подлежащее стоит перед глаголом.',
+    },
+    {
+      kind: 'mistakes',
+      items: [
+        { wrong: 'Подлежащее — всегда первое слово', right: 'Подлежащее — то, что отвечает на «кто? что?» при сказуемом', note: 'В русском порядок свободный: В комнате играет музыка.' },
+        { wrong: 'Артикль the — отдельный член предложения', right: 'the висит на существительном как определение', note: 'Он уточняет, какой именно стол, как прилагательное.' },
+        { wrong: 'В Kate is a doctor сказуемое — doctor', right: 'Сказуемое — is, а doctor — часть сказуемого', note: 'После be слово висит на be.' },
+        { wrong: 'В Anna can swim корень — can', right: 'Корень — swim, а can помогает ему', note: 'Корень — смысловой глагол.' },
+      ],
+    },
+    { kind: 'tip', text: 'Порядок разбора: 1) найди сказуемое; 2) найди, кто делает; 3) каждому остальному слову задай вопрос от хозяина и повесь на него.' },
+  ],
+  items: [
+    {
+      id: 'sentence-graph.root',
+      mode: 'pick',
+      skill: 'Сказуемое — главное слово, корень графа',
+      focus: 'root',
+      why: 'Сказуемое — слово, на котором держится предложение: от него идут связи ко всем остальным.',
+      variants: [
+        { s: 'Lucy_N {writes_V} emails_N every_D day_N .', tr: 'Люси каждый день пишет письма.', q: 'Найди сказуемое — корень графа' },
+        { s: 'Мама_N {готовит_V} ужин_N .', lang: 'ru', tr: 'Mum is cooking dinner.', q: 'Найди сказуемое — корень графа' },
+        { s: 'Ben_N often_R {plays_V} tennis_N .', tr: 'Бен часто играет в теннис.', q: 'Найди сказуемое — корень графа' },
+      ],
+    },
+    {
+      id: 'sentence-graph.root-be',
+      mode: 'pick',
+      skill: 'С be сказуемое — сам be (is, are); в русском — слово без связки',
+      focus: 'compl',
+      why: 'В английском be обязателен: он и есть корень, а слово после него висит на нём. В русском связки нет.',
+      variants: [
+        { s: 'Max_N {is_V} a_D teacher_N .', tr: 'Макс — учитель.', q: 'Найди сказуемое — корень графа' },
+        { s: 'The_D shops_N {are_V} open_J .', tr: 'Магазины открыты.', q: 'Найди сказуемое — корень графа' },
+        { s: 'Они_P {студенты_N} .', lang: 'ru', tr: 'They are students.', q: 'Найди сказуемое — корень графа', why: 'Связки нет, поэтому сказуемое — само слово «студенты».' },
+      ],
+    },
+    {
+      id: 'sentence-graph.root-aux',
+      mode: 'pick',
+      skill: 'С помощником (can, will, do) корень — смысловой глагол',
+      focus: 'aux',
+      why: 'Вспомогательный (will, don’t, будем) висит на смысловом глаголе. Корень графа — смысловой глагол.',
+      variants: [
+        { s: 'Kate_N will_A {call_V} Tom_N .', tr: 'Кейт позвонит Тому.', q: 'Найди смысловой глагол — корень графа' },
+        { s: 'We_P don’t_A {need_V} a_D taxi_N .', tr: 'Нам не нужно такси.', q: 'Найди смысловой глагол — корень графа' },
+        { s: 'Мы_P будем_A {ждать_V} автобус_N .', lang: 'ru', tr: 'We will wait for the bus.', q: 'Найди смысловой глагол — корень графа' },
+      ],
+    },
+    {
+      id: 'sentence-graph.subj',
+      mode: 'pick',
+      skill: 'Подлежащее ищем по вопросу «кто? что?», а не по месту',
+      focus: 'subj',
+      why: 'Подлежащее не всегда первое слово. Спроси у сказуемого: кто? что? — и найдёшь его.',
+      variants: [
+        { s: 'В_I комнате_N играет_V {музыка_N} .', lang: 'ru', tr: 'Music is playing in the room.', q: 'Найди подлежащее' },
+        { s: 'Yesterday_R {Tom_N} found_V a_D wallet_N .', tr: 'Вчера Том нашёл кошелёк.', q: 'Найди подлежащее' },
+        { s: 'After_I lunch_N {we_P} went_V home_R .', tr: 'После обеда мы пошли домой.', q: 'Найди подлежащее', why: 'Кто пошёл? — we. After lunch отвечает «когда?»: это обстоятельство, а не подлежащее.' },
+      ],
+    },
+    {
+      id: 'sentence-graph.obj',
+      mode: 'pick',
+      skill: 'Дополнение отвечает «кого? что? кому?» и висит на глаголе',
+      focus: 'obj',
+      why: 'Дополнение — тот, на кого направлено действие: что читает? что передвинула? Косвенное — кому дал.',
+      variants: [
+        { s: 'Anna_N is_A reading_V a_D {magazine_N} .', tr: 'Анна читает журнал.', q: 'Найди дополнение' },
+        { s: 'Кейт_N пишет_V {письмо_N} .', lang: 'ru', tr: 'Kate is writing a letter.', q: 'Найди дополнение' },
+        { s: 'Tom_N gave_V {Kate_N} a_D {key_N} .', tr: 'Том дал Кейт ключ.', q: 'Найди два дополнения: кому? и что?', why: 'Дал кому? — Kate. Дал что? — key. Оба слова висят на gave.' },
+      ],
+    },
+    {
+      id: 'sentence-graph.hang',
+      mode: 'pick',
+      skill: 'Какой? — к существительному, как? — к глаголу, насколько? — к прилагательному',
+      focus: 'attr',
+      why: 'Спроси про слово: «какой?» — ищи существительное, «как?» — ищи глагол, «насколько?» — ищи прилагательное.',
+      variants: [
+        { s: 'A_D tall_J {man_N} opened_V the_D door_N .', tr: 'Высокий мужчина открыл дверь.', q: 'К какому слову относится tall?' },
+        { s: 'Max_N {drives_V} carefully_R .', tr: 'Макс ездит осторожно.', q: 'К какому слову относится carefully?' },
+        { s: 'The_D film_N was_V really_R {long_J} .', tr: 'Фильм был очень длинным.', q: 'К какому слову относится really?', why: 'really отвечает «насколько?» и усиливает прилагательное long, а не глагол.' },
+      ],
+    },
+    {
+      id: 'sentence-graph.members',
+      mode: 'choice',
+      skill: 'Члены предложения: подлежащее, дополнение, определение, обстоятельство',
+      focus: 'members',
+      why: 'Определение отвечает «какой?», дополнение — «кого? что?», обстоятельство — «где? когда? как?».',
+      variants: [
+        { s: 'The_D {red_J} car_N stopped_V near_I the_D house_N .', tr: 'Красная машина остановилась у дома.', q: MEMBER_Q, answer: 'определение', options: ['дополнение', 'обстоятельство'], why: 'Какая машина? — red. Слово описывает существительное, значит определение.' },
+        { s: 'Tom_N works_V in_I {London_N} .', tr: 'Том работает в Лондоне.', q: MEMBER_Q, answer: 'обстоятельство', options: ['дополнение', 'определение'], why: 'Работает где? — in London. Это обстоятельство места.' },
+        { s: 'Kate_N bought_V a_D {bag_N} .', tr: 'Кейт купила сумку.', q: MEMBER_Q, answer: 'дополнение', options: ['подлежащее', 'обстоятельство'], why: 'Купила что? — bag. На него направлено действие, это дополнение.' },
+      ],
+    },
+    {
+      id: 'sentence-graph.attr',
+      mode: 'graph',
+      skill: 'Артикль, числительное и прилагательное висят на существительном (attr)',
+      focus: 'attr',
+      why: 'The, old, two отвечают «какой? который? сколько?» при существительном — они определения.',
+      variants: [
+        { s: 'The_D old_J man_N smiled_V .', tr: 'Старик улыбнулся.', graph: '1>3 attr, 2>3 attr, 3>4 subj' },
+        { s: 'Старый_J сосед_N улыбнулся_V .', lang: 'ru', tr: 'The old neighbour smiled.', graph: '1>2 attr, 2>3 subj' },
+        { s: 'Two_M small_J dogs_N barked_V .', tr: 'Две маленькие собаки лаяли.', graph: '1>3 attr, 2>3 attr, 3>4 subj' },
+      ],
+    },
+    {
+      id: 'sentence-graph.attr-my',
+      mode: 'graph',
+      skill: 'my, your, наш — тоже определения при существительном',
+      focus: 'attr',
+      why: 'my, our, моя отвечают «чей?» и висят на существительном, как прилагательные.',
+      variants: [
+        { s: 'My_P sister_N works_V here_R .', tr: 'Моя сестра работает здесь.', graph: '1>2 attr, 2>3 subj, 4>3 adv' },
+        { s: 'Моя_P сестра_N работает_V здесь_R .', lang: 'ru', tr: 'My sister works here.', graph: '1>2 attr, 2>3 subj, 4>3 adv' },
+        { s: 'Our_P teacher_N speaks_V slowly_R .', tr: 'Наш учитель говорит медленно.', graph: '1>2 attr, 2>3 subj, 4>3 adv' },
+      ],
+    },
+    {
+      id: 'sentence-graph.adv',
+      mode: 'graph',
+      skill: 'Наречие отвечает «как? когда?» и висит на глаголе (adv)',
+      focus: 'adv',
+      why: 'Говорит как? — slowly. Приходит когда? — early; как часто? — always. Наречие описывает действие, а не предмет.',
+      variants: [
+        { s: 'Anna_N speaks_V slowly_R .', tr: 'Анна говорит медленно.', graph: '1>2 subj, 3>2 adv' },
+        { s: 'Анна_N говорит_V медленно_R .', lang: 'ru', tr: 'Anna speaks slowly.', graph: '1>2 subj, 3>2 adv' },
+        { s: 'Tom_N always_R arrives_V early_R .', tr: 'Том всегда приходит рано.', graph: '1>3 subj, 2>3 adv, 4>3 adv' },
+      ],
+    },
+    {
+      id: 'sentence-graph.prep',
+      mode: 'graph',
+      skill: 'Предлог висит на своём существительном, а оно — на глаголе (где? когда?)',
+      focus: 'prep',
+      why: 'in London — одна группа: предлог in висит на London, а London отвечает «где?» и висит на глаголе.',
+      variants: [
+        { s: 'The_D cat_N sleeps_V on_I the_D sofa_N .', tr: 'Кошка спит на диване.', graph: '1>2 attr, 2>3 subj, 4>6 prep, 5>6 attr, 6>3 adv' },
+        { s: 'Кот_N спит_V на_I диване_N .', lang: 'ru', tr: 'The cat sleeps on the sofa.', graph: '1>2 subj, 3>4 prep, 4>2 adv' },
+        { s: 'Anna_N lives_V in_I London_N .', tr: 'Анна живёт в Лондоне.', graph: '1>2 subj, 3>4 prep, 4>2 adv' },
+      ],
+    },
+    {
+      id: 'sentence-graph.aux',
+      mode: 'graph',
+      skill: 'Вспомогательный (can, will, don’t, буду) висит на смысловом глаголе (aux)',
+      focus: 'aux',
+      why: 'Корень — смысловой глагол: swim, read, like. Вспомогательное слово только помогает ему.',
+      variants: [
+        { s: 'Anna_N can_A swim_V .', tr: 'Анна умеет плавать.', graph: '1>3 subj, 2>3 aux' },
+        { s: 'Я_P буду_A читать_V книгу_N .', lang: 'ru', tr: 'I will read a book.', graph: '1>3 subj, 2>3 aux, 4>3 obj' },
+        { s: 'Tom_N doesn’t_A like_V coffee_N .', tr: 'Том не любит кофе.', graph: '1>3 subj, 2>3 aux, 4>3 obj' },
+      ],
+    },
+    {
+      id: 'sentence-graph.part',
+      mode: 'graph',
+      skill: 'Частица not, не висит на глаголе (part)',
+      focus: 'part',
+      why: 'not и не — частицы, они отрицают глагол и висят на нём. Вспомогательный did / does тоже на нём.',
+      variants: [
+        { s: 'Tom_N did_A not_X come_V .', tr: 'Том не пришёл.', graph: '1>4 subj, 2>4 aux, 3>4 part' },
+        { s: 'Том_N не_X пришёл_V .', lang: 'ru', tr: 'Tom did not come.', graph: '1>3 subj, 2>3 part' },
+        { s: 'Anna_N does_A not_X drive_V .', tr: 'Анна не водит машину.', graph: '1>4 subj, 2>4 aux, 3>4 part' },
+      ],
+    },
+    {
+      id: 'sentence-graph.compl',
+      mode: 'graph',
+      skill: 'Слово после be висит на be (compl)',
+      focus: 'compl',
+      why: 'is — корень. a driver, tired, hot — часть сказуемого: отвечают на «кто? какой?» и висят на is.',
+      variants: [
+        { s: 'Ben_N is_V a_D driver_N .', tr: 'Бен — водитель.', graph: '1>2 subj, 3>4 attr, 4>2 compl' },
+        { s: 'The_D soup_N is_V very_R hot_J .', tr: 'Суп очень горячий.', graph: '1>2 attr, 2>3 subj, 4>5 adv, 5>3 compl' },
+        { s: 'Tom_N is_V tired_J .', tr: 'Том устал.', graph: '1>2 subj, 3>2 compl' },
+      ],
+    },
+    {
+      id: 'sentence-graph.ru-compl',
+      mode: 'graph',
+      skill: 'В русском без связки сказуемое — само слово',
+      focus: 'root',
+      why: 'В «Он программист» нет глагола, поэтому корень — «программист». Подлежащее «он» висит на нём.',
+      variants: [
+        { s: 'Он_P программист_N .', lang: 'ru', tr: 'He is a programmer.', graph: '1>2 subj' },
+        { s: 'Он_P рад_J .', lang: 'ru', tr: 'He is glad.', graph: '1>2 subj' },
+        { s: 'Мы_P дома_R .', lang: 'ru', tr: 'We are at home.', graph: '1>2 subj' },
+      ],
+    },
+    {
+      id: 'sentence-graph.conj',
+      mode: 'graph',
+      skill: 'Однородные члены: второй висит на первом (conj), союз — на втором (cc)',
+      focus: 'conj',
+      why: 'В Tom and Kate второй (Kate) висит на первом (Tom), а and — на Kate. Первый несёт роль для обоих.',
+      variants: [
+        { s: 'Tom_N and_C Kate_N work_V together_R .', tr: 'Том и Кейт работают вместе.', graph: '3>1 conj, 2>3 cc, 1>4 subj, 5>4 adv' },
+        { s: 'Мама_N и_C папа_N спят_V .', lang: 'ru', tr: 'Mum and Dad are sleeping.', graph: '3>1 conj, 2>3 cc, 1>4 subj' },
+        { s: 'Anna_N buys_V bread_N and_C milk_N .', tr: 'Анна покупает хлеб и молоко.', graph: '1>2 subj, 3>2 obj, 5>3 conj, 4>5 cc' },
+      ],
+    },
+    {
+      id: 'sentence-graph.free-order',
+      mode: 'graph',
+      skill: 'В русском роль задаёт окончание, а не место в предложении',
+      focus: 'subj',
+      why: 'В русском порядок свободный. Подлежащее ищем по вопросу и по согласованию с глаголом (открыл — он).',
+      variants: [
+        { s: 'Окно_N открыл_V Макс_N .', lang: 'ru', tr: 'Max opened the window.', graph: '1>2 obj, 3>2 subj', why: 'Открыл — мужской род, значит подлежащее «Макс». Окно — то, что открыли.' },
+        { s: 'Книгу_N читает_V Анна_N .', lang: 'ru', tr: 'Anna is reading a book.', graph: '1>2 obj, 3>2 subj', why: '«Книгу» — форма дополнения (кого? что?), кто читает — Анна.' },
+        { s: 'Сумку_N нашла_V Кейт_N .', lang: 'ru', tr: 'Kate found the bag.', graph: '1>2 obj, 3>2 subj', why: '«Сумку» — форма дополнения (что?), а нашла кто? — Кейт. Она и подлежащее, хотя стоит в конце.' },
+      ],
+    },
+    {
+      id: 'sentence-graph.pair-svo',
+      mode: 'graph',
+      skill: 'Одна мысль — один граф в русском и английском',
+      focus: 'obj',
+      why: 'В русском и английском знаменательные слова висят одинаково: кто → сказуемое, что → сказуемое.',
+      variants: [
+        { s: 'Mum_N moved_V the_D table_N .', tr: 'Мама передвинула стол.', graph: '1>2 subj, 3>4 attr, 4>2 obj' },
+        { s: 'Мама_N передвинула_V стол_N .', lang: 'ru', tr: 'Mum moved the table.', graph: '1>2 subj, 3>2 obj' },
+        { s: 'Dad_N cooked_V dinner_N .', tr: 'Папа приготовил ужин.', graph: '1>2 subj, 3>2 obj' },
+      ],
+    },
+    {
+      id: 'sentence-graph.obj-graph',
+      mode: 'graph',
+      skill: 'Дополнение висит на глаголе (obj)',
+      focus: 'obj',
+      why: 'Закрыл что? — door. Купил что? — хлеб. Дополнение — это слово, на которое переходит действие.',
+      variants: [
+        { s: 'Tom_N closed_V the_D door_N .', tr: 'Том закрыл дверь.', graph: '1>2 subj, 3>4 attr, 4>2 obj' },
+        { s: 'Папа_N купил_V хлеб_N .', lang: 'ru', tr: 'Dad bought bread.', graph: '1>2 subj, 3>2 obj' },
+        { s: 'The_D boy_N kicked_V the_D ball_N .', tr: 'Мальчик пнул мяч.', graph: '1>2 attr, 2>3 subj, 4>5 attr, 5>3 obj' },
+      ],
+    },
+    {
+      id: 'sentence-graph.full',
+      mode: 'graph',
+      skill: 'Весь граф: подлежащее, дополнение, обстоятельства',
+      focus: 'members',
+      why: 'Иди по порядку: корень, подлежащее, дополнение, обстоятельства; артикли и прилагательные — на существительное.',
+      variants: [
+        { s: 'Tom_N often_R drinks_V tea_N at_I work_N .', tr: 'Том часто пьёт чай на работе.', graph: '1>3 subj, 2>3 adv, 4>3 obj, 5>6 prep, 6>3 adv' },
+        { s: 'Анна_N вчера_R купила_V новое_J платье_N .', lang: 'ru', tr: 'Anna bought a new dress yesterday.', graph: '1>3 subj, 2>3 adv, 4>5 attr, 5>3 obj' },
+        { s: 'The_D children_N are_A playing_V in_I the_D park_N .', tr: 'Дети играют в парке.', graph: '1>2 attr, 2>4 subj, 3>4 aux, 5>7 prep, 6>7 attr, 7>4 adv' },
+      ],
+    },
+  ],
+} satisfies TopicBody

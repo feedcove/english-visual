@@ -1,0 +1,414 @@
+/* Семья grid: сетки форм (местоимения, be, лица, this/that, some-/any-). Цвет — от data-pos контейнера. */
+.vg {
+  --cell-h: 40px;
+  display: grid;
+  gap: 4px;
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.vg[data-compact] {
+  --cell-h: 34px;
+  font-size: 14px;
+}
+
+.vg-row {
+  display: grid;
+  grid-template-columns: minmax(40px, 0.7fr) repeat(var(--cols), minmax(0, 1fr));
+  gap: 4px;
+  align-items: stretch;
+}
+
+.vg-head {
+  align-items: end;
+  padding-bottom: 2px;
+}
+
+.vg-colhead {
+  display: grid;
+  gap: 1px;
+  padding: 0 4px;
+  color: var(--c3);
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+}
+
+.vg-colhead b {
+  font-weight: 600;
+  color: var(--c2);
+}
+
+.vg-colhead[data-lit] b {
+  color: var(--pt);
+}
+
+.vg-rowhead {
+  display: flex;
+  align-items: center;
+  color: var(--c3);
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.vg-rowhead[data-lit] {
+  color: var(--c1);
+}
+
+.vg-cell {
+  display: grid;
+  place-items: center;
+  min-height: var(--cell-h);
+  padding: 2px 4px;
+  border-radius: 10px;
+  background: var(--f1);
+  color: var(--c1);
+  font-weight: 500;
+  text-align: center;
+  overflow-wrap: normal;
+  transition: background-color var(--dur), color var(--dur);
+}
+
+.vg-cell[data-on] {
+  background: color-mix(in oklab, var(--pc) 22%, var(--lv));
+  color: var(--pt);
+  font-weight: 600;
+}
+
+.vg-cell[data-exact] {
+  box-shadow: inset 0 0 0 2px var(--pc);
+}
+
+.vg-cell[data-dim] {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--sep);
+  color: var(--c3);
+}
+
+/* ---------- be-forms ---------- */
+.vg-be .vg-row {
+  grid-template-columns: var(--tpl);
+}
+
+.vg-be-block {
+  display: grid;
+  gap: 4px;
+}
+
+.vg-band {
+  padding: 6px 2px 0;
+  color: var(--c3);
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.vg-be-corner {
+  gap: 4px;
+  color: var(--c2);
+  font-weight: 600;
+}
+
+.vg-be-two {
+  display: grid;
+  align-content: center;
+  gap: 0;
+}
+
+.vg-be-two b {
+  font-weight: 600;
+  color: var(--c2);
+}
+
+.vg-be-two i {
+  font-style: normal;
+}
+
+.vg-be-two[data-lit] b {
+  color: var(--c1);
+}
+
+.vg-be .vg-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 14px;
+}
+
+/* ---------- общие блоки (verb-person) ---------- */
+.vg-sec {
+  display: grid;
+  gap: 4px;
+}
+
+.vg-sec + .vg-sec {
+  margin-top: 8px;
+}
+
+.vg-sech {
+  margin: 0;
+  color: var(--c3);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 15px;
+}
+
+.vg-two {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.vg-box,
+.vg-rule,
+.vg-nf-cell {
+  display: grid;
+  align-content: start;
+  gap: 4px;
+  min-width: 0;
+  padding: 8px 10px;
+  border-radius: 14px;
+  background: var(--f1);
+  color: var(--c1);
+  transition: background-color var(--dur), color var(--dur);
+}
+
+.vg-box[data-on],
+.vg-rule[data-on],
+.vg-nf-cell[data-on] {
+  background: color-mix(in oklab, var(--pc) 22%, var(--lv));
+}
+
+.vg-box[data-exact],
+.vg-rule[data-exact],
+.vg-nf-cell[data-exact] {
+  box-shadow: inset 0 0 0 2px var(--pc);
+}
+
+.vg-box[data-dim],
+.vg-rule[data-dim],
+.vg-nf-cell[data-dim] {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--sep);
+  color: var(--c3);
+}
+
+.vg-box[data-dim] [data-pos],
+.vg-nf-cell[data-dim] [data-pos] {
+  --pc: var(--c3);
+  --pt: var(--c3);
+}
+
+.vg-box[data-dim] .vg-end,
+.vg-rule[data-dim] .vg-end {
+  color: inherit;
+}
+
+.vg-who {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--c2);
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.vg-big {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 600;
+}
+
+.vg-end {
+  color: var(--pt);
+  font-weight: 700;
+}
+
+.vg-line {
+  font-size: 14px;
+  line-height: 22px;
+  overflow-wrap: anywhere;
+}
+
+.vg-note {
+  color: var(--c3);
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.vg-rule {
+  grid-template-columns: 74px minmax(0, 1fr);
+  align-items: start;
+  padding: 6px 10px;
+}
+
+.vg-chip {
+  color: var(--c2);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.vg-rule[data-on] .vg-chip {
+  color: var(--pt);
+}
+
+.vg-exs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 12px;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.vg-ex {
+  white-space: nowrap;
+}
+
+.vg-exs small {
+  flex-basis: 100%;
+  color: var(--c3);
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.vg[data-compact] .vg-sec + .vg-sec {
+  margin-top: 0;
+}
+
+/* ---------- near-far ---------- */
+.vg-nf-heads,
+.vg-nf-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.vg-nf-group {
+  display: grid;
+  gap: 2px;
+}
+
+.vg-nf-cap {
+  padding: 4px 2px 0;
+  color: var(--c3);
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.vg-nf-cap[data-lit] {
+  color: var(--pt);
+}
+
+.vg-nf-cell {
+  gap: 2px;
+  padding: 8px 8px 10px;
+}
+
+.vg-nf-word {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.vg-nf-word .glyph {
+  align-self: center;
+}
+
+.vg-nf-word b {
+  font-weight: 600;
+}
+
+.vg-nf-word small {
+  color: var(--c3);
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.vg-nf-cell[data-on] .vg-nf-word b {
+  color: var(--pt);
+}
+
+.vg-nf-ex {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* ---------- indef-grid ---------- */
+.vg-ig .vg-row {
+  grid-template-columns: 56px repeat(3, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.vg-ig-rowhead {
+  display: grid;
+  align-content: center;
+  gap: 0;
+}
+
+.vg-ig-rowhead b {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 600;
+  color: var(--c2);
+}
+
+.vg-ig-rowhead[data-lit] b {
+  color: var(--c1);
+}
+
+.vg-ig .vg-cell {
+  font-size: 13px;
+  font-weight: 500;
+  padding: 2px 1px;
+  overflow-wrap: normal;
+}
+
+.vg-ig .vg-colhead b {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+}
+
+.vg-ig[data-compact] {
+  --cell-h: 28px;
+  gap: 3px;
+}
+
+.vg-ig-ex {
+  margin-top: 6px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: var(--f1);
+  font-size: 15px;
+  line-height: 22px;
+}
+
+/* Глиф: «.visual svg» растягивает любой svg на всю ширину — возвращаем размер из атрибута. */
+.vg .glyph {
+  width: 14px;
+  height: 14px;
+}
+
+.vg .glyph[width='12'] {
+  width: 12px;
+  height: 12px;
+}
+
+.vg .glyph[width='16'] {
+  width: 16px;
+  height: 16px;
+}
+
+.vg-ig-ex small {
+  display: block;
+  color: var(--c3);
+  font-size: 12px;
+  line-height: 15px;
+}

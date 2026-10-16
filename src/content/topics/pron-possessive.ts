@@ -1,0 +1,270 @@
+import type { TopicBody } from '../types'
+
+export default {
+  summary: 'Перед существительным — my, your, his, her, its, our, their. Без существительного — mine, yours, his, hers, ours, theirs.',
+  ref: [
+    { kind: 'visual', visual: { id: 'pron-grid', focus: 'poss' }, caption: 'Третий и четвёртый столбцы сетки: my + существительное, mine — само по себе' },
+    {
+      kind: 'rule',
+      title: 'my + сущ., mine — без сущ.',
+      text: 'my, your, his, her, its, our, their ставятся прямо перед существительным: my bag. Если существительного нет, нужны mine, yours, his, hers, ours, theirs: The bag is mine. Артикль рядом с my не нужен.',
+      examples: [
+        { s: 'This_P is_V my_P bag_N .', tr: 'Это моя сумка.' },
+        { s: 'This_D bag_N is_V mine_P .', tr: 'Эта сумка моя.' },
+        { s: 'Our_P flat_N is_V small_J , but_C theirs_P is_V big_J .', tr: 'Наша квартира маленькая, а их — большая.' },
+      ],
+    },
+    {
+      kind: 'rule',
+      title: 'his или her — по владельцу',
+      text: 'В русском есть «свой», одно слово на всех. В английском выбирай по тому, кто владелец, а не по предмету: Tom loves his sister, Anna loves her brother. Для вещей и животных — its.',
+      examples: [
+        { s: 'Tom_N loves_V his_P sister_N .', tr: 'Том любит свою сестру.' },
+        { s: 'Anna_N loves_V her_P brother_N .', tr: 'Анна любит своего брата.' },
+        { s: 'This_D café_N is_V famous_J for_I its_P cakes_N .', tr: 'Это кафе славится своими пирожными.' },
+      ],
+    },
+    {
+      kind: 'rule',
+      title: 'its — не it’s, whose — не who’s',
+      text: 'its — «его, её» про вещь или животное, апострофа нет. it’s — это сокращение it is. Так же whose («чей?») и who’s (who is).',
+      examples: [
+        { s: 'The_D dog_N loves_V its_P ball_N .', tr: 'Собака любит свой мяч.' },
+        { s: 'It_P +’s_V cold_J today_R .', tr: 'Сегодня холодно.' },
+        { s: 'Whose_P bag_N is_V this_P ?', tr: 'Чья это сумка?' },
+      ],
+    },
+    {
+      kind: 'contrast',
+      title: 'Как в русском',
+      ru: 'Он_P любит_V свою_P сестру_N .',
+      en: 'He_P loves_V his_P sister_N .',
+      note: 'В русском «свою» подходит к любому лицу. В английском такого слова нет: my, your, his, her, our, their выбираются по владельцу. Поэтому «Том любит свою сестру» — his, хотя сестра — женщина.',
+    },
+    {
+      kind: 'mistakes',
+      items: [
+        { wrong: 'Tom_N loves_V her_P sister_N .', right: 'Tom_N loves_V his_P sister_N .', note: 'Сестра Тома: владелец Tom, значит his.' },
+        { wrong: 'The_D dog_N wags_V it_P +’s_V tail_N .', right: 'The_D dog_N wags_V its_P tail_N .', note: 'its — «его» про животное. it’s — только it is.' },
+        { wrong: 'This_P is_V mine_P bag_N .', right: 'This_P is_V my_P bag_N .', note: 'Перед существительным — my. mine стоит без него.' },
+        { wrong: 'Is_V this_P your_P ?', right: 'Is_V this_P yours_P ?', note: 'Существительного нет — нужно yours.' },
+        { wrong: 'Who_P +’s_V bag_N is_V this_P ?', right: 'Whose_P bag_N is_V this_P ?', note: 'Who’s = who is. «Чей?» — whose.' },
+      ],
+    },
+    { kind: 'tip', text: 'Проверка: за словом идёт существительное? Да — my, your, her. Нет — mine, yours, hers. Исключение только одно: his одинаково в обеих ролях.' },
+  ],
+  items: [
+    {
+      id: 'pron-possessive.my',
+      skill: 'my — мой, перед существительным',
+      focus: 'poss.i',
+      why: 'Вещь принадлежит мне, и сразу за словом идёт существительное — my.',
+      variants: [
+        { s: '[My_P] sister_N works_V in_I a_D school_N .', tr: 'Моя сестра работает в школе.', options: ['Me', 'Mine'] },
+        { s: 'I_P can’t_A find_V [my_P] keys_N .', tr: 'Я не могу найти свои ключи.', options: ['me', 'mine'] },
+        { s: 'Tom_N is_V [my_P] best_J friend_N .', tr: 'Том — мой лучший друг.', options: ['me', 'mine'] },
+      ],
+    },
+    {
+      id: 'pron-possessive.your',
+      skill: 'your — твой, ваш, перед существительным',
+      focus: 'poss.you',
+      why: 'your — и «твой», и «ваш». Перед существительным ставится your, а не yours.',
+      variants: [
+        { s: 'Is_V this_P [your_P] umbrella_N , Kate_N ?', tr: 'Это твой зонт, Кейт?', options: ['you', 'yours'] },
+        { s: 'What_P +’s_V [your_P] phone_N number_N ?', tr: 'Какой у вас номер телефона?', options: ['you', 'yours'] },
+        { s: 'Thank_V you_P for_I [your_P] help_N !', tr: 'Спасибо за вашу помощь!', options: ['you', 'yours'] },
+      ],
+    },
+    {
+      id: 'pron-possessive.his',
+      skill: 'his — его (владелец — мужчина)',
+      focus: 'poss.he',
+      why: 'Владелец — мужчина: his. Это слово одно и для my-роли, и для mine-роли: his bag, the bag is his.',
+      variants: [
+        { s: 'Max_N is_V in_I the_D kitchen_N . [His_P] coffee_N is_V on_I the_D table_N .', tr: 'Макс на кухне. Его кофе стоит на столе.', options: ['He', 'Him'] },
+        { s: 'Ben_N lost_V [his_P] wallet_N on_I the_D train_N .', tr: 'Бен потерял свой кошелёк в поезде.', options: ['he', 'him'] },
+        { s: 'Mr~Smith_N drives_V [his_P] daughter_N to_I school_N .', tr: 'Мистер Смит возит свою дочь в школу.', options: ['he', 'him'] },
+      ],
+    },
+    {
+      id: 'pron-possessive.her',
+      skill: 'her — её (владелец — женщина)',
+      focus: 'poss.she',
+      why: 'Владелец — женщина: her, и сразу после идёт существительное. Без существительного будет hers.',
+      variants: [
+        { s: 'Anna_N cleans_V [her_P] flat_N on_I Saturdays_N .', tr: 'Анна убирает свою квартиру по субботам.', options: ['she', 'hers'] },
+        { s: 'Kate_N forgot_V [her_P] passport_N at_I home_N .', tr: 'Кейт забыла свой паспорт дома.', options: ['she', 'hers'] },
+        { s: 'Lucy_N and_C [her_P] brother_N live_V in_I Leeds_N .', tr: 'Люси и её брат живут в Лидсе.', options: ['she', 'hers'] },
+      ],
+    },
+    {
+      id: 'pron-possessive.its',
+      skill: 'its — его, её про вещь или животное',
+      focus: 'poss.it',
+      why: 'Владелец — вещь или животное, не человек: its. Для вещей нет «он» и «она», поэтому не his и не her.',
+      variants: [
+        { s: 'My_P laptop_N is_V old_J , and_C [its_P] battery_N is_V weak_J .', tr: 'Мой ноутбук старый, и его батарея слабая.', options: ['his', 'her'] },
+        { s: 'The_D hotel_N is_V nice_J , but_C [its_P] restaurant_N is_V closed_J .', tr: 'Отель хороший, но его ресторан закрыт.', options: ['his', 'her'] },
+        { s: 'Look_V at_I that_D tree_N ! [Its_P] leaves_N are_V red_J .', tr: 'Посмотри на то дерево! Его листья красные.', options: ['His', 'Their'] },
+      ],
+    },
+    {
+      id: 'pron-possessive.our',
+      skill: 'our — наш, перед существительным',
+      focus: 'poss.we',
+      why: 'Вещь принадлежит нам, дальше идёт существительное — our. Без него — ours.',
+      variants: [
+        { s: '[Our_P] flat_N is_V small_J but_C warm_J .', tr: 'Наша квартира маленькая, но тёплая.', options: ['We', 'Ours'] },
+        { s: 'We_P love_V [our_P] new_J neighbours_N .', tr: 'Мы любим наших новых соседей.', options: ['us', 'ours'] },
+        { s: 'Tom_N and_C I_P sold_V [our_P] old_J car_N .', tr: 'Мы с Томом продали нашу старую машину.', options: ['us', 'ours'] },
+      ],
+    },
+    {
+      id: 'pron-possessive.their',
+      skill: 'their — их, перед существительным',
+      focus: 'poss.they',
+      why: 'Владельцы — несколько людей: their. Без существительного — theirs.',
+      variants: [
+        { s: 'Tom_N and_C Kate_N love_V [their_P] new_J flat_N .', tr: 'Том и Кейт любят свою новую квартиру.', options: ['them', 'theirs'] },
+        { s: 'The_D children_N are_A doing_V [their_P] homework_N .', tr: 'Дети делают свои уроки.', options: ['them', 'theirs'] },
+        { s: 'My_P parents_N want_V to_X sell_V [their_P] house_N .', tr: 'Мои родители хотят продать свой дом.', options: ['them', 'theirs'] },
+      ],
+    },
+    {
+      id: 'pron-possessive.mine',
+      skill: 'mine — мой, без существительного',
+      focus: 'posspron.i',
+      why: 'Существительного после слова нет — вместо my нужно mine.',
+      variants: [
+        { s: 'That_D red_J bag_N is_V [mine_P] .', tr: 'Вон та красная сумка — моя.', options: ['my', 'me'] },
+        { s: 'Whose_P keys_N are_V these_P ? — They_P +’re_V [mine_P] .', tr: 'Чьи это ключи? — Мои.', options: ['my', 'me'] },
+        { s: 'Your_P phone_N is_V new_J . [Mine_P] is_V five_M years_N old_J .', tr: 'Твой телефон новый, а моему уже пять лет.', options: ['My', 'Me'] },
+      ],
+    },
+    {
+      id: 'pron-possessive.yours',
+      skill: 'yours — твой, ваш, без существительного',
+      focus: 'posspron.you',
+      why: 'Существительного после слова нет — вместо your нужно yours.',
+      variants: [
+        { s: 'Is_V this_D pen_N [yours_P] , Anna_N ?', tr: 'Эта ручка твоя, Анна?', options: ['your', 'you'] },
+        { s: 'My_P coffee_N is_V black_J . [Yours_P] has_V milk_N in_I it_P .', tr: 'Мой кофе чёрный, а твой — с молоком.', options: ['Your', 'You'] },
+        { s: 'These_D gloves_N aren’t_V mine_P . Are_V they_P [yours_P] ?', tr: 'Эти перчатки не мои. Они твои?', options: ['your', 'you'] },
+      ],
+    },
+    {
+      id: 'pron-possessive.hers',
+      skill: 'hers — её, без существительного',
+      focus: 'posspron.she',
+      why: 'Нет существительного, владелец — женщина: hers. Для мужчины his остаётся his.',
+      variants: [
+        { s: 'That_D black_J umbrella_N is_V [hers_P] .', tr: 'Тот чёрный зонт — её.', options: ['her', 'she'] },
+        { s: 'Tom_N has_V his_P key_N , and_C Anna_N has_V [hers_P] .', tr: 'У Тома свой ключ, а у Анны — свой.', options: ['her', 'she'] },
+        { s: 'Which_P of_I these_D houses_N is_V [hers_P] ?', tr: 'Какой из этих домов её?', options: ['her', 'she'] },
+      ],
+    },
+    {
+      id: 'pron-possessive.ours',
+      skill: 'ours — наш, без существительного',
+      focus: 'posspron.we',
+      why: 'Нет существительного после слова — вместо our нужно ours.',
+      variants: [
+        { s: 'Their_P garden_N is_V big_J , but_C [ours_P] is_V small_J .', tr: 'Их сад большой, а наш маленький.', options: ['our', 'we'] },
+        { s: 'Is_V this_D table_N free_J ? — No_R , it_P +’s_V [ours_P] .', tr: 'Этот столик свободен? — Нет, он наш.', options: ['our', 'us'] },
+        { s: 'Those_D bikes_N outside_R are_V [ours_P] .', tr: 'Те велосипеды на улице — наши.', options: ['our', 'us'] },
+      ],
+    },
+    {
+      id: 'pron-possessive.theirs',
+      skill: 'theirs — их, без существительного',
+      focus: 'posspron.they',
+      why: 'Нет существительного после слова — вместо their нужно theirs.',
+      variants: [
+        { s: 'Our_P house_N is_V old_J , but_C [theirs_P] is_V new_J .', tr: 'Наш дом старый, а их — новый.', options: ['their', 'they'] },
+        { s: 'Is_V that_D blue_J van_N [theirs_P] ?', tr: 'Тот синий фургон — их?', options: ['their', 'them'] },
+        { s: 'Our_P team_N is_V in_I London_N . [Theirs_P] is_V in_I Leeds_N .', tr: 'Наша команда в Лондоне, а их — в Лидсе.', options: ['Their', 'They'] },
+      ],
+    },
+    {
+      id: 'pron-possessive.its-vs-itis',
+      skill: 'its (чей) пишется без апострофа, it’s = it is',
+      focus: 'poss.it',
+      why: 'its — «его, её» про вещь. it’s — только сокращение it is. Проверь: влезает it is — it’s, нет — its.',
+      variants: [
+        { s: 'I_P like_V this_D café_N . It_P +’s_V quiet_J , and_C [its_P] coffee_N is_V great_J .', tr: 'Мне нравится это кафе. Оно тихое, а его кофе — отличный.', options: ['it’s', 'their'] },
+        { s: 'It_P +’s_V a_D good_J school_N . [Its_P] teachers_N are_V friendly_J .', tr: 'Это хорошая школа. Её учителя дружелюбные.', options: ['It’s', 'Her'] },
+        { s: 'The_D bag_N is_V nice_J , but_C [its_P] zip_N is_V broken_J .', tr: 'Сумка красивая, но её молния сломана.', options: ['it’s', 'his'] },
+      ],
+    },
+    {
+      id: 'pron-possessive.whose',
+      skill: 'whose — чей? (не who’s)',
+      focus: 'poss',
+      why: 'Спрашиваем «чей?» — whose. Who’s — это who is («кто это?»).',
+      variants: [
+        { s: '[Whose_P] bag_N is_V this_P ?', tr: 'Чья это сумка?', options: ['Who’s', 'Who'] },
+        { s: '[Whose_P] turn_N is_V it_P ?', tr: 'Чья сейчас очередь?', options: ['Who’s', 'Who'] },
+        { s: 'Excuse_V me_P , [whose_P] car_N is_V that_P ?', tr: 'Простите, чья это машина?', options: ['who’s', 'who'] },
+      ],
+    },
+    {
+      id: 'pron-possessive.owner',
+      skill: 'his / her — по владельцу, а не по предмету',
+      focus: 'poss',
+      why: 'Смотри на того, кому принадлежит вещь. Том — мужчина, значит his, даже если речь о сестре.',
+      variants: [
+        { s: 'Tom_N is_V proud_J of_I [his_P] sister_N .', tr: 'Том гордится своей сестрой.', options: ['her', 'hers'] },
+        { s: 'Kate_N takes_V [her_P] son_N to_I school_N .', tr: 'Кейт отводит своего сына в школу.', options: ['his', 'hers'] },
+        { s: 'Ben_N cleans_V [his_P] car_N every_D Sunday_N .', tr: 'Бен моет свою машину каждое воскресенье.', options: ['its', 'her'] },
+      ],
+    },
+    {
+      id: 'pron-possessive.my-or-mine',
+      skill: 'Есть существительное — my, нет — mine',
+      focus: 'posspron',
+      why: 'За словом стоит существительное — my, your, her. Если слово стоит само — mine, yours, hers.',
+      variants: [
+        { s: 'This_P isn’t_V [my_P] seat_N .', tr: 'Это не моё место.', options: ['mine', 'me'] },
+        { s: 'This_D seat_N isn’t_V [mine_P] .', tr: 'Это место не моё.', options: ['my', 'me'] },
+        { s: 'Is_V this_P your_P pen_N or_C [mine_P] ?', tr: 'Это твоя ручка или моя?', options: ['my', 'me'] },
+      ],
+    },
+    {
+      id: 'pron-possessive.order',
+      mode: 'order',
+      skill: 'Собрать: чей предмет и где он',
+      focus: 'poss',
+      why: 'my, her, their стоят прямо перед существительным; yours и mine — в конце, без него.',
+      variants: [
+        { s: 'Is_V this_D bag_N yours_P ?', tr: 'Эта сумка твоя?', options: ['mine'] },
+        { s: 'Anna_N found_V her_P keys_N in_I my_P car_N .', tr: 'Анна нашла свои ключи в моей машине.', options: ['his'] },
+        { s: 'Our_P neighbours_N sold_V their_P old_J car_N .', tr: 'Наши соседи продали свою старую машину.', options: ['they', 'ours'] },
+      ],
+    },
+    {
+      id: 'pron-possessive.pick',
+      mode: 'pick',
+      skill: 'Найти слово, которое говорит, чей предмет',
+      focus: 'poss',
+      why: 'my, your, her, our и им подобные отвечают на вопрос «чей?». Без существительного это mine, yours, hers.',
+      variants: [
+        { s: 'Anna_N lost_V {her_P} phone_N on_I the_D bus_N .', q: 'Найди слово, которое говорит, чей телефон.', model: 'I_P like_V {your_P} new_J jacket_N .' },
+        { s: '{Our_P} neighbours_N have_V a_D big_J dog_N .', q: 'Найди слово, которое говорит, чьи соседи.', model: 'Is_V that_P {his_P} car_N ?' },
+        { s: 'Your_P coat_N is_V black_J , but_C {mine_P} is_V blue_J .', q: 'Найди слово, которое стоит вместо «моё пальто».', model: 'These_D shoes_N are_V {ours_P} .' },
+      ],
+    },
+    {
+      id: 'pron-possessive.graph',
+      mode: 'graph',
+      skill: 'my, her, their — определение при существительном',
+      focus: 'poss',
+      why: 'Притяжательное слово отвечает «чей?» и висит на своём существительном как определение.',
+      variants: [
+        { s: 'My_P sister_N loves_V her_P job_N .', tr: 'Моя сестра любит свою работу.', graph: '1>2 attr, 2>3 subj, 4>5 attr, 5>3 obj' },
+        { s: 'Tom_N sold_V his_P old_J bike_N .', tr: 'Том продал свой старый велосипед.', graph: '1>2 subj, 3>5 attr, 4>5 attr, 5>2 obj' },
+        { s: 'Their_P house_N is_V big_J .', tr: 'Их дом большой.', graph: '1>2 attr, 2>3 subj, 4>3 compl' },
+      ],
+    },
+  ],
+} satisfies TopicBody

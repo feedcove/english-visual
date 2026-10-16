@@ -1,0 +1,943 @@
+/* Семья sets2 (префикс vx2-): прилагательное/наречие, степени сравнения, модальные, формы глагола,
+   состояние/действие, частицы, союзы, -ed/-ing. Цвет — только от data-pos, всегда рядом Glyph. */
+
+.vx2 {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  color: var(--c1);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.vx2 > * {
+  min-width: 0;
+}
+
+.vx2[data-compact] {
+  gap: 6px;
+}
+
+/* Приглушённое: одна пара токенов гасит цвет части речи у всех потомков. */
+.vx2 [data-dim][data-pos],
+.vx2 [data-dim] [data-pos] {
+  --pc: var(--c4);
+  --pt: var(--c3);
+}
+
+.vx2 [data-dim] {
+  color: var(--c3);
+}
+
+.vx2 .glyph {
+  width: auto;
+  height: auto;
+}
+
+.vx2-q {
+  color: var(--c1);
+  font-weight: 600;
+}
+
+/* ---------- Блок ---------- */
+.vx2-sec {
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  border-radius: var(--r-card);
+  background: var(--f1);
+  transition: background-color var(--dur), box-shadow var(--dur);
+}
+
+.vx2[data-compact] .vx2-sec {
+  padding: 8px 10px;
+  gap: 6px;
+}
+
+.vx2-sec[data-on] {
+  background: color-mix(in oklab, var(--pc) 22%, var(--lv));
+  box-shadow: inset 0 0 0 2px var(--pc);
+}
+
+.vx2-sec[data-dim] {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--sep);
+}
+
+.vx2-sec-h {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 8px;
+}
+
+.vx2-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--pt);
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.vx2-sec-hint {
+  color: var(--c2);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+/* ---------- Плашка-слово ---------- */
+.vx2-pill {
+  display: inline-grid;
+  justify-items: center;
+  gap: 1px;
+  min-width: 0;
+}
+
+.vx2-pill-w {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 12px;
+  background: var(--f2);
+  color: var(--pt);
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.vx2-pill[data-on] .vx2-pill-w {
+  background: color-mix(in oklab, var(--pc) 22%, var(--lv));
+  box-shadow: inset 0 0 0 2px var(--pc);
+}
+
+.vx2-pill[data-dim] .vx2-pill-w {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--sep);
+}
+
+.vx2-sec[data-dim] .vx2-pill-w {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--sep);
+}
+
+.vx2-pill-cap {
+  color: var(--c3);
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+}
+
+/* ---------- Стрелка с вопросом ---------- */
+.vx2-arrow {
+  display: grid;
+  justify-items: center;
+  min-width: 0;
+  color: var(--c3);
+}
+
+.vx2-arrow-l {
+  min-height: 15px;
+  color: var(--c2);
+  font-size: 12px;
+  line-height: 15px;
+  white-space: nowrap;
+}
+
+.vx2 .vx2-arrow svg {
+  width: 100%;
+  max-width: 56px;
+  height: 10px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.vx2-arrow[data-dir='left'] svg {
+  transform: scaleX(-1);
+}
+
+.vx2-sec[data-on] .vx2-arrow svg {
+  color: var(--c2);
+}
+
+/* ---------- adj-adv ---------- */
+.vx2-link {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 64px minmax(0, 1fr);
+  align-items: center;
+  justify-items: center;
+  gap: 4px;
+}
+
+.vx2-trio {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  justify-items: center;
+  gap: 4px;
+}
+
+.vx2-brk {
+  height: 8px;
+  margin: -2px 14% 0;
+  border: 1.5px solid var(--c3);
+  border-top: 0;
+  border-radius: 0 0 8px 8px;
+}
+
+.vx2-note {
+  margin: 0;
+  color: var(--c2);
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+}
+
+.vx2-ex {
+  margin: 0;
+  font-size: 15px;
+  line-height: 22px;
+  text-align: center;
+}
+
+.vx2-irr {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 20px minmax(0, 1fr) 64px;
+  align-items: center;
+  justify-items: center;
+  gap: 4px;
+}
+
+.vx2-eq {
+  color: var(--c2);
+  font-size: 15px;
+}
+
+.vx2-ru {
+  justify-self: start;
+  color: var(--c2);
+  font-size: 12px;
+  line-height: 15px;
+}
+
+/* ---------- comparison-steps ---------- */
+.vx2-cs-head {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+  padding: 0 10px;
+  text-align: center;
+}
+
+.vx2-cs-head span {
+  display: grid;
+  font-size: 12px;
+  line-height: 15px;
+  color: var(--c3);
+}
+
+.vx2-cs-head b {
+  font-weight: 600;
+  color: var(--c2);
+}
+
+.vx2-cs-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+  align-items: end;
+  border-bottom: 2px solid var(--sep);
+}
+
+.vx2-cs-row[data-down] {
+  align-items: start;
+  border-bottom: 0;
+  border-top: 2px solid var(--sep);
+}
+
+.vx2-cs-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+  padding: 2px 4px;
+  border-radius: 10px 10px 0 0;
+  background: color-mix(in oklab, var(--pc) 26%, var(--lv));
+  color: var(--pt);
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+}
+
+.vx2-cs-cell svg {
+  flex: none;
+}
+
+.vx2-cs-row[data-down] .vx2-cs-cell {
+  border-radius: 0 0 10px 10px;
+}
+
+.vx2-cs-t {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.vx2-cs-t b {
+  font-weight: 700;
+}
+
+.vx2-sec[data-on] .vx2-cs-cell,
+.vx2-sec[data-on] .vx2-cs-bar {
+  background: color-mix(in oklab, var(--pc) 38%, var(--lv));
+}
+
+.vx2-sec[data-dim] .vx2-cs-cell {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--sep);
+}
+
+.vx2-cs-pair {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr) minmax(0, 1fr);
+  align-items: end;
+  gap: 4px;
+  border-bottom: 2px solid var(--sep);
+}
+
+.vx2-cs-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  border-radius: 10px 10px 0 0;
+  background: color-mix(in oklab, var(--pc) 26%, var(--lv));
+  color: var(--pt);
+  font-weight: 600;
+}
+
+.vx2-sec[data-dim] .vx2-cs-bar {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--sep);
+}
+
+.vx2-cs-mid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+  gap: 2px 8px;
+  text-align: center;
+}
+
+.vx2-cs-w {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--pt);
+  font-weight: 600;
+}
+
+.vx2 .vx2-sec[data-on] .vx2-cs-w[data-pos='conj'] {
+  color: var(--c1);
+}
+
+/* ---------- modal-scale ---------- */
+.vx2-ms-scale {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: auto auto auto;
+  gap: 2px 0;
+}
+
+.vx2-ms-node {
+  grid-row: 1 / span 3;
+  display: grid;
+  grid-template-rows: subgrid;
+  justify-items: center;
+  row-gap: 4px;
+  min-width: 0;
+}
+
+.vx2-ms-chips {
+  display: grid;
+  align-content: end;
+  justify-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+.vx2-ms-dot {
+  position: relative;
+  align-self: center;
+  justify-self: stretch;
+  height: 14px;
+}
+
+/* Ось шкалы: линия через весь столбец, точка по центру. */
+.vx2-ms-dot::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--sep);
+}
+
+.vx2-ms-node:first-child .vx2-ms-dot::before {
+  left: 50%;
+}
+
+.vx2-ms-node:last-child .vx2-ms-dot::before {
+  right: 50%;
+}
+
+.vx2-ms-dot::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: calc(50% - 5px);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--c4);
+}
+
+.vx2-ms-node[data-on] .vx2-ms-dot::after {
+  top: 0;
+  left: calc(50% - 7px);
+  width: 14px;
+  height: 14px;
+  background: var(--pc);
+}
+
+.vx2-ms-hint {
+  color: var(--c2);
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+}
+
+.vx2-ms-node[data-on] .vx2-ms-hint {
+  color: var(--pt);
+  font-weight: 600;
+}
+
+.vx2-sec[data-dim] .vx2-ms-hint {
+  color: var(--c3);
+}
+
+.vx2 .vx2-ms-scale .vx2-pill-w {
+  gap: 3px;
+  padding: 2px 5px;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: normal;
+  text-align: center;
+  line-height: 17px;
+}
+
+.vx2-ms-scale .glyph {
+  flex: none;
+}
+
+.vx2-ms-abil {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+}
+
+.vx2-ms-ab {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+}
+
+.vx2-ms-rule {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px 12px;
+  margin: 0;
+  padding: 0 10px;
+  color: var(--c2);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.vx2-ms-rule[data-dim] {
+  color: var(--c3);
+}
+
+/* ---------- verb-forms ---------- */
+.vx2-vf {
+  gap: 4px;
+}
+
+.vx2-vf-row {
+  display: grid;
+  grid-template-columns: 72px repeat(3, minmax(0, 1fr));
+  gap: 4px;
+  padding: 4px;
+  border-radius: 14px;
+  align-items: stretch;
+}
+
+.vx2-vf-head {
+  padding-bottom: 0;
+  align-items: start;
+}
+
+.vx2-vf-row[data-on] {
+  background: color-mix(in oklab, var(--pc) 22%, var(--lv));
+  box-shadow: inset 0 0 0 2px var(--pc);
+}
+
+.vx2-vf-row[data-dim] {
+  box-shadow: inset 0 0 0 1px var(--sep);
+}
+
+.vx2-vf-col {
+  display: grid;
+  text-align: center;
+  color: var(--c3);
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.vx2-vf-col b {
+  color: var(--c2);
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.vx2-vf-col[data-on] b {
+  color: var(--pt);
+}
+
+.vx2-vf-col[data-dim] b {
+  color: var(--c3);
+}
+
+.vx2-vf-pat {
+  display: grid;
+  align-content: center;
+  color: var(--c2);
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.vx2-vf-pat b {
+  color: var(--c1);
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.vx2-vf-row[data-dim] .vx2-vf-pat b {
+  color: var(--c3);
+}
+
+.vx2-vf-cell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 42px;
+  padding: 12px 4px 2px;
+  border-radius: 10px;
+  background: var(--f2);
+  color: var(--pt);
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.vx2-vf-cell[data-on] {
+  background: color-mix(in oklab, var(--pc) 22%, var(--lv));
+  box-shadow: inset 0 0 0 2px var(--pc);
+}
+
+.vx2-vf-cell[data-dim],
+.vx2-vf-row[data-dim] .vx2-vf-cell {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--sep);
+  color: var(--c3);
+}
+
+.vx2-vf-l {
+  position: absolute;
+  top: 1px;
+  left: 6px;
+  color: var(--c3);
+  font-size: 12px;
+  line-height: 14px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.vx2-vf[data-compact] .vx2-vf-cell {
+  min-height: 38px;
+}
+
+/* ---------- state-action ---------- */
+.vx2-sa-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.vx2 .vx2-sa-chips .vx2-pill-w {
+  padding: 1px 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.vx2-sa-ex {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 10px;
+  font-size: 15px;
+}
+
+.vx2-sa-gate {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 1px 9px;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px var(--s2);
+  color: var(--c2);
+  font-size: 12px;
+  line-height: 18px;
+  white-space: nowrap;
+}
+
+.vx2-sa-gate b {
+  color: var(--c1);
+  font-weight: 700;
+}
+
+.vx2-sa-two {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.vx2-sa-way {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: 4px;
+  padding: 8px;
+  border-radius: 12px;
+  background: var(--f2);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.vx2-sec[data-dim] .vx2-sa-way {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--sep);
+}
+
+.vx2-sa-way-h {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--c2);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+/* ---------- phrasal-particles ---------- */
+.vx2-pp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.vx2-pp-tile {
+  display: grid;
+  align-content: start;
+  gap: 4px;
+  padding: 8px;
+  border-radius: 14px;
+  background: var(--f1);
+  min-width: 0;
+}
+
+.vx2-pp-tile[data-on] {
+  background: color-mix(in oklab, var(--pc) 22%, var(--lv));
+  box-shadow: inset 0 0 0 2px var(--pc);
+}
+
+.vx2-pp-tile[data-dim] {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--sep);
+}
+
+.vx2-pp-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.vx2 .vx2-pp-ico {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: var(--pt);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.vx2-pp-word {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--pt);
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+.vx2-pp-ru {
+  color: var(--c2);
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.vx2-pp-tile[data-dim] .vx2-pp-ru {
+  color: var(--c3);
+}
+
+.vx2-pp-verbs {
+  display: grid;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.vx2-pp-grid[data-single] {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.vx2-pp-grid[data-single] .vx2-pp-tile {
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 14px;
+  align-items: center;
+  padding: 10px 12px;
+}
+
+.vx2-pp-grid[data-single] .vx2-pp-top {
+  grid-row: span 2;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.vx2-pp-sep {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vx2-pp-sep li {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 15px;
+  line-height: 24px;
+}
+
+.vx2-pp-sep b {
+  width: 16px;
+  color: var(--c1);
+  text-align: center;
+}
+
+.vx2-sec[data-dim] .vx2-pp-sep b {
+  color: var(--c3);
+}
+
+/* ---------- conj-links ---------- */
+.vx2-cj {
+  gap: 4px;
+}
+
+.vx2-cj-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 84px minmax(0, 1fr);
+  align-items: center;
+  gap: 4px;
+  padding: 6px;
+  border-radius: 14px;
+  background: var(--f1);
+}
+
+.vx2-cj-row[data-on] {
+  background: color-mix(in oklab, var(--pc) 22%, var(--lv));
+  box-shadow: inset 0 0 0 2px var(--pc);
+}
+
+.vx2-cj-row[data-dim] {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--sep);
+}
+
+.vx2-cj-box {
+  display: grid;
+  place-items: center;
+  min-height: 34px;
+  padding: 4px 6px;
+  border-radius: 10px;
+  background: var(--f2);
+  font-size: 13px;
+  line-height: 17px;
+  text-align: center;
+}
+
+.vx2-cj-row[data-dim] .vx2-cj-box {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--sep);
+}
+
+.vx2-cj-mid {
+  display: grid;
+  justify-items: center;
+  gap: 1px;
+  min-width: 0;
+}
+
+.vx2-cj-word {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--pt);
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+.vx2-cj-row[data-on] .vx2-cj-word {
+  color: var(--c1);
+}
+
+.vx2 .vx2-cj-ico {
+  width: 80px;
+  max-width: 100%;
+  height: 16px;
+  fill: none;
+  stroke: var(--c2);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.vx2-cj-row[data-on] .vx2-cj-ico {
+  stroke: var(--c1);
+}
+
+.vx2-cj-row[data-dim] .vx2-cj-ico {
+  stroke: var(--c4);
+}
+
+.vx2-cj-ru {
+  color: var(--c2);
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.vx2-cj-row[data-dim] .vx2-cj-ru {
+  color: var(--c3);
+}
+
+/* ---------- ed-ing ---------- */
+.vx2-ei {
+  grid-template-columns: minmax(0, 1fr) 60px minmax(0, 1fr);
+  align-items: start;
+  gap: 0;
+}
+
+.vx2-ei-col {
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 2px;
+  padding: 10px 6px;
+  border-radius: var(--r-card);
+  background: var(--f1);
+}
+
+.vx2-ei-col[data-on] {
+  background: color-mix(in oklab, var(--pc) 22%, var(--lv));
+  box-shadow: inset 0 0 0 2px var(--pc);
+}
+
+.vx2-ei-col[data-dim] {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--sep);
+}
+
+.vx2-ei-down {
+  color: var(--c3);
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.vx2-ei-ex {
+  margin: 4px 0 0;
+  font-size: 13px;
+  line-height: 20px;
+  text-align: center;
+}
+
+.vx2-ei-pairs {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  width: 100%;
+  margin: 6px 0 0;
+  padding: 8px 0 0;
+  border-top: 1px solid var(--sep);
+  list-style: none;
+}
+
+.vx2-ei-col .vx2-pill-w {
+  padding: 3px 7px;
+  font-size: 14px;
+}
+
+.vx2-ei-col[data-dim] .vx2-pill-w {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--sep);
+}
+
+.vx2-ei-mid {
+  padding-top: 24px;
+}
+
+.vx2[data-compact] .vx2-ei-col {
+  padding: 8px 4px;
+}
+
+.vx2[data-compact] .vx2-ei-mid {
+  padding-top: 16px;
+}

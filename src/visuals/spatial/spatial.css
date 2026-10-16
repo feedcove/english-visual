@@ -1,0 +1,393 @@
+/* Семья spatial: предлоги места, времени и движения. Сцены «траектор (шар цвета prep) — ориентир (серый)».
+   Цвет — от data-pos="prep" контейнера .vs; ориентиры только серые (f*, s*), текст в SVG не рисуем. */
+.vs {
+  container-type: inline-size;
+  display: grid;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+/* ---------- Сетка сцен ---------- */
+.vsp-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.vsp-grid[data-n='1'] {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.vsp-grid[data-n='3'] {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@container (min-width: 520px) {
+  .vsp-grid[data-wide='5'] {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+  .vsp-grid[data-wide='4'] {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.vsp-fig {
+  display: contents;
+}
+
+.vsp-cell {
+  display: grid;
+  align-content: start;
+  gap: 4px;
+  min-width: 0;
+  padding: 6px 6px 8px;
+  border-radius: 14px;
+  background: var(--f2);
+  transition: background-color var(--dur), box-shadow var(--dur);
+}
+
+.vsp-cell[data-lit] {
+  background: color-mix(in oklab, var(--pc) 22%, var(--lv));
+  box-shadow: inset 0 0 0 2px var(--pc);
+}
+
+.vsp-cell[data-dim] {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--sep);
+}
+
+/* Мини-версия: крупная сцена слева, подписи справа */
+.vsp-cell[data-compact] {
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px 8px 8px;
+}
+
+.vsp-side {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.vsp-cell[data-slim] .vsp-cap {
+  justify-content: center;
+}
+
+/* ---------- Подписи ---------- */
+.vsp-cap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  min-width: 0;
+  padding: 0 2px;
+}
+
+.vsp-captext {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 6px;
+  min-width: 0;
+}
+
+.vsp-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--pt);
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.vsp-cell[data-dim] .vsp-name {
+  color: var(--c3);
+}
+
+.vsp-cell[data-compact] .vsp-name {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.vsp-ru {
+  color: var(--c2);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.vsp-cell[data-dim] .vsp-ru {
+  color: var(--c3);
+}
+
+.vsp-cell[data-compact] .vsp-ru {
+  font-size: 13px;
+}
+
+.vsp-ex {
+  font-size: 15px;
+  line-height: 24px;
+}
+
+.vsp-blank {
+  color: var(--pt);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* ---------- SVG-сцены ---------- */
+.vsp-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Ориентиры — только серые токены */
+.vsp-lm {
+  fill: var(--f5);
+  stroke: var(--s3);
+  stroke-width: 1.5;
+}
+
+.vsp-wall {
+  fill: none;
+  stroke: var(--s3);
+  stroke-width: 3;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.vsp-slab {
+  fill: var(--s3);
+  stroke: none;
+}
+
+.vsp-cross {
+  fill: none;
+  stroke: var(--s3);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+.vsp-guide {
+  fill: none;
+  stroke: var(--s3);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 1 6;
+}
+
+/* Траектор — шар цвета части речи */
+.vsp-ball {
+  fill: var(--pc);
+  stroke: var(--lv);
+  stroke-width: 1.5;
+}
+
+.vsp-pin {
+  fill: var(--lv);
+}
+
+.vsp-ghost {
+  fill: none;
+  stroke: var(--pc);
+  stroke-width: 2;
+  stroke-dasharray: 3 3.5;
+}
+
+.vsp-arrow {
+  fill: none;
+  stroke: var(--pc);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.vsp-tip {
+  fill: var(--pc);
+}
+
+/* Приглушённые сцены: всё читается, но тише */
+.vsp-svg[data-dim] .vsp-lm {
+  fill: var(--f3);
+  stroke: var(--sep);
+}
+
+.vsp-svg[data-dim] .vsp-wall,
+.vsp-svg[data-dim] .vsp-cross,
+.vsp-svg[data-dim] .vsp-guide {
+  stroke: var(--sep);
+}
+
+.vsp-svg[data-dim] .vsp-slab {
+  fill: var(--sep);
+}
+
+.vsp-svg[data-dim] .vsp-ball {
+  fill: color-mix(in oklab, var(--pc) 65%, var(--lv));
+}
+
+.vsp-svg[data-dim] .vsp-ghost,
+.vsp-svg[data-dim] .vsp-arrow {
+  stroke: color-mix(in oklab, var(--pc) 65%, var(--lv));
+}
+
+.vsp-svg[data-dim] .vsp-tip {
+  fill: color-mix(in oklab, var(--pc) 65%, var(--lv));
+}
+
+/* ---------- Кнопка «▶» ---------- */
+.vsp-play {
+  flex: none;
+  color: var(--c2);
+}
+
+.vsp-cell[data-lit] .vsp-play {
+  color: var(--pt);
+}
+
+.vsp-cell[data-dim] .vsp-play {
+  color: var(--c3);
+}
+
+.vsp-play:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* Без движения (--m-move: 0): шар проявляется, а не едет */
+.vsp-fadein {
+  animation: vsp-fade var(--dur) ease-out;
+}
+
+@keyframes vsp-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ---------- prep-time: вложенные масштабы ---------- */
+.vt {
+  gap: 8px;
+}
+
+.vspt-lv {
+  display: grid;
+  gap: 6px;
+  padding: 8px;
+  border-radius: 16px;
+  transition: background-color var(--dur), box-shadow var(--dur);
+}
+
+.vspt-lv[data-d='0'] {
+  background: var(--f2);
+}
+
+.vspt-lv[data-d='1'] {
+  background: var(--f3);
+}
+
+.vspt-lv[data-d='2'] {
+  background: var(--f4);
+}
+
+.vspt-lv[data-lit] {
+  background: color-mix(in oklab, var(--pc) 22%, var(--lv));
+  box-shadow: inset 0 0 0 2px var(--pc);
+}
+
+.vspt-lv[data-dim] {
+  box-shadow: inset 0 0 0 1px var(--sep);
+}
+
+.vspt-head {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+}
+
+.vspt-title {
+  display: grid;
+  gap: 0;
+}
+
+.vspt-lv[data-dim] > .vspt-head .vsp-name {
+  color: var(--c3);
+}
+
+.vspt-lv[data-dim] > .vspt-head .vsp-ru {
+  color: var(--c3);
+}
+
+.vspt-ex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--c1);
+}
+
+.vspt-lv[data-dim] > .vspt-ex {
+  color: var(--c3);
+}
+
+.vspt-ex li {
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: var(--lv);
+  font-size: 14px;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.vspt-null {
+  display: grid;
+  place-items: center;
+  height: 40px;
+  color: var(--c2);
+  font-size: 28px;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.vspt-lv[data-dim] > .vspt-head .vspt-null {
+  color: var(--c3);
+}
+
+.vspt-npname {
+  color: var(--c1);
+}
+
+.vspt-lv[data-dim] > .vspt-head .vspt-npname {
+  color: var(--c3);
+}
+
+/* Глиф части речи: размер задаём здесь, иначе .visual svg растягивает его на всю ширину */
+.vsp-name .glyph {
+  width: 14px;
+  height: 14px;
+}
+
+.vspt-head .vsp-name .glyph {
+  width: 16px;
+  height: 16px;
+}
+
+.vsp-cell[data-compact] .vsp-name .glyph {
+  width: 18px;
+  height: 18px;
+}
+
+.vsp-play svg {
+  width: 16px;
+  height: 16px;
+}

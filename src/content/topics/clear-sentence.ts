@@ -1,0 +1,422 @@
+import type { TopicBody } from '../types'
+
+// Ясное письмо (Уильямс; канцелярит по Чуковскому) — эвристика, а не грамматика. Половина навыков английская, половина — русские пары.
+
+export default {
+  summary: 'Кто действует — в подлежащее, что делает — в глагол, а не в существительное. Это совет по стилю, а не закон грамматики.',
+  ref: [
+    { kind: 'visual', visual: { id: 'sentence-graph', focus: 'root' }, caption: 'В ясном предложении корень — слово-действие, а подлежащее — тот, кто действует' },
+    {
+      kind: 'rule',
+      title: 'Кто — подлежащее, что делает — глагол',
+      text: 'Ясное предложение отвечает на вопрос «кто что делает?». Героя ставим в подлежащее (кто делает), действие — в сказуемое (глагол). Тогда читателю не надо догадываться, кто что сделал.',
+      examples: [
+        { s: 'The_D manager_N approved_V the_D plan_N .', tr: 'Менеджер одобрил план.' },
+        { s: 'Anna_N wrote_V the_D report_N yesterday_R .', tr: 'Анна вчера написала отчёт.' },
+      ],
+    },
+    {
+      kind: 'rule',
+      title: 'Не «проверка», а «проверить»',
+      text: 'Существительное от глагола (на -tion, -sion, -ment, -al, -ing: checking, decision, arrival) прячет действие. Верни его в глагол. Так же с глаголами-пустышками: carry out a check, make a decision, give an explanation. Берём глагол от существительного: check, decide, explain.',
+      examples: [
+        { s: 'We_P decided_V to_X leave_V early_R .', tr: 'Мы решили уйти пораньше.' },
+        { s: 'Tom_N explained_V the_D rules_N to_I us_P .', tr: 'Том объяснил нам правила.' },
+      ],
+    },
+    {
+      kind: 'rule',
+      title: 'Это эвристика, а не закон',
+      text: 'Оба варианта грамматически верны. Прямых экспериментов о вреде номинализаций мало, совет держится на опыте редакторов. Иногда существительное уместно: это термин или сжатие, когда мысль уже известна. Сомневаешься — спроси «кто что делает?».',
+      examples: [
+        { s: 'The_D decision_N surprised_V us_P .', tr: 'Решение нас удивило. (о каком решении речь, уже понятно)' },
+        { s: 'She_P studies_V information~technology_N .', tr: 'Она изучает информационные технологии. (термин)' },
+      ],
+    },
+    {
+      kind: 'contrast',
+      title: 'Как в русском',
+      ru: 'Проведение_N проверки_N документов_N осуществляется_V бухгалтером_N .',
+      en: 'The_D checking_N of_I the_D documents_N is_A done_V by_I the_D accountant_N .',
+      note: 'Это канцелярит (так назвал его Чуковский): цепочка существительных и «осуществляется». В русском её держит родительный падеж, в английском — of. Лечение одно: «Бухгалтер проверяет документы» и The accountant checks the documents.',
+    },
+    {
+      kind: 'mistakes',
+      items: [
+        {
+          wrong: 'The_D checking_N of_I the_D bill_N is_A made_V by_I Anna_N .',
+          right: 'Anna_N checks_V the_D bill_N .',
+          note: 'Калька с «осуществляется»: Anna делает — пусть будет подлежащим.',
+        },
+        {
+          wrong: 'We_P carried~out_V a_D repair_N of_I the_D roof_N .',
+          right: 'We_P repaired_V the_D roof_N .',
+          note: 'carry out + существительное — бери глагол от слова: repair.',
+        },
+        {
+          wrong: 'The_D lateness_N of_I the_D bus_N was_V the_D reason_N for_I our_P delay_N .',
+          right: 'The_D bus_N was_V late_J , so_C we_P were_V late_J .',
+          note: 'lateness, delay — это «опоздал» и «опоздали».',
+        },
+      ],
+    },
+    {
+      kind: 'tip',
+      text: 'Проверка: найди слова на -tion / -ment / -ing (по-русски -ние, -ка) и глагол-пустышку (make, do, carry out, give; производить, осуществлять). Вычеркни их и спроси «кто что делает?».',
+    },
+  ],
+  items: [
+    // --- английский ---
+    {
+      id: 'clear-sentence.agent-subject',
+      mode: 'choice',
+      skill: 'Кто действует — в подлежащее, а не в хвост фразы',
+      focus: 'subj',
+      why: 'Герой в подлежащем: сразу видно, кто что делает.',
+      variants: [
+        {
+          q: 'Какое предложение яснее?',
+          answer: 'Our team tested the new app on Monday.',
+          options: ['The testing of the new app was done by our team on Monday.', 'Testing of the new app by our team took place on Monday.'],
+          why: 'Our team — подлежащее, tested — действие. В тяжёлых вариантах действие спрятано в существительном testing.',
+        },
+        {
+          q: 'Какое предложение яснее?',
+          answer: 'Anna explained the problem to the customers.',
+          options: ['An explanation of the problem was given to the customers by Anna.', 'The problem was explained to the customers by Anna.'],
+          why: 'Anna стоит в начале и делает действие explained. Героя не надо искать в конце фразы.',
+        },
+        {
+          q: 'Какое предложение яснее?',
+          answer: 'Mr Smith signed the contract on Friday.',
+          options: ['The signing of the contract was done by Mr Smith on Friday.', 'The contract’s signing was completed by Mr Smith on Friday.'],
+          why: 'Mr Smith — подлежащее, signed — сказуемое. Существительное signing только прячет действие.',
+        },
+      ],
+    },
+    {
+      id: 'clear-sentence.action-verb',
+      mode: 'choice',
+      skill: 'Действие — глаголом, а не существительным на -tion, -ment, -ing',
+      focus: 'root',
+      why: 'Существительное прячет действие. Верни его в глагол: refusal → refused.',
+      variants: [
+        {
+          q: 'Какое предложение яснее?',
+          answer: 'We were surprised when our manager refused the offer.',
+          options: ['Our manager’s refusal of the offer was a surprise to us.', 'The refusal of the offer by our manager caused us surprise.'],
+          why: 'refusal → refused, surprise → surprised: два действия снова стали глаголами.',
+        },
+        {
+          q: 'Какое предложение яснее?',
+          answer: 'Lucy was annoyed because Tom replied so late.',
+          options: ['Tom’s lateness in his reply was the cause of Lucy’s annoyance.', 'Tom’s delay in replying caused annoyance for Lucy.'],
+          why: 'reply → replied, annoyance → was annoyed: причина и чувство читаются без распутывания.',
+        },
+        {
+          q: 'Какое предложение яснее?',
+          answer: 'The shop closed early, so we couldn’t buy bread.',
+          options: ['The early closure of the shop led to our inability to buy bread.', 'The early closing of the shop made our purchase of bread impossible.'],
+          why: 'closure → closed, inability → couldn’t: обычная речь против канцелярита.',
+        },
+      ],
+    },
+    {
+      id: 'clear-sentence.empty-verb',
+      mode: 'choice',
+      skill: 'carry out, make, give + существительное — один глагол',
+      focus: 'root',
+      why: 'Глагол-пустышка ничего не говорит, смысл в существительном. Бери глагол от него.',
+      variants: [
+        {
+          q: 'Какое предложение короче и яснее?',
+          answer: 'Anna checked all the invoices.',
+          options: ['Anna carried out a check of all the invoices.', 'Anna did a check of all the invoices.'],
+          why: 'carry out a check → check. Пустышка и существительное сливаются в один глагол.',
+        },
+        {
+          q: 'Какое предложение короче и яснее?',
+          answer: 'The teacher explained the new rules.',
+          options: ['The teacher gave an explanation of the new rules.', 'The teacher provided an explanation regarding the new rules.'],
+          why: 'give an explanation → explain. Короче и живее, смысл тот же.',
+        },
+        {
+          q: 'Какое предложение короче и яснее?',
+          answer: 'We discussed the plan for an hour.',
+          options: ['We had a discussion about the plan for an hour.', 'We held a discussion of the plan for an hour.'],
+          why: 'have a discussion → discuss. Все варианты верны, но с глаголом короче.',
+        },
+      ],
+    },
+    {
+      id: 'clear-sentence.hidden-verb',
+      mode: 'pick',
+      skill: 'Найти действие, спрятанное в существительном',
+      focus: 'root',
+      variants: [
+        {
+          s: 'The_D {checking_N} of_I the_D documents_N takes_V an_D hour_N .',
+          q: 'Найди существительное, в котором спрятано действие',
+          tr: 'Проверка документов занимает час.',
+          why: 'checking → check: It takes an hour to check the documents.',
+        },
+        {
+          s: 'Her_P {decision_N} to_X leave_V surprised_V everyone_P .',
+          q: 'Найди существительное, в котором спрятано действие',
+          tr: 'Её решение уйти удивило всех.',
+          why: 'decision → decide: She decided to leave, and everyone was surprised.',
+        },
+        {
+          s: 'The_D {arrival_N} of_I the_D guests_N made_V Kate_N happy_J .',
+          q: 'Найди существительное, в котором спрятано действие',
+          tr: 'Приезд гостей обрадовал Кейт.',
+          why: 'arrival → arrive: Kate was happy when the guests arrived.',
+        },
+      ],
+    },
+    {
+      id: 'clear-sentence.empty-verb-find',
+      mode: 'pick',
+      skill: 'Найти глагол-пустышку: смысл несёт слово после него',
+      focus: 'root',
+      variants: [
+        {
+          s: 'Anna_N {carried~out_V} a_D test_N of_I the_D new_J system_N .',
+          q: 'Найди глагол-пустышку',
+          tr: 'Анна провела тестирование новой системы.',
+          why: 'carried out a test → tested. Смысл в слове test, а не в carried out.',
+        },
+        {
+          s: 'Kate_N {gave_V} us_P an_D explanation_N of_I the_D plan_N .',
+          q: 'Найди глагол-пустышку',
+          tr: 'Кейт дала нам пояснения по плану.',
+          why: 'gave an explanation → explained. Смысл в слове explanation, а не в gave.',
+        },
+        {
+          s: 'The_D team_N {made_V} an_D improvement_N to_I the_D website_N .',
+          q: 'Найди глагол-пустышку',
+          tr: 'Команда внесла улучшение в сайт.',
+          why: 'made an improvement → improved. Смысл в слове improvement, а не в made.',
+        },
+      ],
+    },
+    {
+      id: 'clear-sentence.compose-en',
+      mode: 'order',
+      skill: 'Собрать ясное предложение: кто — что делает — что',
+      focus: 'subj',
+      why: 'Подлежащее — тот, кто действует; сказуемое — один сильный глагол. Пустышки и существительные лишние.',
+      variants: [
+        {
+          from: ['кто: the_D accountant_N', 'что делает: checks_V', 'что: the_D documents_N'],
+          s: 'The_D accountant_N checks_V the_D documents_N .',
+          tr: 'Бухгалтер проверяет документы.',
+          options: ['carries', 'out'],
+        },
+        {
+          from: ['кто: Ben_N', 'что делает: cleans_V', 'что: the_D office_N'],
+          s: 'Ben_N cleans_V the_D office_N .',
+          tr: 'Бен убирает офис.',
+          options: ['does', 'cleaning', 'of'],
+        },
+        {
+          from: ['кто: Tom_N', 'что сделал: booked_V', 'что: the_D hotel_N'],
+          s: 'Tom_N booked_V the_D hotel_N .',
+          tr: 'Том забронировал гостиницу.',
+          options: ['made', 'booking', 'of'],
+        },
+      ],
+    },
+    // --- русский: канцелярит ---
+    {
+      id: 'clear-sentence.ru-agent-subject',
+      mode: 'choice',
+      skill: 'По-русски: кто действует — подлежащее («Мастер починил кран»)',
+      focus: 'subj',
+      why: 'Герой в подлежащем: сразу видно, кто что сделал. Страдательный оборот прячет его в конец.',
+      variants: [
+        {
+          lang: 'ru',
+          q: 'Какой вариант яснее?',
+          answer: 'Бухгалтер проверяет документы.',
+          options: ['Проведение проверки документов осуществляется бухгалтером.', 'Проверка документов производится бухгалтером.'],
+          tr: 'The accountant checks the documents.',
+          why: 'Бухгалтер — подлежащее, проверяет — сказуемое. В канцелярском варианте действие спрятано в слове «проверка».',
+        },
+        {
+          lang: 'ru',
+          q: 'Какой вариант яснее?',
+          answer: 'Менеджер согласовал договор.',
+          options: ['Согласование договора было произведено менеджером.', 'Менеджером осуществлено согласование договора.'],
+          tr: 'The manager approved the contract.',
+          why: 'Менеджер действует, согласовал — глагол. «Было произведено согласование» ничего нового не добавляет.',
+        },
+        {
+          lang: 'ru',
+          q: 'Какой вариант яснее?',
+          answer: 'Мастер починил кран.',
+          options: ['Ремонт крана был осуществлён мастером.', 'Мастером был произведён ремонт крана.'],
+          tr: 'The handyman fixed the tap.',
+          why: 'Мастер — подлежащее, починил — действие. «Осуществлён ремонт» — то же, но тяжелее.',
+        },
+      ],
+    },
+    {
+      id: 'clear-sentence.ru-action-verb',
+      mode: 'choice',
+      skill: 'По-русски: действие — глаголом, а не отглагольным существительным',
+      focus: 'root',
+      why: 'Слова на -ние, -ка, -ство прячут действие. Верни его в глагол: решение → решили.',
+      variants: [
+        {
+          lang: 'ru',
+          q: 'Какой вариант яснее?',
+          answer: 'Мы решили перенести встречу.',
+          options: ['Было принято решение о переносе встречи.', 'Нами принято решение о переносе встречи.'],
+          tr: 'We decided to move the meeting.',
+          why: 'решение → решили, перенос → перенести: два действия снова стали глаголами, и появился герой «мы».',
+        },
+        {
+          lang: 'ru',
+          q: 'Какой вариант яснее?',
+          answer: 'Директор запретил курить в офисе.',
+          options: ['Директором введён запрет на курение в офисе.', 'В офисе директором установлен запрет курения.'],
+          tr: 'The director banned smoking in the office.',
+          why: 'запрет → запретил, курение → курить. Директор снова делает действие.',
+        },
+        {
+          lang: 'ru',
+          q: 'Какой вариант яснее?',
+          answer: 'Поезд опоздал, поэтому мы опоздали на встречу.',
+          options: ['Опоздание поезда привело к нашему опозданию на встречу.', 'Вследствие опоздания поезда имело место наше опоздание на встречу.'],
+          tr: 'The train was late, so we were late for the meeting.',
+          why: 'Опоздание → опоздал, «привело к» → поэтому. Причина читается сразу.',
+        },
+      ],
+    },
+    {
+      id: 'clear-sentence.ru-empty-verb',
+      mode: 'choice',
+      skill: 'По-русски: «производить, осуществлять, оказывать» + слово — один глагол',
+      focus: 'root',
+      why: 'Пустой глагол ничего не говорит, смысл в существительном. Бери глагол от него: произвести проверку → проверить.',
+      variants: [
+        {
+          lang: 'ru',
+          q: 'Какой вариант короче и яснее?',
+          answer: 'Мы проверили склад.',
+          options: ['Мы произвели проверку склада.', 'Нами осуществлена проверка склада.'],
+          tr: 'We checked the warehouse.',
+          why: 'произвели проверку → проверили. Смысл тот же, слов меньше.',
+        },
+        {
+          lang: 'ru',
+          q: 'Какой вариант короче и яснее?',
+          answer: 'Сотрудники помогают клиентам.',
+          options: ['Сотрудники оказывают помощь клиентам.', 'Сотрудниками осуществляется оказание помощи клиентам.'],
+          tr: 'The staff help the customers.',
+          why: 'оказывать помощь → помогать. Пустышка «оказывать» уходит.',
+        },
+        {
+          lang: 'ru',
+          q: 'Какой вариант короче и яснее?',
+          answer: 'Мы оплатили заказ.',
+          options: ['Мы произвели оплату заказа.', 'Нами осуществлена оплата заказа.'],
+          tr: 'We paid for the order.',
+          why: 'произвели оплату → оплатили. Одно действие — один глагол.',
+        },
+      ],
+    },
+    {
+      id: 'clear-sentence.ru-hidden-verb',
+      mode: 'pick',
+      skill: 'По-русски: найти действие, спрятанное в существительном',
+      focus: 'root',
+      variants: [
+        {
+          lang: 'ru',
+          s: '{Проверка_N} документов_N занимает_V час_N .',
+          q: 'Найди слово, в котором спрятано действие',
+          tr: 'Checking the documents takes an hour.',
+          why: 'проверка → проверить: «Документы проверяем час».',
+        },
+        {
+          lang: 'ru',
+          s: 'Его_P {опоздание_N} расстроило_V всех_P .',
+          q: 'Найди слово, в котором спрятано действие',
+          tr: 'His being late upset everyone.',
+          why: 'опоздание → опоздать: Он опоздал, и все расстроились.',
+        },
+        {
+          lang: 'ru',
+          s: '{Приезд_N} гостей_N обрадовал_V Анну_N .',
+          q: 'Найди слово, в котором спрятано действие',
+          tr: 'The guests’ arrival made Anna happy.',
+          why: 'приезд → приехать: Анна обрадовалась, когда гости приехали.',
+        },
+      ],
+    },
+    {
+      id: 'clear-sentence.ru-empty-verb-find',
+      mode: 'pick',
+      skill: 'По-русски: найти глагол-пустышку («произвёл», «осуществил»)',
+      focus: 'root',
+      variants: [
+        {
+          lang: 'ru',
+          s: 'Бухгалтер_N {произвёл_V} проверку_N документов_N .',
+          q: 'Найди глагол-пустышку',
+          tr: 'The accountant carried out a check of the documents.',
+          why: 'произвёл проверку → проверил. Смысл в слове «проверку», а не в «произвёл».',
+        },
+        {
+          lang: 'ru',
+          s: 'Вчера_R мы_P {осуществили_V} доставку_N заказа_N .',
+          q: 'Найди глагол-пустышку',
+          tr: 'Yesterday we carried out the delivery of the order.',
+          why: 'осуществили доставку → доставили. Смысл в слове «доставку».',
+        },
+        {
+          lang: 'ru',
+          s: 'Отдел_N {оказывает_V} помощь_N клиентам_N .',
+          q: 'Найди глагол-пустышку',
+          tr: 'The department provides assistance to customers.',
+          why: 'оказывает помощь → помогает. Смысл в слове «помощь».',
+        },
+      ],
+    },
+    {
+      id: 'clear-sentence.ru-compose',
+      mode: 'order',
+      skill: 'По-русски: собрать ясное предложение «кто — что делает — что»',
+      focus: 'subj',
+      why: 'Кто действует — подлежащее, действие — один глагол. Лишние плитки делают фразу канцелярской.',
+      variants: [
+        {
+          lang: 'ru',
+          from: ['кто: Маша_N', 'что делает: готовит_V', 'что: отчёт_N'],
+          s: 'Маша_N готовит_V отчёт_N .',
+          tr: 'Masha is preparing the report.',
+          accept: ['отчёт готовит Маша.', 'отчёт Маша готовит.', 'Маша отчёт готовит.'],
+          options: ['производит', 'подготовку'],
+        },
+        {
+          lang: 'ru',
+          from: ['кто: директор_N', 'что делает: подписал_V', 'что: приказ_N'],
+          s: 'Директор_N подписал_V приказ_N .',
+          tr: 'The director signed the order.',
+          accept: ['приказ подписал Директор.', 'приказ Директор подписал.', 'Директор приказ подписал.'],
+          options: ['осуществил', 'подписание'],
+        },
+        {
+          lang: 'ru',
+          from: ['кто: курьер_N', 'что делает: привёз_V', 'что: посылку_N'],
+          s: 'Курьер_N привёз_V посылку_N .',
+          tr: 'The courier brought the parcel.',
+          accept: ['посылку привёз Курьер.', 'посылку Курьер привёз.', 'Курьер посылку привёз.'],
+          options: ['осуществил', 'доставку'],
+        },
+      ],
+    },
+  ],
+} satisfies TopicBody

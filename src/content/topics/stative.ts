@@ -1,0 +1,378 @@
+import type { TopicBody } from '../types'
+
+export default {
+  summary: 'Глаголы состояния (know, want, like, belong) обычно стоят в Simple, не в Continuous. Многие глаголы имеют два значения: «быть» и «делать».',
+  ref: [
+    { kind: 'visual', visual: { id: 'state-action', focus: 'both' }, caption: 'Состояние — Simple, действие — Continuous; двойные глаголы зависят от значения' },
+    {
+      kind: 'rule',
+      title: 'Состояние или действие',
+      text: 'Спроси себя: это ЕСТЬ или ДЕЛАЕТСЯ? Можно ли начать и закончить? «Начал знать в два часа» нельзя, «начал обедать» можно. Состояние — Simple (I know), действие сейчас — Continuous (I am working). В слоганах бывают исключения (I’m loving it), но в учёбе ставь Simple.',
+      examples: [
+        { s: 'I_P know_V the_D answer_N .', tr: 'Я знаю ответ.' },
+        { s: 'She_P wants_V a_D coffee_N .', tr: 'Она хочет кофе.' },
+        { s: 'Tom_N is_A working_V now_R .', tr: 'Том сейчас работает.' },
+      ],
+    },
+    {
+      kind: 'table',
+      title: 'Основные глаголы состояния',
+      head: ['Что описывают', 'Глаголы'],
+      rows: [
+        ['мысли и знание', 'know understand believe remember mean'],
+        ['чувства и желания', 'like love hate want need prefer'],
+        ['владение и состав', 'belong own contain consist include'],
+        ['вид, цена, размер', 'seem cost weigh fit'],
+      ],
+    },
+    {
+      kind: 'rule',
+      title: 'Одно слово — два значения',
+      text: 'Глаголы think, see, have, taste, smell, look, feel, be могут быть и состоянием, и действием. Значение «мнение, свойство, владение» — Simple. Значение «делаю сам, прямо сейчас» — Continuous. Время выбирает не слово, а смысл.',
+      examples: [
+        { s: 'I_P think_V it_P is_V wrong_J .', tr: 'Я думаю, это неверно.' },
+        { s: 'I_P am_A thinking_V about_I my_P holiday_N .', tr: 'Я думаю о своём отпуске.' },
+        { s: 'They_P are_A having_V lunch_N .', tr: 'Они обедают.' },
+      ],
+    },
+    {
+      kind: 'rule',
+      title: 'Слово с -ing не всегда Continuous',
+      text: 'Continuous — это только am / is / are + -ing. Без be слово на -ing — прилагательное (a sleeping cat), описание после существительного (a box containing photos) или существительное (Swimming is fun, interested in learning).',
+      examples: [
+        { s: 'A_D sleeping_J cat_N is_V on_I the_D sofa_N .', tr: 'На диване спящий кот.' },
+        { s: 'Swimming_N is_V fun_N .', tr: 'Плавать — это весело.' },
+      ],
+    },
+    {
+      kind: 'contrast',
+      title: 'Как в русском',
+      ru: 'Я_P сейчас_R хочу_V кофе_N .',
+      en: 'I_P want_V coffee_N right_R now_R .',
+      note: 'В русском сейчас — всегда настоящее время, глагол один. В английском для действий сейчас нужен Continuous, а для состояний остаётся Simple. Слово now не решает.',
+    },
+    {
+      kind: 'mistakes',
+      items: [
+        { wrong: 'I_P am_A knowing_V the_D answer_N .', right: 'I_P know_V the_D answer_N .', note: 'Знание — состояние: только Simple.' },
+        { wrong: 'She_P is_A wanting_V a_D coffee_N now_R .', right: 'She_P wants_V a_D coffee_N now_R .', note: 'now не превращает want в действие.' },
+        { wrong: 'This_D bag_N is_A belonging_V to_I Anna_N .', right: 'This_D bag_N belongs_V to_I Anna_N .', note: 'Принадлежность — состояние.' },
+        { wrong: 'I_P am_A having_V two_M cars_N .', right: 'I_P have_V two_M cars_N .', note: 'have = «владеть» — Simple.' },
+        { wrong: 'I_P think_V about_I my_P holiday_N now_R .', right: 'I_P am_A thinking_V about_I my_P holiday_N now_R .', note: 'think about = обдумывать: Continuous.' },
+      ],
+    },
+  ],
+  items: [
+    {
+      id: 'stative.know',
+      skill: 'know — состояние, только Simple',
+      focus: 'state',
+      why: 'Знание не процесс: нельзя «начать знать». I know, а не I am knowing.',
+      variants: [
+        { s: 'I_P [know_V] the_D answer_N .', tr: 'Я знаю ответ.', options: ['am knowing', 'knows'] },
+        { s: 'Anna_N [knows_V] the_D way_N to_I the_D station_N .', tr: 'Анна знает дорогу до вокзала.', options: ['is knowing', 'know'] },
+        { s: 'We_P [know_V] your_P brother_N very_R well_R .', tr: 'Мы очень хорошо знаем твоего брата.', options: ['are knowing', 'knows'] },
+      ],
+    },
+    {
+      id: 'stative.understand',
+      skill: 'understand — состояние, Simple',
+      focus: 'state',
+      why: 'Понимание — состояние «дошло». Слово now не делает его действием: I understand now.',
+      variants: [
+        { s: 'I_P [understand_V] this_D rule_N now_R .', tr: 'Теперь я понимаю это правило.', options: ['am understanding', 'understood'] },
+        { s: 'Max_N [understands_V] English_N , but_C he_P can’t_A speak_V it_P .', tr: 'Макс понимает по-английски, но не может говорить.', options: ['is understanding', 'understand'] },
+        { s: 'They_P [understand_V] the_D problem_N .', tr: 'Они понимают проблему.', options: ['are understanding', 'understands'] },
+      ],
+    },
+    {
+      id: 'stative.believe',
+      skill: 'believe, remember — мысль, Simple',
+      focus: 'state',
+      why: 'Вера, мнение и память — состояния ума, а не действия. Ставь Simple.',
+      variants: [
+        { s: 'I_P [believe_V] you_P .', tr: 'Я тебе верю.', options: ['am believing', 'believes'] },
+        { s: 'She_P [remembers_V] my_P name_N .', tr: 'Она помнит моё имя.', options: ['is remembering', 'remember'] },
+        { s: 'Tom_N [believes_V] that_C the_D shop_N is_V open_J .', tr: 'Том считает, что магазин открыт.', options: ['is believing', 'believe'] },
+      ],
+    },
+    {
+      id: 'stative.like',
+      skill: 'like, love, hate — чувство, Simple',
+      focus: 'state',
+      why: 'Отношение к чему-то — состояние: Anna loves it, а не is loving. I’m loving it бывает в разговоре и рекламе, но норма — Simple.',
+      variants: [
+        { s: 'Anna_N [loves_V] old_J films_N .', tr: 'Анна обожает старые фильмы.', options: ['is loving', 'love'] },
+        { s: 'I_P [hate_V] waiting_N in_I queues_N .', tr: 'Терпеть не могу стоять в очередях.', options: ['am hating', 'hates'] },
+        { s: 'They_P [like_V] the_D new_J office_N .', tr: 'Им нравится новый офис.', options: ['are liking', 'likes'] },
+      ],
+    },
+    {
+      id: 'stative.want',
+      skill: 'want — желание, Simple',
+      focus: 'state',
+      why: 'Желание есть или нет, даже сейчас: I want, а не I am wanting.',
+      variants: [
+        { s: 'Kate_N [wants_V] a_D coffee_N right_R now_R .', tr: 'Кейт сейчас хочет кофе.', options: ['is wanting', 'want'] },
+        { s: 'I_P [want_V] to_X go_V home_R .', tr: 'Я хочу домой.', options: ['am wanting', 'wants'] },
+        { s: 'The_D children_N [want_V] some_D ice~cream_N .', tr: 'Дети хотят мороженого.', options: ['are wanting', 'wants'] },
+      ],
+    },
+    {
+      id: 'stative.need',
+      skill: 'need — потребность, Simple',
+      focus: 'state',
+      why: 'Потребность — состояние. We need, а не We are needing.',
+      variants: [
+        { s: 'We_P [need_V] more_D time_N .', tr: 'Нам нужно больше времени.', options: ['are needing', 'needs'] },
+        { s: 'Tom_N [needs_V] a_D new_J phone_N .', tr: 'Тому нужен новый телефон.', options: ['is needing', 'need'] },
+        { s: 'I_P [need_V] your_P help_N today_R .', tr: 'Сегодня мне нужна твоя помощь.', options: ['am needing', 'needs'] },
+      ],
+    },
+    {
+      id: 'stative.prefer',
+      skill: 'prefer — предпочтение, Simple',
+      focus: 'state',
+      why: 'Предпочтение — состояние. I prefer tea to coffee, а не am preferring.',
+      variants: [
+        { s: 'I_P [prefer_V] tea_N to_I coffee_N .', tr: 'Я предпочитаю чай кофе.', options: ['am preferring', 'prefers'] },
+        { s: 'Anna_N [prefers_V] trains_N to_I planes_N .', tr: 'Анна предпочитает поезда самолётам.', options: ['is preferring', 'prefer'] },
+        { s: 'My_P parents_N [prefer_V] the_D countryside_N .', tr: 'Мои родители предпочитают жить за городом.', options: ['are preferring', 'prefers'] },
+      ],
+    },
+    {
+      id: 'stative.belong',
+      skill: 'belong, own — владение, Simple',
+      focus: 'state',
+      why: 'Принадлежность и владение — факт. Сумка не «начинает принадлежать»: belongs.',
+      variants: [
+        { s: 'This_D bag_N [belongs_V] to_I Anna_N .', tr: 'Эта сумка принадлежит Анне.', options: ['is belonging', 'belong'] },
+        { s: 'Max_N [owns_V] a_D small_J shop_N .', tr: 'Максу принадлежит небольшой магазин.', options: ['is owning', 'own'] },
+        { s: 'These_D keys_N [belong_V] to_I me_P .', tr: 'Эти ключи мои.', options: ['are belonging', 'belongs'] },
+      ],
+    },
+    {
+      id: 'stative.contain',
+      skill: 'contain, include, consist — состав, Simple',
+      focus: 'state',
+      why: 'Состав — статичный факт о предмете: The box contains, а не is containing.',
+      variants: [
+        { s: 'This_D box_N [contains_V] old_J letters_N .', tr: 'В этой коробке старые письма.', options: ['is containing', 'contain'] },
+        { s: 'The_D course_N [includes_V] a_D free_J lunch_N .', tr: 'В курс входит бесплатный обед.', options: ['is including', 'include'] },
+        { s: 'Our_P team_N [consists_V] of_I six_M people_N .', tr: 'Наша команда состоит из шести человек.', options: ['is consisting', 'consist'] },
+      ],
+    },
+    {
+      id: 'stative.seem',
+      skill: 'seem — впечатление, Simple',
+      focus: 'state',
+      why: 'Впечатление — состояние. It seems good, а не is seeming.',
+      variants: [
+        { s: 'That_P [seems_V] a_D good_J idea_N .', tr: 'Похоже, это хорошая идея.', options: ['is seeming', 'seem'] },
+        { s: 'Tom_N [seems_V] happy_J today_R .', tr: 'Сегодня Том кажется счастливым.', options: ['is seeming', 'seem'] },
+        { s: 'They_P [seem_V] very_R tired_J .', tr: 'Кажется, они очень устали.', options: ['are seeming', 'seems'] },
+      ],
+    },
+    {
+      id: 'stative.cost',
+      skill: 'cost, weigh — цена и вес, Simple',
+      focus: 'state',
+      why: 'Цена и вес — свойство вещи: the ticket costs, а не is costing. weigh «весить» — Simple, weigh «взвешивать» — уже действие.',
+      variants: [
+        { s: 'The_D ticket_N [costs_V] ten_M pounds_N .', tr: 'Билет стоит десять фунтов.', options: ['is costing', 'cost'] },
+        { s: 'This_D bag_N [weighs_V] two_M kilos_N .', tr: 'Эта сумка весит два килограмма.', options: ['is weighing', 'weigh'] },
+        { s: 'Those_D shoes_N [cost_V] too_R much_R .', tr: 'Эти туфли стоят слишком дорого.', options: ['are costing', 'costs'] },
+      ],
+    },
+    {
+      id: 'stative.think',
+      skill: 'think: мнение — Simple, обдумываю — Continuous',
+      focus: 'both',
+      why: 'think = «считать» (мнение, можно заменить на believe) — Simple. think about = «обдумывать прямо сейчас» — процесс, Continuous.',
+      variants: [
+        { s: 'I_P [think_V] this_D answer_N is_V wrong_J .', tr: 'Я думаю, этот ответ неверный.', options: ['am thinking', 'thinks'], why: 'Мнение (= believe) — Simple.' },
+        { s: 'Anna_N [is~thinking_V] about_I her_P new_J job_N right_R now_R .', tr: 'Анна сейчас думает о своей новой работе.', options: ['thinks', 'think'], why: 'think about = обдумывать, идёт процесс — Continuous.' },
+        { s: 'Tom_N [thinks_V] that_C London_N is_V expensive_J .', tr: 'Том считает, что Лондон дорогой.', options: ['is thinking', 'think'], why: 'Мнение (= believes) — Simple.' },
+      ],
+    },
+    {
+      id: 'stative.see',
+      skill: 'see: вижу — Simple, встречаюсь — Continuous',
+      focus: 'both',
+      why: 'see = «видеть» или «понимать» — состояние, Simple. see = «встречаться с кем-то» — действие, Continuous.',
+      variants: [
+        { s: 'I_P [see_V] what_P you_P mean_V .', tr: 'Понимаю, о чём ты.', options: ['am seeing', 'sees'], why: 'see = понимать — состояние, Simple.' },
+        { s: 'Anna_N can’t_A talk_V now_R : she_P [is~seeing_V] a_D client_N .', tr: 'Анна сейчас не может говорить: у неё клиент.', options: ['sees', 'see'], why: 'see = встречаться по делу — действие, Continuous.' },
+        { s: 'Max_N [is~seeing_V] his_P manager_N right_R now_R .', tr: 'Макс сейчас на встрече со своим начальником.', options: ['sees', 'see'], why: 'see = встречаться — Continuous.' },
+      ],
+    },
+    {
+      id: 'stative.have',
+      skill: 'have: владею — Simple, обедаю — Continuous',
+      focus: 'both',
+      why: 'have = «иметь, владеть» — Simple. have lunch, have a shower, have a party — действия, Continuous можно.',
+      variants: [
+        { s: 'Kate_N [has_V] two_M cars_N and_C a_D big_J house_N .', tr: 'У Кейт две машины и большой дом.', options: ['is having', 'have'], why: 'Владение — Simple.' },
+        { s: 'We_P [are~having_V] lunch_N at~the~moment_R .', tr: 'Мы сейчас обедаем.', options: ['have', 'has'], why: 'have lunch = обедать, действие — Continuous.' },
+        { s: 'Anna_N [is~having_V] a_D shower_N , so_C she_P can’t_A answer_V .', tr: 'Анна принимает душ, поэтому не может ответить.', options: ['has', 'have'], why: 'have a shower = принимать душ, действие — Continuous.' },
+      ],
+    },
+    {
+      id: 'stative.taste',
+      skill: 'taste, smell: свойство — Simple, пробую сам — Continuous',
+      focus: 'both',
+      why: 'Еда «имеет вкус» (tastes) — Simple. Когда человек специально пробует (is tasting), это действие — Continuous.',
+      variants: [
+        { s: 'The_D soup_N [tastes_V] delicious_J .', tr: 'Суп очень вкусный.', options: ['is tasting', 'taste'], why: 'Свойство блюда — Simple.' },
+        { s: 'The_D chef_N [is~tasting_V] the_D sauce_N at~the~moment_R .', tr: 'Повар сейчас пробует соус.', options: ['tastes', 'taste'], why: 'Человек пробует специально — Continuous.' },
+        { s: 'These_D flowers_N [smell_V] lovely_J .', tr: 'Эти цветы чудесно пахнут.', options: ['are smelling', 'smells'], why: 'Свойство цветов — Simple.' },
+      ],
+    },
+    {
+      id: 'stative.look',
+      skill: 'look: выгляжу — Simple, смотрю на — Continuous',
+      focus: 'both',
+      why: 'look + прилагательное = «выглядеть» — Simple. look at, look for — действия, Continuous.',
+      variants: [
+        { s: 'The_D new_J boss_N [looks_V] very_R friendly_J .', tr: 'Новый начальник выглядит очень дружелюбным.', options: ['is looking', 'look'], why: 'Внешний вид — Simple.' },
+        { s: 'Tom_N [is~looking_V] at_I the_D map_N right_R now_R .', tr: 'Том сейчас смотрит на карту.', options: ['looks', 'look'], why: 'look at = смотреть, действие — Continuous.' },
+        { s: 'I_P [am~looking_V] for_I my_P keys_N at~the~moment_R .', tr: 'Сейчас я ищу свои ключи.', options: ['look', 'looks'], why: 'look for = искать, действие — Continuous.' },
+      ],
+    },
+    {
+      id: 'stative.feel',
+      skill: 'feel: на ощупь, мнение — Simple, трогаю — Continuous',
+      focus: 'both',
+      why: 'feel = «быть на ощупь» или «считать» — Simple. feel = «трогать, ощупывать» — действие, Continuous.',
+      variants: [
+        { s: 'This_D sofa_N [feels_V] really_R soft_J .', tr: 'Этот диван на ощупь очень мягкий.', options: ['is feeling', 'feel'], why: 'Свойство ткани — Simple.' },
+        { s: 'Kate_N [is~feeling_V] the_D fabric_N right_R now_R .', tr: 'Кейт сейчас ощупывает ткань.', options: ['feels', 'feel'], why: 'Трогает руками — действие, Continuous.' },
+        { s: 'I_P [feel_V] this_D plan_N is_V a_D mistake_N .', tr: 'Мне кажется, этот план — ошибка.', options: ['am feeling', 'feels'], why: 'Мнение (= think) — Simple.' },
+      ],
+    },
+    {
+      id: 'stative.be',
+      skill: 'be: какой он — is, как себя ведёт — is being',
+      focus: 'both',
+      why: 'is + прилагательное = характеристика. is being + прилагательное = ведёт себя так сейчас, по своей воле.',
+      variants: [
+        { s: 'Anna_N [is_V] very_R polite_J . She_P always_R says_V thank~you_N .', tr: 'Анна очень вежливая. Она всегда говорит спасибо.', options: ['is being', 'are being'], why: 'Постоянная черта характера — is.' },
+        { s: 'Max_N isn’t_V usually_R silly_J , but_C today_R he_P [is~being_V] silly_J .', tr: 'Обычно Макс не дурачится, но сегодня он ведёт себя глупо.', options: ['are being', 'being'], why: 'Временное поведение — is being.' },
+        { s: 'Why_R are_A you_P [being_V] so_R rude_J today_R ?', tr: 'Почему ты сегодня так грубо себя ведёшь?', options: ['be', 'is'], why: 'Поведение сегодня — are being.' },
+      ],
+    },
+    {
+      id: 'stative.fit',
+      skill: 'fit: подходит по размеру — Simple, устанавливаю — Continuous',
+      focus: 'both',
+      why: 'fit = «быть впору» — состояние, Simple. fit a lock, a shelf = «устанавливать», действие руками — Continuous.',
+      variants: [
+        { s: 'These_D shoes_N [fit_V] me_P perfectly_R .', tr: 'Эти туфли мне идеально подходят по размеру.', options: ['are fitting', 'fits'], why: 'Размер — состояние, Simple.' },
+        { s: 'Tom_N [is~fitting_V] a_D new_J lock_N on_I the_D door_N right_R now_R .', tr: 'Том сейчас ставит новый замок на дверь.', options: ['fits', 'fit'], why: 'Устанавливает руками — действие, Continuous.' },
+        { s: 'This_D jacket_N [fits_V] him_P well_R .', tr: 'Эта куртка хорошо на нём сидит.', options: ['is fitting', 'fit'], why: 'Сидит по размеру — состояние, Simple.' },
+      ],
+    },
+    {
+      id: 'stative.now',
+      skill: 'now и at the moment не делают состояние действием',
+      focus: 'state',
+      why: 'Слова now, right now, at the moment подсказывают время, но не меняют глагол. Состояние остаётся Simple.',
+      variants: [
+        { s: 'Anna_N [needs_V] help_N at~the~moment_R .', tr: 'Сейчас Анне нужна помощь.', options: ['is needing', 'need'] },
+        { s: 'Right_R now_R I_P [hate_V] this_D rain_N !', tr: 'Сейчас я просто ненавижу этот дождь!', options: ['am hating', 'hates'] },
+        { s: 'At~the~moment_R we_P [own_V] two_M cars_N .', tr: 'Сейчас у нас две машины.', options: ['are owning', 'owns'] },
+      ],
+    },
+    {
+      id: 'stative.order',
+      mode: 'order',
+      skill: 'Собрать предложение с глаголом состояния',
+      focus: 'state',
+      why: 'С глаголами состояния берём один глагол: wants, understand, belongs. Лишнего is и -ing не нужно.',
+      variants: [
+        { s: 'My_P brother_N wants_V a_D new_J bike_N .', tr: 'Мой брат хочет новый велосипед.', options: ['is', 'wanting'] },
+        { s: 'I_P don’t_A understand_V this_D word_N .', tr: 'Я не понимаю это слово.', options: ['am', 'understanding'] },
+        { s: 'This_D flat_N belongs_V to_I my_P aunt_N .', tr: 'Эта квартира принадлежит моей тёте.', options: ['is', 'belonging'] },
+      ],
+    },
+    {
+      id: 'stative.ing-verb',
+      mode: 'choice',
+      skill: 'am / is / are + -ing — это Continuous',
+      focus: 'action',
+      why: 'Если перед -ing стоит am / is / are / was / were, слово входит в глагольную форму: действие в процессе.',
+      variants: [
+        {
+          s: 'Anna_N is_A {reading_V} a_D book_N .',
+          q: 'Какую роль играет слово с -ing?',
+          answer: 'Часть глагола: действие идёт',
+          options: ['Прилагательное: какой?', 'Существительное: что?'],
+        },
+        {
+          s: 'The_D children_N are_A {playing_V} in_I the_D garden_N .',
+          q: 'Какую роль играет слово с -ing?',
+          answer: 'Часть глагола: действие идёт',
+          options: ['Прилагательное: какой?', 'Существительное: что?'],
+        },
+        {
+          s: 'Tom_N isn’t_A {working_V} today_R .',
+          q: 'Какую роль играет слово с -ing?',
+          answer: 'Часть глагола: действие идёт',
+          options: ['Прилагательное: какой?', 'Существительное: что?'],
+        },
+      ],
+    },
+    {
+      id: 'stative.ing-adj',
+      mode: 'choice',
+      skill: '-ing без be, описывает предмет — как прилагательное',
+      why: 'Нет am / is / are перед -ing, слово отвечает на «какой?» и описывает существительное: спящий кот, содержащая фото коробка.',
+      variants: [
+        {
+          s: 'A_D {sleeping_J} cat_N is_V on_I the_D sofa_N .',
+          q: 'Какую роль играет слово с -ing?',
+          answer: 'Прилагательное: какой?',
+          options: ['Часть глагола: действие идёт', 'Существительное: что?'],
+        },
+        {
+          s: 'People_N {wanting_J} tickets_N should_A wait_V here_R .',
+          q: 'Какую роль играет слово с -ing?',
+          answer: 'Прилагательное: какой?',
+          options: ['Часть глагола: действие идёт', 'Существительное: что?'],
+        },
+        {
+          s: 'Tom_N found_V a_D box_N {containing_J} old_J photos_N .',
+          q: 'Какую роль играет слово с -ing?',
+          answer: 'Прилагательное: какой?',
+          options: ['Часть глагола: действие идёт', 'Существительное: что?'],
+        },
+      ],
+    },
+    {
+      id: 'stative.ing-noun',
+      mode: 'choice',
+      skill: '-ing как существительное: подлежащее, после предлога',
+      why: '-ing отвечает на «что?» и называет действие как предмет: Swimming is fun. После предлога глагол всегда -ing.',
+      variants: [
+        {
+          s: '{Swimming_N} is_V good_J exercise_N .',
+          q: 'Какую роль играет слово с -ing?',
+          answer: 'Существительное: что?',
+          options: ['Часть глагола: действие идёт', 'Прилагательное: какой?'],
+        },
+        {
+          s: 'I_P am_A thinking_V of_I {buying_N} a_D car_N .',
+          q: 'Какую роль играет слово с -ing?',
+          answer: 'Существительное: что?',
+          options: ['Часть глагола: действие идёт', 'Прилагательное: какой?'],
+        },
+        {
+          s: 'She_P is_V good_J at_I {drawing_N} .',
+          q: 'Какую роль играет слово с -ing?',
+          answer: 'Существительное: что?',
+          options: ['Часть глагола: действие идёт', 'Прилагательное: какой?'],
+        },
+      ],
+    },
+  ],
+} satisfies TopicBody

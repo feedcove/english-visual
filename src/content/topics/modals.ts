@@ -1,0 +1,272 @@
+import type { TopicBody } from '../types'
+
+export default {
+  summary: 'can, must, should, may — особые помощники. После них глагол без to и без -s. mustn’t — нельзя, don’t have to — не обязательно.',
+  ref: [
+    { kind: 'visual', visual: { id: 'modal-scale', focus: 'must' }, caption: 'Две шкалы: насколько ты уверен и насколько что-то обязательно' },
+    {
+      kind: 'rule',
+      title: 'После модального — глагол без to',
+      text: 'can, could, must, should, may, might не меняются по лицам (she can, не she cans), вопрос и отрицание строят сами, без do. Следующий глагол стоит в начальной форме, без to и без -s.',
+      examples: [
+        { s: 'She_P can_A swim_V .', tr: 'Она умеет плавать.' },
+        { s: 'I_P must_A go_V now_R .', tr: 'Мне пора идти.' },
+        { s: 'Can_A you_P help_V me_P ?', tr: 'Ты можешь мне помочь?' },
+      ],
+    },
+    {
+      kind: 'rule',
+      title: 'can и could: умею, можно, прошу',
+      text: 'can — умею, могу, мне можно. could — вежливая просьба (Could you…?) и «умел раньше». Для одного случая в прошлом лучше was able to, но отрицание couldn’t подходит всегда.',
+      examples: [
+        { s: 'Tom_N can_A speak_V three_M languages_N .', tr: 'Том говорит на трёх языках.' },
+        { s: 'Could_A you_P open_V the_D window_N , please_R ?', tr: 'Не могли бы вы открыть окно?' },
+        { s: 'I_P could_A swim_V when_C I_P was_V five_M .', tr: 'Я умел плавать в пять лет.' },
+      ],
+    },
+    {
+      kind: 'rule',
+      title: 'must, have to, should, mustn’t',
+      text: 'must и have to — надо, обязан (у must нет прошедшего: had to). should — совет. mustn’t — нельзя, запрещено. don’t have to — не обязательно: можно, но не надо. Это разные вещи.',
+      examples: [
+        { s: 'You_P mustn’t_A park_V here_R .', tr: 'Здесь нельзя парковаться.' },
+        { s: 'You_P don’t~have~to_A pay_V .', tr: 'Платить не нужно.' },
+        { s: 'You_P should_A sleep_V more_R .', tr: 'Тебе стоит больше спать.' },
+      ],
+    },
+    {
+      kind: 'rule',
+      title: 'must be, can’t be, might: догадка',
+      text: 'must be — наверняка так (по фактам). can’t be — не может быть. may, might, could — возможно. Тут модальные не про обязанность, а про то, насколько ты уверен.',
+      examples: [
+        { s: 'He_P must_A be_V tired_J .', tr: 'Он, должно быть, устал.' },
+        { s: 'She_P can’t_A be_V at_I work_N . It_P +’s_V Sunday_N .', tr: 'Не может быть, чтобы она была на работе. Сегодня воскресенье.' },
+        { s: 'It_P might_A rain_V later_R .', tr: 'Позже может пойти дождь.' },
+      ],
+    },
+    {
+      kind: 'contrast',
+      title: 'Как в русском',
+      ru: 'Тебе_P не_X нужно_R платить_V .',
+      en: 'You_P don’t~have~to_A pay_V .',
+      note: 'По-русски «не надо» и «нельзя» легко спутать. В английском это разные фразы: don’t have to — не обязательно, mustn’t — запрещено.',
+    },
+    {
+      kind: 'mistakes',
+      items: [
+        { wrong: 'She_P cans_A swim_V .', right: 'She_P can_A swim_V .', note: 'Модальный не меняется: без -s.' },
+        { wrong: 'I_P must_A to_X go_V .', right: 'I_P must_A go_V .', note: 'После модального — без to.' },
+        { wrong: 'You_P mustn’t_A pay_V , it_P is_V free_J .', right: 'You_P don’t~have~to_A pay_V , it_P is_V free_J .', note: 'Бесплатно — не обязательно, а не запрещено.' },
+        { wrong: 'Do_A you_P can_A swim_V ?', right: 'Can_A you_P swim_V ?', note: 'Вопрос — модальный вперёд, без do.' },
+        { wrong: 'She_P doesn’t_A can_A drive_V .', right: 'She_P can’t_A drive_V .', note: 'Отрицание — can’t, без doesn’t.' },
+      ],
+    },
+  ],
+  items: [
+    {
+      id: 'modals.bare-verb',
+      skill: 'После модального — глагол без to и без -s',
+      focus: 'can',
+      why: 'can, must, should — особые помощники. За ними глагол в начальной форме: she can swim, не swims и не to swim.',
+      variants: [
+        { s: 'Max_N can_A [cook_V] very_R well_R .', tr: 'Макс очень хорошо готовит.', options: ['cooks', 'to cook'] },
+        { s: 'We_P must_A [leave_V] at_I eight_M .', tr: 'Нам нужно выехать в восемь.', options: ['to leave', 'leaving'] },
+        { s: 'Tom_N should_A [call_V] his_P mum_N .', tr: 'Тому стоит позвонить маме.', options: ['calls', 'to call'] },
+      ],
+    },
+    {
+      id: 'modals.can-ability',
+      skill: 'can — умею, могу; can’t — не умею, не смогу',
+      focus: 'can',
+      why: 'can — умение или возможность: she can swim. Отрицание — can’t, вопрос — Can you…? Без do и без -s.',
+      variants: [
+        { s: 'Anna_N [can_A] speak_V Spanish_N .', tr: 'Анна умеет говорить по-испански.', options: ['cans', 'must'] },
+        { s: 'I_P [can’t_A] come_V tonight_R . I_P +’m_A working_V .', tr: 'Я не смогу прийти сегодня вечером. Я работаю.', options: ['don’t', 'mustn’t'] },
+        { s: '[Can_A] you_P play_V the_D guitar_N ?', tr: 'Ты умеешь играть на гитаре?', options: ['Does', 'Are'] },
+      ],
+    },
+    {
+      id: 'modals.can-request',
+      skill: 'Can I…? Could you…? — разрешение и просьба',
+      focus: 'can',
+      why: 'Can I…? — можно мне? Could you…? — вежливая просьба. Could звучит мягче, чем Can.',
+      variants: [
+        { s: '[Can_A] I_P use_V your_P phone_N , please_R ?', tr: 'Можно воспользоваться твоим телефоном?', options: ['Do', 'Am'], accept: ['Could', 'May'] },
+        { s: '[Could_A] you_P close_V the_D door_N , please_R ?', tr: 'Не могли бы вы закрыть дверь?', options: ['Are', 'Does'], accept: ['Can', 'Would'] },
+        { s: 'You_P [can_A] park_V here_R after_I six_M .', tr: 'Здесь можно парковаться после шести.', options: ['must', 'mustn’t'], accept: ['may'] },
+      ],
+    },
+    {
+      id: 'modals.could-past',
+      skill: 'could — умел в прошлом; couldn’t — не смог',
+      focus: 'could',
+      why: 'could — прошедшее от can: умел, мог. Couldn’t подходит и для одного случая: вчера не смогли найти.',
+      variants: [
+        { s: 'When_C I_P was_V ten_M , I_P [could_A] run_V very_R fast_R .', tr: 'Когда мне было десять, я очень быстро бегал.', options: ['can', 'must'] },
+        { s: 'My_P grandfather_N [could_A] speak_V four_M languages_N .', tr: 'Мой дедушка умел говорить на четырёх языках.', options: ['can', 'must'] },
+        { s: 'We_P [couldn’t_A] find_V the_D hotel_N yesterday_R .', tr: 'Вчера мы не смогли найти отель.', options: ['can’t', 'mustn’t'] },
+      ],
+    },
+    {
+      id: 'modals.must-have-to',
+      skill: 'must / have to — надо, обязан',
+      focus: 'must',
+      why: 'must и have to — надо, обязан. Отрицание mustn’t уже про запрет, а не про «не надо».',
+      variants: [
+        { s: 'You_P [must_A] show_V your_P ticket_N at_I the_D gate_N .', tr: 'У входа нужно показать билет.', options: ['mustn’t', 'can’t'], accept: ['have to'] },
+        { s: 'All_D students_N [must_A] wear_V a_D uniform_N .', tr: 'Все ученики обязаны носить форму.', options: ['mustn’t', 'can'], accept: ['have to'] },
+        { s: 'I_P [must_A] call_V my_P mum_N tonight_R . It_P +’s_V her_P birthday_N .', tr: 'Мне обязательно надо позвонить маме сегодня вечером. У неё день рождения.', options: ['mustn’t', 'can’t'], accept: ['have to'] },
+      ],
+    },
+    {
+      id: 'modals.have-to-forms',
+      skill: 'have to: has to, had to и вопрос Does she have to…?',
+      focus: 'have-to',
+      why: 'У must нет прошедшего и нет -s. Тогда берём have to: has to (he, she, it), had to (вчера), Does he have to…?',
+      variants: [
+        { s: 'Yesterday_R I_P [had~to_A] wait_V for_I an_D hour_N .', tr: 'Вчера мне пришлось ждать целый час.', options: ['must', 'have to'] },
+        { s: '[Does_A] Anna_N have~to_A work_V on_I Saturdays_N ?', tr: 'Анне приходится работать по субботам?', options: ['Do', 'Is'] },
+        { s: 'Tom_N [has~to_A] get_V up_R at_I five_M every_D day_N .', tr: 'Тому приходится вставать в пять каждый день.', options: ['have to', 'musts'], accept: ['must'] },
+      ],
+    },
+    {
+      id: 'modals.should',
+      skill: 'should — совет: тебе стоит',
+      focus: 'should',
+      why: 'should — мягкий совет, не приказ: «стоит», «лучше». Отрицание — shouldn’t: «не стоит».',
+      variants: [
+        { s: 'You_P [should_A] drink_V more_D water_N .', tr: 'Тебе стоит пить больше воды.', options: ['mustn’t', 'can’t'] },
+        { s: 'It_P +’s_V late_J . We_P [should_A] go_V home_R .', tr: 'Уже поздно. Нам стоит идти домой.', options: ['mustn’t', 'can’t'] },
+        { s: 'You_P [shouldn’t_A] drive_V so_R fast_R .', tr: 'Тебе не стоит ехать так быстро.', options: ['doesn’t', 'can’t'] },
+      ],
+    },
+    {
+      id: 'modals.mustnt',
+      skill: 'mustn’t — нельзя, запрещено',
+      focus: 'mustnt',
+      why: 'mustn’t — запрет: «нельзя». Не путай с don’t have to («не надо»).',
+      variants: [
+        { s: 'You_P [mustn’t_A] park_V here_R . It_P is_V a_D bus_N stop_N .', tr: 'Здесь нельзя парковаться. Это автобусная остановка.', options: ['don’t have to', 'needn’t'], accept: ['can’t'] },
+        { s: 'Visitors_N [mustn’t_A] touch_V the_D paintings_N .', tr: 'Посетителям нельзя трогать картины.', options: ['don’t have to', 'aren’t'], accept: ['can’t'] },
+        { s: 'You_P [mustn’t_A] tell_V anyone_P . It_P is_V a_D secret_N .', tr: 'Никому нельзя рассказывать. Это секрет.', options: ['needn’t', 'don’t have to'], accept: ['can’t'] },
+      ],
+    },
+    {
+      id: 'modals.dont-have-to',
+      skill: 'don’t have to — не обязательно, не нужно',
+      focus: 'dont-have-to',
+      why: 'don’t have to — можно, но не обязательно: «не нужно». Это не запрет, запрет — mustn’t.',
+      variants: [
+        { s: 'You_P [don’t~have~to_A] wear_V a_D tie_N . The_D dress~code_N is_V casual_J .', tr: 'Галстук носить не обязательно. Дресс-код свободный.', options: ['mustn’t', 'can’t'], accept: ['needn’t'] },
+        { s: 'We_P [don’t~have~to_A] get_V up_R early_R tomorrow_R . It_P +’s_V Sunday_N .', tr: 'Завтра нам не нужно рано вставать: воскресенье.', options: ['mustn’t', 'can’t'], accept: ['needn’t'] },
+        { s: 'Tom_N [doesn’t~have~to_A] cook_V tonight_R . We_P are_A eating_V out_R .', tr: 'Тому не нужно готовить сегодня вечером. Мы идём в ресторан.', options: ['mustn’t', 'can’t'], accept: ['needn’t'] },
+      ],
+    },
+    {
+      id: 'modals.mustnt-or-dont',
+      mode: 'choice',
+      skill: 'Нельзя или не обязательно: mustn’t и don’t have to',
+      focus: 'mustnt',
+      why: 'mustn’t — запрет, нельзя. don’t have to — можно, но необязательно.',
+      variants: [
+        { s: 'You_P {mustn’t_A} enter_V this_D room_N .', q: 'Что это значит?', answer: 'Нельзя, запрещено', options: ['Не обязательно, можно по желанию'] },
+        { s: 'You_P {don’t~have~to_A} enter_V this_D room_N .', q: 'Что это значит?', answer: 'Не обязательно, можно по желанию', options: ['Нельзя, запрещено'] },
+        { s: 'Children_N {mustn’t_A} play_V near_I the_D road_N .', q: 'Что это значит?', answer: 'Нельзя, запрещено', options: ['Не обязательно, можно по желанию'] },
+        { s: 'We_P {don’t~have~to_A} hurry_V .', q: 'Что это значит?', answer: 'Не обязательно, можно по желанию', options: ['Нельзя, запрещено'] },
+      ],
+    },
+    {
+      id: 'modals.might',
+      skill: 'may / might / could — возможно, не уверен',
+      focus: 'might',
+      why: 'may, might и could — «возможно, пятьдесят на пятьдесят». После них, как всегда, глагол без to.',
+      variants: [
+        { s: 'Take_V an_D umbrella_N . It_P [might_A] rain_V later_R .', tr: 'Возьми зонт. Позже может пойти дождь.', options: ['mustn’t', 'can’t'], accept: ['may', 'could'] },
+        { s: 'I_P [may_A] be_V late_J , so_C don’t_A wait_V for_I me_P .', tr: 'Я могу опоздать, так что не жди меня.', options: ['must', 'can’t'], accept: ['might', 'could'] },
+        { s: 'Anna_N [might_A] come_V to_I the_D party_N . I_P don’t_A know_V .', tr: 'Анна, может быть, придёт на вечеринку. Я не знаю.', options: ['must', 'can’t'], accept: ['may', 'could'] },
+      ],
+    },
+    {
+      id: 'modals.must-deduction',
+      skill: 'must be — наверняка так (по фактам)',
+      focus: 'must',
+      why: 'must be — вывод из того, что видишь: «наверняка». Почти уверен, что да.',
+      variants: [
+        { s: 'Tom_N worked_V for_I twelve_M hours_N today_R . He_P [must_A] be_V tired_J .', tr: 'Том сегодня работал двенадцать часов. Он, должно быть, устал.', options: ['can’t', 'mustn’t'] },
+        { s: 'The_D lights_N are_V on_R . Someone_P [must_A] be_V at_I home_N .', tr: 'Свет горит. Кто-то, должно быть, дома.', options: ['can’t', 'mustn’t'] },
+        { s: 'You_P have_A walked_V ten_M miles_N ! You_P [must_A] be_V hungry_J .', tr: 'Ты прошёл десять миль! Ты, наверное, голоден.', options: ['can’t', 'mustn’t'] },
+      ],
+    },
+    {
+      id: 'modals.cant-deduction',
+      skill: 'can’t be — не может быть (почти точно нет)',
+      focus: 'cant',
+      why: 'can’t be — вывод «нет»: факты этому противоречат. Не mustn’t: mustn’t про запрет.',
+      variants: [
+        { s: 'Anna_N is_V in_I London_N today_R . She_P [can’t_A] be_V at_I the_D party_N .', tr: 'Анна сегодня в Лондоне. Её не может быть на вечеринке.', options: ['mustn’t', 'don’t'] },
+        { s: 'That_P [can’t_A] be_V Tom_N . He_P is_V on_I holiday_N .', tr: 'Это не может быть Том. Он в отпуске.', options: ['mustn’t', 'doesn’t'] },
+        { s: 'You_P [can’t_A] be_V hungry_J ! You_P +’ve_A just_R eaten_V two_M pizzas_N .', tr: 'Не может быть, чтобы ты был голоден! Ты только что съел две пиццы.', options: ['mustn’t', 'aren’t'] },
+      ],
+    },
+    {
+      id: 'modals.neg-question',
+      skill: 'Отрицание и вопрос модального — без do / does',
+      focus: 'can',
+      why: 'Модальный сам идёт вперёд в вопросе и сам получает not. does can, don’t should — ошибка.',
+      variants: [
+        { s: 'My_P brother_N [can’t_A] cook_V .', tr: 'Мой брат не умеет готовить.', options: ['doesn’t can', 'don’t can'] },
+        { s: '[Can_A] he_P speak_V French_N ?', tr: 'Он умеет говорить по-французски?', options: ['Does can', 'Is can'] },
+        { s: 'You_P [shouldn’t_A] worry_V so_R much_R .', tr: 'Тебе не стоит так сильно переживать.', options: ['don’t should', 'aren’t'] },
+      ],
+    },
+    {
+      id: 'modals.certainty-choice',
+      mode: 'choice',
+      skill: 'Насколько уверен: must be, might be, can’t be',
+      focus: 'might',
+      why: 'must be — почти точно да. might / may be — возможно. can’t be — почти точно нет.',
+      variants: [
+        { s: 'His_P car_N is_V outside_R . He_P {must_A} be_V at_I home_N .', q: 'Насколько уверен говорящий?', answer: 'Почти уверен: да', options: ['Не уверен: возможно', 'Почти уверен: нет'] },
+        { s: 'I_P don’t_A know_V . She_P {might_A} be_V at_I work_N .', q: 'Насколько уверен говорящий?', answer: 'Не уверен: возможно', options: ['Почти уверен: да', 'Почти уверен: нет'] },
+        { s: 'Tom_N {can’t_A} be_V hungry_J . He_P has_A just_R had_V lunch_N .', q: 'Насколько уверен говорящий?', answer: 'Почти уверен: нет', options: ['Почти уверен: да', 'Не уверен: возможно'] },
+        { s: 'They_P {may_A} come_V later_R . I_P +’m_V not_X sure_J .', q: 'Насколько уверен говорящий?', answer: 'Не уверен: возможно', options: ['Почти уверен: да', 'Почти уверен: нет'] },
+      ],
+    },
+    {
+      id: 'modals.order',
+      mode: 'order',
+      skill: 'Собрать предложение с модальным',
+      focus: 'can',
+      why: 'Подлежащее, потом модальный, потом глагол. В вопросе модальный идёт первым.',
+      variants: [
+        { s: 'You_P mustn’t_A use_V your_P phone_N here_R .', tr: 'Здесь нельзя пользоваться телефоном.', options: ['don’t'] },
+        { s: 'Could_A you_P pass_V the_D salt_N , please_R ?', tr: 'Не могли бы вы передать соль?', options: ['Do'] },
+        { s: 'He_P can’t_A be_V at_I home_N .', tr: 'Не может быть, чтобы он был дома.', options: ['mustn’t'] },
+      ],
+    },
+    {
+      id: 'modals.graph',
+      mode: 'graph',
+      skill: 'Граф: модальный висит на глаголе (aux)',
+      focus: 'can',
+      why: 'Корень — глагол после модального. Модальный помогает ему (aux), подлежащее и обстоятельство висят на корне.',
+      variants: [
+        { s: 'Tom_N can_A swim_V fast_R .', tr: 'Том умеет быстро плавать.', graph: '1>3 subj, 2>3 aux, 4>3 adv' },
+        { s: 'You_P should_A call_V your_P mother_N .', tr: 'Тебе стоит позвонить маме.', graph: '1>3 subj, 2>3 aux, 4>5 attr, 5>3 obj' },
+        { s: 'She_P must_A be_V tired_J .', tr: 'Она, должно быть, устала.', graph: '1>3 subj, 2>3 aux, 4>3 compl' },
+      ],
+    },
+    {
+      id: 'modals.pick-pair',
+      mode: 'pick',
+      skill: 'Найти модальный глагол и глагол после него',
+      focus: 'can',
+      why: 'Модальный глагол и смысловой работают вместе: can speak, mustn’t park, might rain.',
+      variants: [
+        { s: 'Anna_N {can_A} {play_V} the_D piano_N .', q: 'Найди модальный глагол и глагол после него.' },
+        { s: 'You_P {mustn’t_A} {touch_V} this_D button_N .', q: 'Найди модальный глагол и глагол после него.' },
+        { s: 'It_P {might_A} {rain_V} tomorrow_R .', q: 'Найди модальный глагол и глагол после него.' },
+      ],
+    },
+  ],
+} satisfies TopicBody

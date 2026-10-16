@@ -1,0 +1,35 @@
+/* Цвета частей речи — пресеты акцента UI-кита, посчитанные движком кита для тёмной темы
+   (tools/uikit-engine/engine.cjs: tokens() с accH/accC/accL пресета). fill держит 4,5:1 с чёрным текстом,
+   text — не ниже 4,5:1 на всех уровнях фона bg0–bg2. Связки (conj, part) нейтральные: цвет не тратим.
+   Цвет никогда не единственный носитель смысла — рядом всегда глиф (src/content/pos.ts). */
+:root {
+  --pos-noun: #3c89ff; /* Синий iOS, h259 */
+  --pos-noun-text: #a1c6ff;
+  --pos-pron: #9678ed; /* Фиолетовый, h293 */
+  --pos-pron-text: #c8bbff;
+  --pos-det: #ffe068; /* Жёлтый, h95 */
+  --pos-det-text: #ffe068;
+  --pos-adj: #49bc71; /* Зелёный, h152 */
+  --pos-adj-text: #6ada8e;
+  --pos-verb: #fe8c2c; /* Оранжевый, h55 */
+  --pos-verb-text: #ffb37f;
+  --pos-adv: #dc60a1; /* Розовый, h350 */
+  --pos-adv-text: #ffabd3;
+  --pos-prep: #4ac9d0; /* Бирюзовый, h200 */
+  --pos-prep-text: #59d6dc;
+  --pos-link: var(--s3);
+  --pos-link-text: var(--c2);
+}
+
+/* Один атрибут — вся пара цветов: --pc (заливка, линии) и --pt (текст). */
+[data-pos='noun'] { --pc: var(--pos-noun); --pt: var(--pos-noun-text); }
+[data-pos='pron'] { --pc: var(--pos-pron); --pt: var(--pos-pron-text); }
+[data-pos='det'],
+[data-pos='num'] { --pc: var(--pos-det); --pt: var(--pos-det-text); }
+[data-pos='adj'] { --pc: var(--pos-adj); --pt: var(--pos-adj-text); }
+[data-pos='verb'],
+[data-pos='aux'] { --pc: var(--pos-verb); --pt: var(--pos-verb-text); }
+[data-pos='adv'] { --pc: var(--pos-adv); --pt: var(--pos-adv-text); }
+[data-pos='prep'] { --pc: var(--pos-prep); --pt: var(--pos-prep-text); }
+[data-pos='conj'],
+[data-pos='part'] { --pc: var(--pos-link); --pt: var(--pos-link-text); }

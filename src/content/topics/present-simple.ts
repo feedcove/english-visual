@@ -1,0 +1,270 @@
+import type { TopicBody } from '../types'
+
+export default {
+  summary: 'Привычки, факты, расписания. С he / she / it глагол берёт -s; вопрос и отрицание строятся через do / does, и после них глагол без -s.',
+  ref: [
+    { kind: 'visual', visual: { id: 'verb-person', focus: 's' }, caption: 'Только he / she / it получают окончание -s; для вопроса и отрицания нужны do и does' },
+    {
+      kind: 'rule',
+      title: 'Когда: привычки, факты, расписания',
+      text: 'Present Simple — это то, что повторяется или всегда верно. Подсказки: always, usually, often, sometimes, never, every day, on Mondays.',
+      examples: [
+        { s: 'I_P usually_R walk_V to_I work_N .', tr: 'Обычно я хожу на работу пешком.' },
+        { s: 'Water_N boils_V at_I 100_M degrees_N .', tr: 'Вода кипит при ста градусах.' },
+        { s: 'The_D bank_N opens_V at_I nine_M .', tr: 'Банк открывается в девять.' },
+      ],
+    },
+    {
+      kind: 'rule',
+      title: 'he / she / it: добавляем -s',
+      text: 'С I, you, we, they глагол без изменений: I work. С he, she, it и с одним именем (Anna, my brother) — с окончанием: she works. После s, sh, ch, x, o — -es. Согласная + y → ies. have → has.',
+      examples: [
+        { s: 'My_P brother_N works_V in_I London_N .', tr: 'Мой брат работает в Лондоне.' },
+        { s: 'She_P studies_V French_N .', tr: 'Она изучает французский.' },
+        { s: 'Tom_N has_V a_D dog_N .', tr: 'У Тома есть собака.' },
+      ],
+    },
+    {
+      kind: 'table',
+      title: 'Как менять написание',
+      head: ['Глагол кончается на', 'Что делаем', 'Пример'],
+      rows: [
+        ['s, sh, ch, x, o', 'добавляем -es', 'watch_V → watches_V'],
+        ['согласная + y', 'y → ies', 'study_V → studies_V'],
+        ['гласная + y', 'просто -s', 'play_V → plays_V'],
+        ['всё остальное', 'добавляем -s', 'work_V → works_V'],
+        ['have', 'особая форма', 'have_V → has_V'],
+      ],
+    },
+    {
+      kind: 'rule',
+      title: 'do / does: вопрос и отрицание',
+      text: 'Вопрос: Do / Does + подлежащее + глагол. Отрицание: don’t / doesn’t + глагол. С he, she, it — does и doesn’t, и сам глагол остаётся без -s: окончание уже «ушло» во вспомогательный.',
+      examples: [
+        { s: 'Do_A you_P speak_V French_N ?', tr: 'Ты говоришь по-французски?' },
+        { s: 'He_P doesn’t_A drink_V coffee_N .', tr: 'Он не пьёт кофе.' },
+        { s: 'Where_R does_A she_P work_V ?', tr: 'Где она работает?' },
+      ],
+    },
+    {
+      kind: 'contrast',
+      title: 'Как в русском',
+      ru: 'Он_P не_X любит_V кофе_N .',
+      en: 'He_P doesn’t_A like_V coffee_N .',
+      note: 'По-русски «не» просто ставится перед глаголом, и тот сохраняет окончание. В английском -s переходит в doesn’t, а глагол like остаётся в начальной форме.',
+    },
+    {
+      kind: 'mistakes',
+      items: [
+        { wrong: 'She_P work_V in_I a_D shop_N .', right: 'She_P works_V in_I a_D shop_N .', note: 'he / she / it — глагол с -s.' },
+        { wrong: 'He_P don’t_A like_V tea_N .', right: 'He_P doesn’t_A like_V tea_N .', note: 'Для he / she / it — doesn’t.' },
+        { wrong: 'Does_A she_P works_V here_R ?', right: 'Does_A she_P work_V here_R ?', note: 'После does -s не нужно: оно уже в does.' },
+        { wrong: 'You_P like_V coffee_N ?', right: 'Do_A you_P like_V coffee_N ?', note: 'Вопрос строится через do, одной интонации мало.' },
+        { wrong: 'She_P studys_V French_N .', right: 'She_P studies_V French_N .', note: 'Согласная + y: y меняется на ies.' },
+        { wrong: 'He_P haves_V a_D car_N .', right: 'He_P has_V a_D car_N .', note: 'Особая форма: have → has.' },
+      ],
+    },
+  ],
+  items: [
+    {
+      id: 'present-simple.base',
+      skill: 'I / you / we / they — глагол без -s',
+      focus: 'base',
+      why: 'С I, you, we, they и множественным числом глагол не меняется: I work, they live.',
+      variants: [
+        { s: 'I_P [work_V] near_I the_D station_N .', tr: 'Я работаю рядом с вокзалом.', options: ['works', 'am work'] },
+        { s: 'My_P parents_N [live_V] in_I Bristol_N .', tr: 'Мои родители живут в Бристоле.', options: ['lives', 'are live'] },
+        { s: 'We_P [start_V] work_N at_I nine_M .', tr: 'Мы начинаем работу в девять.', options: ['starts', 'are start'], accept: ['begin'] },
+      ],
+    },
+    {
+      id: 'present-simple.s',
+      skill: 'he / she / it — глагол с -s',
+      focus: 's',
+      why: 'С he, she, it и одним именем к глаголу добавляем -s: she works, Tom drinks.',
+      variants: [
+        { s: 'Tom_N [works_V] in_I a_D bank_N .', tr: 'Том работает в банке.', options: ['work', 'working'] },
+        { s: 'Anna_N [drinks_V] tea_N with_I milk_N .', tr: 'Анна пьёт чай с молоком.', options: ['drink', 'drinking'] },
+        { s: 'My_P dad_N [reads_V] the_D paper_N every_D morning_N .', tr: 'Мой папа каждое утро читает газету.', options: ['read', 'reading'] },
+      ],
+    },
+    {
+      id: 'present-simple.es',
+      skill: 'После s, sh, ch, x, o — окончание -es',
+      focus: 'es',
+      why: 'Если глагол кончается на s, sh, ch, x или o, добавляем -es: watch → watches, go → goes.',
+      variants: [
+        { s: 'She_P [watches_V] TV_N in_I the_D evening_N .', tr: 'Вечером она смотрит телевизор.', options: ['watchs', 'watch'] },
+        { s: 'He_P [goes_V] to_I the_D gym_N on_I Mondays_N .', tr: 'По понедельникам он ходит в спортзал.', options: ['gos', 'go'] },
+        { s: 'My_P wife_N [fixes_V] bikes_N at_I the_D weekend_N .', tr: 'В выходные моя жена чинит велосипеды.', options: ['fixs', 'fix'], accept: ['repairs'] },
+      ],
+    },
+    {
+      id: 'present-simple.ies',
+      skill: 'Согласная + y → ies: study → studies',
+      focus: 'ies',
+      why: 'Перед y стоит согласная — y меняем на ies: study → studies, try → tries, carry → carries.',
+      variants: [
+        { s: 'Kate_N [studies_V] English_N every_D evening_N .', tr: 'Кейт каждый вечер занимается английским.', options: ['studys', 'study'] },
+        { s: 'Our_P cat_N always_R [tries_V] to_X open_V the_D fridge_N .', tr: 'Наша кошка всё время пытается открыть холодильник.', options: ['trys', 'try'] },
+        { s: 'The_D baby_N [cries_V] every_D night_N .', tr: 'Малыш плачет каждую ночь.', options: ['crys', 'cry'] },
+      ],
+    },
+    {
+      id: 'present-simple.vowel-y',
+      skill: 'Гласная + y: просто -s (plays, не plaies)',
+      focus: 's',
+      why: 'Перед y стоит гласная (a, e, o, u) — y не трогаем, добавляем -s: play → plays, buy → buys.',
+      variants: [
+        { s: 'Max_N [plays_V] football_N on_I Saturdays_N .', tr: 'Макс играет в футбол по субботам.', options: ['plaies', 'play'] },
+        { s: 'She_P [enjoys_V] her_P job_N .', tr: 'Ей нравится её работа.', options: ['enjoies', 'enjoy'], accept: ['likes', 'loves'] },
+        { s: 'My_P brother_N [buys_V] a_D newspaper_N every_D day_N .', tr: 'Мой брат каждый день покупает газету.', options: ['buyes', 'buy'], accept: ['gets'] },
+      ],
+    },
+    {
+      id: 'present-simple.have-has',
+      skill: 'have → has для he / she / it',
+      focus: 'have-has',
+      why: 'have — особый глагол: с he, she, it форма has (не haves).',
+      variants: [
+        { s: 'Anna_N [has_V] two_M sisters_N .', tr: 'У Анны две сестры.', options: ['have', 'haves'] },
+        { s: 'My_P flat_N [has_V] a_D small_J balcony_N .', tr: 'В моей квартире есть небольшой балкон.', options: ['have', 'haves'] },
+        { s: 'He_P [has_V] breakfast_N at_I seven_M .', tr: 'Он завтракает в семь.', options: ['have', 'having'], accept: ['eats'] },
+      ],
+    },
+    {
+      id: 'present-simple.dont',
+      skill: 'don’t — отрицание для I / you / we / they',
+      focus: 'do',
+      why: 'Отрицание в Present Simple: don’t + глагол без изменений (I, you, we, they). Не no и не am not.',
+      variants: [
+        { s: 'I_P [don’t_A] like_V coffee_N .', tr: 'Я не люблю кофе.', options: ['doesn’t', 'am not'] },
+        { s: 'We_P [don’t_A] work_V on_I Sundays_N .', tr: 'По воскресеньям мы не работаем.', options: ['doesn’t', 'aren’t'] },
+        { s: 'My_P parents_N [don’t_A] use_V social~media_N .', tr: 'Мои родители не пользуются соцсетями.', options: ['doesn’t', 'aren’t'] },
+      ],
+    },
+    {
+      id: 'present-simple.doesnt',
+      skill: 'doesn’t — отрицание для he / she / it',
+      focus: 'does',
+      why: 'С he, she, it отрицание — doesn’t (а не don’t): He doesn’t drink tea.',
+      variants: [
+        { s: 'He_P [doesn’t_A] have_V a_D car_N .', tr: 'У него нет машины.', options: ['don’t', 'isn’t'] },
+        { s: 'My_P sister_N [doesn’t_A] live_V in_I London_N .', tr: 'Моя сестра не живёт в Лондоне.', options: ['don’t', 'isn’t'] },
+        { s: 'Tom_N [doesn’t_A] eat_V meat_N .', tr: 'Том не ест мясо.', options: ['don’t', 'isn’t'] },
+      ],
+    },
+    {
+      id: 'present-simple.neg-base',
+      skill: 'После don’t / doesn’t глагол без -s',
+      focus: 'does',
+      why: 'В doesn’t уже есть -s, поэтому сам глагол остаётся в начальной форме: doesn’t like, не doesn’t likes.',
+      variants: [
+        { s: 'She_P doesn’t_A [like_V] spicy_J food_N .', tr: 'Она не любит острую еду.', options: ['likes', 'liking'] },
+        { s: 'My_P brother_N doesn’t_A [play_V] tennis_N .', tr: 'Мой брат не играет в теннис.', options: ['plays', 'playing'] },
+        { s: 'Max_N doesn’t_A [drive_V] to_I work_N .', tr: 'Макс не ездит на работу на машине.', options: ['drives', 'driving'] },
+      ],
+    },
+    {
+      id: 'present-simple.q-do',
+      skill: 'Do — вопрос для I / you / we / they',
+      focus: 'do',
+      why: 'Вопрос в Present Simple начинается с Do (I, you, we, they и множественное число): Do you speak French?',
+      variants: [
+        { s: '[Do_A] you_P speak_V French_N ?', tr: 'Ты говоришь по-французски?', options: ['Does', 'Are'] },
+        { s: '[Do_A] your_P parents_N live_V near_I here_R ?', tr: 'Твои родители живут недалеко отсюда?', options: ['Does', 'Are'] },
+        { s: '[Do_A] we_P need_V a_D taxi_N ?', tr: 'Нам нужно такси?', options: ['Does', 'Are'] },
+      ],
+    },
+    {
+      id: 'present-simple.q-does',
+      skill: 'Does — вопрос для he / she / it',
+      focus: 'does',
+      why: 'С he, she, it и одним именем вопрос начинается с Does: Does Tom play the guitar?',
+      variants: [
+        { s: '[Does_A] Tom_N play_V the_D guitar_N ?', tr: 'Том играет на гитаре?', options: ['Do', 'Is'] },
+        { s: '[Does_A] this_D bus_N go_V to_I the_D centre_N ?', tr: 'Этот автобус идёт в центр?', options: ['Do', 'Is'] },
+        { s: '[Does_A] your_P sister_N work_V on_I Saturdays_N ?', tr: 'Твоя сестра работает по субботам?', options: ['Do', 'Is'] },
+      ],
+    },
+    {
+      id: 'present-simple.q-base',
+      skill: 'После Do / Does глагол без -s',
+      focus: 'does',
+      why: 'Вопрос уже показан через Do / Does, поэтому глагол остаётся в начальной форме: Does she live, не Does she lives.',
+      variants: [
+        { s: 'Does_A Anna_N [speak_V] Spanish_N ?', tr: 'Анна говорит по-испански?', options: ['speaks', 'speaking'] },
+        { s: 'Do_A they_P [live_V] in_I London_N ?', tr: 'Они живут в Лондоне?', options: ['lives', 'living'] },
+        { s: 'Does_A he_P [finish_V] work_N at_I six_M ?', tr: 'Он заканчивает работу в шесть?', options: ['finishes', 'finishing'] },
+      ],
+    },
+    {
+      id: 'present-simple.q-wh',
+      skill: 'Where / What time / How + do / does',
+      focus: 'does',
+      why: 'Вопросительное слово стоит перед do / does: Where does Max work? What time do you get up?',
+      variants: [
+        { s: 'Where_R [does_A] Max_N work_V ?', tr: 'Где работает Макс?', options: ['do', 'is'] },
+        { s: 'What_D time_N [do_A] you_P get_V up_R ?', tr: 'Во сколько ты встаёшь?', options: ['does', 'are'] },
+        { s: 'How_R [does_A] she_P get_V to_I work_N ?', tr: 'Как она добирается до работы?', options: ['do', 'is'] },
+      ],
+    },
+    {
+      id: 'present-simple.markers',
+      mode: 'pick',
+      skill: 'Подсказки привычки: always, usually, often, never…',
+      why: 'always, usually, often, sometimes, never отвечают «как часто?» и подсказывают Present Simple.',
+      variants: [
+        { s: 'Tom_N {usually_R} walks_V to_I work_N .', tr: 'Том обычно ходит на работу пешком.', q: 'Найди слово-подсказку: как часто?', model: 'I_P {never_R} drink_V coffee_N .' },
+        { s: 'My_P parents_N {always_R} watch_V the_D news_N .', tr: 'Мои родители всегда смотрят новости.', q: 'Найди слово-подсказку: как часто?', model: 'She_P {often_R} plays_V tennis_N .' },
+        { s: 'We_P {sometimes_R} eat_V out_R on_I Fridays_N .', tr: 'По пятницам мы иногда ужинаем вне дома.', q: 'Найди слово-подсказку: как часто?', model: 'He_P {rarely_R} eats_V meat_N .' },
+      ],
+    },
+    {
+      id: 'present-simple.fact',
+      skill: 'Факты и общеизвестное — Present Simple',
+      focus: 's',
+      why: 'То, что верно всегда (природа, география), говорим в Present Simple: The sun rises in the east.',
+      variants: [
+        { s: 'The_D sun_N [rises_V] in_I the_D east_N .', tr: 'Солнце встаёт на востоке.', options: ['rise', 'rising'] },
+        { s: 'Ice_N [melts_V] when_C it_P is_V warm_J .', tr: 'Лёд тает, когда тепло.', options: ['melt', 'melting'] },
+        { s: 'The_D Thames_N [flows_V] through_I London_N .', tr: 'Темза протекает через Лондон.', options: ['flow', 'flowing'], accept: ['runs'] },
+      ],
+    },
+    {
+      id: 'present-simple.schedule',
+      skill: 'Расписание и режим работы — Present Simple',
+      focus: 's',
+      why: 'Расписания, графики, режим работы — это регулярное, поэтому Present Simple: The film starts at nine.',
+      variants: [
+        { s: 'The_D film_N [starts_V] at_I nine_M .', tr: 'Фильм начинается в девять.', options: ['start', 'starting'], accept: ['begins'] },
+        { s: 'Our_P lesson_N [finishes_V] at_I four_M .', tr: 'Наш урок заканчивается в четыре.', options: ['finish', 'finishs'], accept: ['ends'] },
+        { s: 'The_D bank_N [closes_V] at_I five_M on_I Fridays_N .', tr: 'По пятницам банк закрывается в пять.', options: ['close', 'closing'] },
+      ],
+    },
+    {
+      id: 'present-simple.order-neg',
+      mode: 'order',
+      skill: 'Собрать отрицание: подлежащее + don’t / doesn’t + глагол',
+      focus: 'does',
+      why: 'Порядок: кто — don’t / doesn’t — глагол без -s — остальное.',
+      variants: [
+        { s: 'My_P brother_N doesn’t_A eat_V fish_N .', tr: 'Мой брат не ест рыбу.', options: ['don’t', 'eats'] },
+        { s: 'We_P don’t_A know_V the_D answer_N .', tr: 'Мы не знаем ответа.', options: ['doesn’t', 'knows'] },
+        { s: 'Anna_N doesn’t_A speak_V German_N .', tr: 'Анна не говорит по-немецки.', options: ['don’t', 'speaks'] },
+      ],
+    },
+    {
+      id: 'present-simple.order-q',
+      mode: 'order',
+      skill: 'Собрать вопрос: (слово) + do / does + подлежащее + глагол',
+      focus: 'do',
+      why: 'Порядок: вопросительное слово — do / does — кто — глагол без -s — остальное.',
+      variants: [
+        { s: 'Where_R does_A your_P sister_N work_V ?', tr: 'Где работает твоя сестра?', options: ['do', 'works'] },
+        { s: 'Do_A they_P speak_V English_N at_I home_N ?', tr: 'Они говорят дома по-английски?', options: ['does', 'speaks'] },
+        { s: 'What_D time_N does_A the_D shop_N open_V ?', tr: 'Во сколько открывается магазин?', options: ['do', 'opens'] },
+      ],
+    },
+  ],
+} satisfies TopicBody

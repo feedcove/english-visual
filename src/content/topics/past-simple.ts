@@ -1,0 +1,260 @@
+import type { TopicBody } from '../types'
+
+export default {
+  summary: 'Законченное действие в прошлом: глагол с -ed или особая форма (went, saw, had). Вопрос и отрицание — через did / didn’t и начальную форму глагола.',
+  ref: [
+    { kind: 'visual', visual: { id: 'timeline', focus: 'past.simple' }, caption: 'Точка в прошлом: действие случилось и закончилось, до NOW оно не дотягивается' },
+    {
+      kind: 'rule',
+      title: 'Законченное действие в прошлом',
+      text: 'Past Simple — то, что случилось и закончилось. Подсказки: yesterday, last week, two days ago, in 2019, when I was a child. У правильных глаголов добавляем -ed, у частых неправильных — своя форма: go → went, see → saw, have → had.',
+      examples: [
+        { s: 'I_P called_V Anna_N yesterday_R .', tr: 'Вчера я позвонил Анне.' },
+        { s: 'We_P went_V to_I Paris_N last_J summer_N .', tr: 'Прошлым летом мы ездили в Париж.' },
+        { s: 'He_P had_V a_D busy_J day_N .', tr: 'У него был загруженный день.' },
+      ],
+    },
+    {
+      kind: 'rule',
+      title: '-ed: как менять написание',
+      text: 'Обычно +ed: work → worked. Если глагол кончается на -e, добавляем только d: live → lived. Согласная + y → ied: study → studied. Короткий глагол с одной гласной и согласной удваивает согласную: stop → stopped. Гласная + y — просто +ed: play → played.',
+      examples: [
+        { s: 'We_P lived_V in_I Leeds_N .', tr: 'Мы жили в Лидсе.' },
+        { s: 'She_P studied_V all_D night_N .', tr: 'Она училась всю ночь.' },
+        { s: 'The_D bus_N stopped_V here_R .', tr: 'Автобус остановился здесь.' },
+      ],
+    },
+    {
+      kind: 'rule',
+      title: 'did: вопрос и отрицание',
+      text: 'Для всех лиц: Did + подлежащее + глагол без изменений (Did you call?). Отрицание: didn’t + глагол без изменений (I didn’t call). Прошедшее время уже «ушло» в did, поэтому сам глагол без -ed и без формы went.',
+      examples: [
+        { s: 'Did_A you_P see_V Tom_N ?', tr: 'Ты видел Тома?' },
+        { s: 'She_P didn’t_A go_V to_I work_N .', tr: 'Она не пошла на работу.' },
+        { s: 'Where_R did_A they_P stay_V ?', tr: 'Где они остановились?' },
+      ],
+    },
+    {
+      kind: 'contrast',
+      title: 'Как в русском',
+      ru: 'Он_P не_X купил_V хлеб_N .',
+      en: 'He_P didn’t_A buy_V bread_N .',
+      note: 'По-русски прошедшее видно в окончании глагола (купил). По-английски его несёт didn’t, а сам глагол остаётся в начальной форме: buy, а не bought.',
+    },
+    {
+      kind: 'mistakes',
+      items: [
+        { wrong: 'I_P didn’t_A went_V home_R .', right: 'I_P didn’t_A go_V home_R .', note: 'После didn’t глагол без прошедшей формы.' },
+        { wrong: 'Did_A you_P saw_V him_P ?', right: 'Did_A you_P see_V him_P ?', note: 'После did — начальная форма: see.' },
+        { wrong: 'Yesterday_R I_P go_V to_I work_N .', right: 'Yesterday_R I_P went_V to_I work_N .', note: 'yesterday — прошлое: went, не go.' },
+        { wrong: 'I_P goed_V to_I school_N .', right: 'I_P went_V to_I school_N .', note: 'go — неправильный глагол: went, не goed.' },
+        { wrong: 'She_P studyed_V hard_R .', right: 'She_P studied_V hard_R .', note: 'Согласная + y → ied.' },
+        { wrong: 'He_P stoped_V at_I the_D door_N .', right: 'He_P stopped_V at_I the_D door_N .', note: 'Удваиваем согласную: stopped.' },
+      ],
+    },
+    { kind: 'tip', text: 'Одно прошедшее на глагол: либо did / didn’t + начальная форма, либо сам глагол в прошедшей форме. Оба сразу не ставим.' },
+  ],
+  items: [
+    {
+      id: 'past-simple.ed',
+      skill: 'Правильный глагол в прошлом: основа + ed',
+      focus: 'past.simple',
+      why: 'У правильных глаголов в прошлом добавляется -ed для всех лиц: worked, visited, called.',
+      variants: [
+        { s: 'I_P [worked_V] from_I home_N yesterday_R .', tr: 'Вчера я работал из дома.', options: ['work', 'working'] },
+        { s: 'We_P [visited_V] our_P grandparents_N last_J weekend_N .', tr: 'В прошлые выходные мы навестили бабушку с дедушкой.', options: ['visit', 'visiting'] },
+        { s: 'Anna_N [called_V] me_P an_D hour_N ago_R .', tr: 'Анна позвонила мне час назад.', options: ['call', 'calls'], accept: ['phoned', 'rang'] },
+      ],
+    },
+    {
+      id: 'past-simple.ed-e',
+      skill: 'Глагол на -e: только d (live → lived)',
+      focus: 'past.simple',
+      why: 'Если глагол уже кончается на -e, добавляем только -d: live → lived, arrive → arrived, close → closed.',
+      variants: [
+        { s: 'We_P [lived_V] in_I Glasgow_N for_I five_M years_N .', tr: 'Мы пять лет жили в Глазго.', options: ['liveed', 'live'] },
+        { s: 'She_P [arrived_V] at_I the_D station_N at_I six_M .', tr: 'Она приехала на вокзал в шесть.', options: ['arriveed', 'arrive'] },
+        { s: 'Tom_N [closed_V] the_D window_N and_C went_V out_R .', tr: 'Том закрыл окно и вышел.', options: ['closeed', 'close'], accept: ['shut'] },
+      ],
+    },
+    {
+      id: 'past-simple.ed-double',
+      skill: 'Удвоение согласной: stop → stopped, plan → planned',
+      focus: 'past.simple',
+      why: 'Короткий глагол с одной гласной и одной согласной в конце удваивает согласную: stop → stopped, plan → planned.',
+      variants: [
+        { s: 'The_D train_N [stopped_V] for_I ten_M minutes_N .', tr: 'Поезд остановился на десять минут.', options: ['stoped', 'stop'] },
+        { s: 'We_P [planned_V] a_D trip_N to_I Wales_N .', tr: 'Мы запланировали поездку в Уэльс.', options: ['planed', 'plan'] },
+        { s: 'He_P [dropped_V] his_P phone_N on_I the_D floor_N .', tr: 'Он уронил телефон на пол.', options: ['droped', 'drop'] },
+      ],
+    },
+    {
+      id: 'past-simple.ed-y',
+      skill: 'Согласная + y → ied (studied), гласная + y → yed (played)',
+      focus: 'past.simple',
+      why: 'После согласной y меняется на i: study → studied. После гласной y остаётся: play → played.',
+      variants: [
+        { s: 'Kate_N [studied_V] law_N at_I university_N .', tr: 'Кейт изучала право в университете.', options: ['studyed', 'study'] },
+        { s: 'I_P [tried_V] the_D soup_N and_C it_P was_V great_J .', tr: 'Я попробовал суп, и он был отличный.', options: ['tryed', 'try'] },
+        { s: 'The_D children_N [played_V] in_I the_D park_N all_D day_N .', tr: 'Дети весь день играли в парке.', options: ['plaied', 'play'] },
+      ],
+    },
+    {
+      id: 'past-simple.went',
+      skill: 'go → went',
+      focus: 'past.simple',
+      why: 'go — неправильный глагол: в прошлом всегда went. Форм goed и gone в Past Simple нет.',
+      variants: [
+        { s: 'I_P [went_V] to_I the_D gym_N yesterday_R .', tr: 'Вчера я ходил в спортзал.', options: ['goed', 'gone'] },
+        { s: 'They_P [went_V] home_R early_R .', tr: 'Они рано ушли домой.', options: ['goed', 'go'] },
+        { s: 'Last_J summer_N we_P [went_V] to_I Spain_N .', tr: 'Прошлым летом мы ездили в Испанию.', options: ['goed', 'gone'] },
+      ],
+    },
+    {
+      id: 'past-simple.saw',
+      skill: 'see → saw',
+      focus: 'past.simple',
+      why: 'see — неправильный глагол: в прошлом saw. Форма seen нужна в другом времени, не здесь.',
+      variants: [
+        { s: 'I_P [saw_V] Tom_N at_I the_D shop_N yesterday_R .', tr: 'Вчера я видел Тома в магазине.', options: ['seen', 'seed'] },
+        { s: 'We_P [saw_V] a_D great_J film_N last_J night_N .', tr: 'Вчера вечером мы смотрели отличный фильм.', options: ['seen', 'seed'], accept: ['watched'] },
+        { s: 'She_P [saw_V] her_P teacher_N in_I town_N .', tr: 'Она увидела своего учителя в городе.', options: ['seen', 'seed'] },
+      ],
+    },
+    {
+      id: 'past-simple.had',
+      skill: 'have → had',
+      focus: 'past.simple',
+      why: 'have — неправильный глагол: в прошлом had для всех лиц (не haved).',
+      variants: [
+        { s: 'We_P [had_V] pizza_N for_I dinner_N yesterday_R .', tr: 'Вчера на ужин у нас была пицца.', options: ['haved', 'have'] },
+        { s: 'Anna_N [had_V] a_D meeting_N at_I ten_M .', tr: 'У Анны была встреча в десять.', options: ['haved', 'has'] },
+        { s: 'I_P [had_V] a_D shower_N and_C went_V to_I bed_N .', tr: 'Я принял душ и лёг спать.', options: ['haved', 'have'], accept: ['took'] },
+      ],
+    },
+    {
+      id: 'past-simple.didnt',
+      skill: 'didn’t — отрицание для всех лиц',
+      focus: 'past.simple',
+      why: 'В прошлом отрицание одинаково для всех: didn’t + начальная форма. Не don’t и не wasn’t.',
+      variants: [
+        { s: 'I_P [didn’t_A] have_V time_N for_I lunch_N .', tr: 'У меня не было времени на обед.', options: ['don’t', 'wasn’t'] },
+        { s: 'He_P [didn’t_A] come_V to_I work_N on_I Monday_N .', tr: 'В понедельник он не пришёл на работу.', options: ['doesn’t', 'wasn’t'] },
+        { s: 'We_P [didn’t_A] buy_V anything_P .', tr: 'Мы ничего не купили.', options: ['don’t', 'weren’t'] },
+      ],
+    },
+    {
+      id: 'past-simple.neg-base',
+      skill: 'После didn’t глагол в начальной форме',
+      focus: 'past.simple',
+      why: 'Прошедшее уже выражено в didn’t, поэтому глагол остаётся в начальной форме: didn’t go, не didn’t went.',
+      variants: [
+        { s: 'She_P didn’t_A [watch_V] the_D match_N .', tr: 'Она не смотрела матч.', options: ['watched', 'watches'] },
+        { s: 'We_P didn’t_A [go_V] out_R last_J night_N .', tr: 'Вчера вечером мы никуда не ходили.', options: ['went', 'gone'] },
+        { s: 'Tom_N didn’t_A [see_V] the_D message_N .', tr: 'Том не увидел сообщение.', options: ['saw', 'seen'] },
+      ],
+    },
+    {
+      id: 'past-simple.q-did',
+      skill: 'Did — вопрос в прошлом для всех лиц',
+      focus: 'past.simple',
+      why: 'Вопрос в Past Simple начинается с Did для любого лица: Did you sleep well? Did Anna call?',
+      variants: [
+        { s: '[Did_A] you_P sleep_V well_R ?', tr: 'Ты хорошо спал?', options: ['Do', 'Were'] },
+        { s: '[Did_A] Anna_N call_V you_P last_J night_N ?', tr: 'Анна звонила тебе вчера вечером?', options: ['Does', 'Was'] },
+        { s: '[Did_A] they_P enjoy_V the_D party_N ?', tr: 'Им понравилась вечеринка?', options: ['Do', 'Were'] },
+      ],
+    },
+    {
+      id: 'past-simple.q-base',
+      skill: 'После Did глагол в начальной форме',
+      focus: 'past.simple',
+      why: 'Прошедшее выражено в Did, поэтому глагол без изменений: Did you buy, не Did you bought.',
+      variants: [
+        { s: 'Did_A you_P [buy_V] the_D tickets_N ?', tr: 'Ты купил билеты?', options: ['bought', 'buys'] },
+        { s: 'Did_A she_P [pass_V] the_D exam_N ?', tr: 'Она сдала экзамен?', options: ['passed', 'passes'] },
+        { s: 'Did_A Max_N [find_V] his_P keys_N ?', tr: 'Макс нашёл свои ключи?', options: ['found', 'finds'] },
+      ],
+    },
+    {
+      id: 'past-simple.q-wh',
+      skill: 'Where / What time / Why + did',
+      focus: 'past.simple',
+      why: 'Вопросительное слово стоит перед did: Where did you buy it? Why did she leave?',
+      variants: [
+        { s: 'Where_R [did_A] you_P buy_V that_D jacket_N ?', tr: 'Где ты купил эту куртку?', options: ['do', 'were'] },
+        { s: 'What_D time_N [did_A] the_D film_N start_V ?', tr: 'Во сколько начался фильм?', options: ['does', 'was'] },
+        { s: 'Why_R [did_A] she_P leave_V early_R ?', tr: 'Почему она рано ушла?', options: ['does', 'was'] },
+      ],
+    },
+    {
+      id: 'past-simple.markers',
+      mode: 'pick',
+      skill: 'Подсказки прошлого: yesterday, ago, last…',
+      why: 'yesterday, ago, last week, in 2019 привязывают действие к закрытому отрезку прошлого — это Past Simple.',
+      variants: [
+        { s: 'Ben_N lost_V his_P wallet_N {yesterday_R} .', tr: 'Вчера Бен потерял кошелёк.', q: 'Найди слово-подсказку: это было в прошлом', model: 'He_P left_V two_M days_N {ago_R} .' },
+        { s: 'The_D shop_N closed_V two_M weeks_N {ago_R} .', tr: 'Магазин закрылся две недели назад.', q: 'Найди слово-подсказку: это было в прошлом', model: 'I_P visited_V Rome_N {last_J} year_N .' },
+        { s: 'They_P got_V married_J {last_J} summer_N .', tr: 'Прошлым летом они поженились.', q: 'Найди слово-подсказку: это было в прошлом', model: 'She_P called_V me_P {yesterday_R} .' },
+      ],
+    },
+    {
+      id: 'past-simple.ago',
+      skill: 'ago — «назад» ставится после периода',
+      focus: 'past.simple',
+      why: '«Два года назад» — two years ago: слово ago идёт после периода времени.',
+      variants: [
+        { s: 'We_P moved_V here_R two_M years_N [ago_R] .', tr: 'Мы переехали сюда два года назад.', options: ['last', 'since'] },
+        { s: 'I_P met_V Anna_N ten_M minutes_N [ago_R] .', tr: 'Я встретил Анну десять минут назад.', options: ['since', 'for'] },
+        { s: 'Tom_N left_V the_D office_N an_D hour_N [ago_R] .', tr: 'Том ушёл из офиса час назад.', options: ['last', 'for'] },
+      ],
+    },
+    {
+      id: 'past-simple.last-week',
+      skill: 'last week / last year — без предлога и артикля',
+      focus: 'past.simple',
+      why: '«На прошлой неделе» — last week, без предлога: не in last week и не past week.',
+      variants: [
+        { s: 'I_P phoned_V Tom_N [last_J] week_N .', tr: 'Я звонил Тому на прошлой неделе.', options: ['past', 'ago'] },
+        { s: 'They_P bought_V a_D car_N [last_J] month_N .', tr: 'В прошлом месяце они купили машину.', options: ['past', 'ago'] },
+        { s: 'Anna_N started_V her_P new_J job_N [last_J] Monday_N .', tr: 'В прошлый понедельник Анна начала новую работу.', options: ['past', 'ago'] },
+      ],
+    },
+    {
+      id: 'past-simple.order-stmt',
+      mode: 'order',
+      skill: 'Собрать: подлежащее + глагол в прошедшей форме',
+      focus: 'past.simple',
+      why: 'Порядок: кто — глагол в прошедшей форме — что — когда.',
+      variants: [
+        { s: 'We_P watched_V a_D funny_J film_N .', tr: 'Мы посмотрели смешной фильм.', options: ['watch', 'watches'] },
+        { s: 'Anna_N cleaned_V her_P room_N .', tr: 'Анна убрала свою комнату.', options: ['clean', 'cleans'] },
+        { s: 'Ben_N bought_V a_D new_J laptop_N .', tr: 'Бен купил новый ноутбук.', options: ['buy', 'buys'] },
+      ],
+    },
+    {
+      id: 'past-simple.order-neg',
+      mode: 'order',
+      skill: 'Собрать отрицание: подлежащее + didn’t + глагол',
+      focus: 'past.simple',
+      why: 'Порядок: кто — didn’t — глагол в начальной форме — остальное.',
+      variants: [
+        { s: 'I_P didn’t_A see_V the_D sign_N .', tr: 'Я не увидел знак.', options: ['saw', 'don’t'] },
+        { s: 'They_P didn’t_A buy_V the_D tickets_N .', tr: 'Они не купили билеты.', options: ['bought', 'doesn’t'] },
+        { s: 'She_P didn’t_A answer_V the_D phone_N .', tr: 'Она не ответила на звонок.', options: ['answered', 'wasn’t'] },
+      ],
+    },
+    {
+      id: 'past-simple.order-q',
+      mode: 'order',
+      skill: 'Собрать вопрос: (слово) + did + подлежащее + глагол',
+      focus: 'past.simple',
+      why: 'Порядок: вопросительное слово — did — кто — глагол в начальной форме.',
+      variants: [
+        { s: 'Did_A you_P lock_V the_D door_N ?', tr: 'Ты запер дверь?', options: ['do', 'locked'] },
+        { s: 'Where_R did_A they_P go_V on_I holiday_N ?', tr: 'Куда они ездили в отпуск?', options: ['do', 'went'] },
+        { s: 'What_P did_A he_P say_V ?', tr: 'Что он сказал?', options: ['does', 'said'] },
+      ],
+    },
+  ],
+} satisfies TopicBody

@@ -1,0 +1,474 @@
+/* Семья graph: граф предложения (дерево, члены, группы) и мост RU↔EN. Префиксы: sg- (граф), pb- (мост). Цвет — от data-pos слова. */
+
+/* ---------- Граф предложения ---------- */
+.sg {
+  --gs: 14px;
+  --fs: 15px;
+  min-width: 0;
+  font-size: 15px;
+  line-height: 20px;
+  color: var(--c1);
+}
+
+.sg svg {
+  display: block;
+  width: auto;
+  height: auto;
+  overflow: visible;
+}
+
+.sg .glyph {
+  width: var(--gs);
+  height: var(--gs);
+  vertical-align: baseline;
+}
+
+.sg-error {
+  padding: 10px 12px;
+  border-radius: 12px;
+  box-shadow: inset 0 0 0 1px var(--s2);
+  color: var(--danger-text);
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.sg-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 5px;
+  margin: -5px;
+  scrollbar-width: thin;
+}
+
+.sg-canvas {
+  position: relative;
+  margin: 0 auto;
+}
+
+.sg-lines {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+}
+
+/* Слово: плитка цвета части речи + глиф. */
+.sg-node,
+.sg-cell {
+  box-sizing: border-box;
+  border: 0;
+  color: var(--pt, var(--c1));
+  font-family: var(--font-ui);
+  font-size: var(--fs);
+  font-weight: 600;
+  line-height: 20px;
+  white-space: nowrap;
+  text-align: center;
+  transition: opacity var(--dur), background-color var(--dur), box-shadow var(--dur);
+}
+
+button.sg-node,
+button.sg-cell {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sg-node[data-sel],
+.sg-cell[data-sel] {
+  outline: 2px solid var(--c1);
+  outline-offset: 2px;
+}
+
+.sg-node[data-dim],
+.sg-cell[data-dim] {
+  opacity: 0.6;
+}
+
+.sg-noglyph {
+  display: block;
+  width: var(--gs);
+  height: var(--gs);
+}
+
+/* Дерево */
+.sg-node {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  height: var(--nh);
+  padding: 0 7px;
+  border-radius: 12px;
+  background: color-mix(in oklab, var(--pc, var(--c3)) 14%, var(--lv));
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--pc, var(--c3)) 40%, transparent);
+}
+
+.sg-node[data-on],
+.sg-cell[data-on] {
+  background: color-mix(in oklab, var(--pc, var(--c3)) 26%, var(--lv));
+  box-shadow: inset 0 0 0 2px var(--pc, var(--c1));
+}
+
+.sg-edge path {
+  fill: none;
+  stroke: var(--s3);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.sg-edge .sg-arrow {
+  fill: var(--s3);
+  stroke: none;
+}
+
+.sg-edge[data-dim] path {
+  stroke: var(--sep);
+}
+
+.sg-edge[data-dim] .sg-arrow {
+  fill: var(--sep);
+  stroke: none;
+}
+
+.sg-edge[data-on] path {
+  stroke: var(--pc);
+  stroke-width: 2.25;
+}
+
+.sg-edge[data-on] .sg-arrow {
+  fill: var(--pc);
+  stroke: none;
+}
+
+/* Подпись на связи: школьный вопрос */
+.sg-rel,
+.sg-group {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  height: 18px;
+  padding: 0 6px;
+  border-radius: 9px;
+  background: var(--lv);
+  box-shadow: inset 0 0 0 1px var(--sep);
+  color: var(--c2);
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.sg-group {
+  color: var(--pt, var(--c2));
+}
+
+.sg-rel[data-dim],
+.sg-group[data-dim] {
+  color: var(--c3);
+}
+
+.sg-rel[data-on],
+.sg-group[data-on] {
+  background: color-mix(in oklab, var(--pc, var(--c3)) 24%, var(--lv));
+  box-shadow: inset 0 0 0 1px var(--pc, var(--c1));
+  color: var(--pt, var(--c1));
+  font-weight: 600;
+}
+
+.sg-roottag {
+  position: absolute;
+  transform: translateX(-50%);
+  color: var(--c2);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.sg-roottag[data-on] {
+  color: var(--pt);
+  font-weight: 600;
+}
+
+.sg-roottag[data-dim] {
+  color: var(--c3);
+}
+
+/* Члены предложения */
+.sg-members {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 4px;
+}
+
+.sg-cell {
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 2px;
+  padding: 5px 0 4px;
+  border-radius: 12px;
+  background: transparent;
+}
+
+.sg-cell-abs {
+  position: absolute;
+  top: 0;
+  padding-bottom: 0;
+}
+
+.sg-word {
+  display: block;
+}
+
+.sg-underline {
+  display: block;
+  line-height: 0;
+  color: var(--c1);
+}
+
+.sg-line path {
+  stroke: currentColor;
+}
+
+.sg-cell[data-on] .sg-underline {
+  color: var(--pt);
+}
+
+.sg-member {
+  color: var(--c2);
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 500;
+}
+
+.sg-member[data-service] {
+  color: var(--c3);
+}
+
+.sg-cell[data-on] .sg-member {
+  color: var(--pt);
+  font-weight: 600;
+}
+
+/* Группы */
+.sg-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  --gs: 12px;
+  font-weight: 700;
+}
+
+.sg-bracket path {
+  fill: none;
+  stroke: var(--pc, var(--s3));
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sg-bracket[data-dim] path {
+  stroke: var(--sep);
+}
+
+.sg-bracket[data-on] path {
+  stroke-width: 2.5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sg-node,
+  .sg-cell {
+    transition: none;
+  }
+}
+
+/* ---------- Схема каталога: пара RU / EN ---------- */
+.sgv {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+}
+
+.sgv-lang {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.sgv-tag {
+  color: var(--c3);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+}
+
+/* ---------- Мост RU ↔ EN ---------- */
+.pb {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+  font-size: 15px;
+  line-height: 20px;
+  color: var(--c1);
+}
+
+.pb[data-compact] {
+  gap: 0;
+}
+
+.pb svg {
+  display: block;
+  width: auto;
+  height: auto;
+  overflow: visible;
+}
+
+.pb .glyph {
+  width: 14px;
+  height: 14px;
+  vertical-align: baseline;
+}
+
+.pb-note {
+  color: var(--c3);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.pb-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 3px;
+  margin: -3px;
+  scrollbar-width: thin;
+  transition: opacity var(--dur);
+}
+
+.pb-scroll[data-dim] {
+  opacity: 0.45;
+}
+
+/* Пары отделены линией: английская строка одной пары не должна читаться как русская следующей. */
+.pb-scroll + .pb-scroll {
+  padding-top: 14px;
+  border-top: 1px solid var(--sep);
+}
+
+/* В приглушённой паре слова не гасим второй раз — иначе текст не читается. */
+.pb-scroll[data-dim] .pb-cell[data-dim] {
+  opacity: 1;
+}
+
+.pb-canvas {
+  position: relative;
+  margin: 0 auto;
+}
+
+.pb-cell {
+  position: absolute;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  border-radius: 12px;
+  background: color-mix(in oklab, var(--pc, var(--c3)) 12%, var(--lv));
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--pc, var(--c3)) 36%, transparent);
+  color: var(--pt, var(--c1));
+  font-weight: 600;
+  white-space: nowrap;
+  transition: opacity var(--dur), background-color var(--dur), box-shadow var(--dur);
+}
+
+.pb-cell[data-on] {
+  background: color-mix(in oklab, var(--pc, var(--c3)) 26%, var(--lv));
+  box-shadow: inset 0 0 0 2px var(--pc, var(--c1));
+}
+
+.pb-cell[data-dim] {
+  opacity: 0.5;
+}
+
+.pb-noglyph {
+  display: block;
+  width: 14px;
+  height: 14px;
+}
+
+.pb-ending {
+  text-decoration: underline 2px var(--pc);
+  text-underline-offset: 3px;
+  text-decoration-skip-ink: none;
+}
+
+.pb-label {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--pt, var(--c1));
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.pb-label[data-side='bottom'] {
+  top: calc(100% + 3px);
+}
+
+.pb-label[data-side='top'] {
+  bottom: calc(100% + 3px);
+}
+
+.pb-ghost {
+  position: absolute;
+  box-sizing: border-box;
+  border-radius: 12px;
+  border: 1.5px dashed var(--s2);
+}
+
+.pb-links {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+}
+
+.pb-link {
+  fill: none;
+  stroke: var(--pc, var(--s3));
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  opacity: 0.7;
+}
+
+.pb-link[data-on] {
+  stroke-width: 2.5;
+  opacity: 1;
+}
+
+.pb-link[data-dim] {
+  stroke: var(--sep);
+  opacity: 1;
+}
+
+.pb-mid {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  height: 18px;
+  padding: 0 7px;
+  border-radius: 9px;
+  background: color-mix(in oklab, var(--pc, var(--c3)) 24%, var(--lv));
+  box-shadow: inset 0 0 0 1px var(--pc, var(--c1));
+  color: var(--pt, var(--c1));
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 600;
+  white-space: nowrap;
+  pointer-events: none;
+}

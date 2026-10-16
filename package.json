@@ -1,0 +1,29 @@
+{
+  "name": "english-visual",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build && node tools/inline.mjs",
+    "preview": "vite preview",
+    "check": "tsc --noEmit",
+    "test": "vitest run",
+    "validate": "vitest run tests/content.test.ts",
+    "smoke": "node tools/smoke.mjs",
+    "deploy": "bash tools/deploy.sh"
+  },
+  "dependencies": {
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "ts-fsrs": "5.4.2"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.1.1",
+    "typescript": "~6.0.3",
+    "vite": "8.3.1",
+    "vitest": "5.0.3"
+  }
+}

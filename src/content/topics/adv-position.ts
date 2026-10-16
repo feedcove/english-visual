@@ -1,0 +1,220 @@
+import type { TopicBody } from '../types'
+
+export default {
+  summary: 'Частота (always, often, never) — перед смысловым глаголом, но после am / is / are. Как, где, когда — в конце.',
+  ref: [
+    { kind: 'visual', visual: { id: 'adv-slots', focus: 'mid' }, caption: 'Три места наречия: в начале, рядом с глаголом и в конце' },
+    {
+      kind: 'rule',
+      title: 'Частота — перед глаголом',
+      text: 'always, usually, often, sometimes, rarely, never ставим прямо перед смысловым глаголом: I often walk to work. Между глаголом и дополнением наречие не вставляем.',
+      examples: [
+        { s: 'I_P often_R walk_V to_I work_N .', tr: 'Я часто хожу на работу пешком.' },
+        { s: 'Tom_N never_R eats_V meat_N .', tr: 'Том никогда не ест мясо.' },
+        { s: 'We_P sometimes_R eat_V out_R .', tr: 'Иногда мы ужинаем в ресторане.' },
+      ],
+    },
+    {
+      kind: 'rule',
+      title: 'После be и первого вспомогательного',
+      text: 'Если есть am / is / are (was / were), наречие частоты идёт после него: She is always late. Если есть вспомогательный или модальный глагол (have, can, will), то после первого из них: He has never been there. В вопросе наречие стоит после подлежащего: Do you often cook?',
+      examples: [
+        { s: 'She_P is_V always_R late_J .', tr: 'Она всегда опаздывает.' },
+        { s: 'He_P has_A never_R been_V there_R .', tr: 'Он там ни разу не был.' },
+        { s: 'Do_A you_P often_R cook_V ?', tr: 'Ты часто готовишь?' },
+      ],
+    },
+    {
+      kind: 'rule',
+      title: 'Как, где, когда — в конце',
+      text: 'Наречия образа действия (well, fast), места (here, upstairs) и времени (yesterday, today) ставим в конец предложения. Время можно вынести в начало. Степень (very, really) стоит прямо перед прилагательным: very cold.',
+      examples: [
+        { s: 'He_P speaks_V English_N well_R .', tr: 'Он хорошо говорит по-английски.' },
+        { s: 'Yesterday_R I_P called_V Tom_N .', tr: 'Вчера я позвонил Тому.' },
+        { s: 'It_P is_V very_R cold_J .', tr: 'Очень холодно.' },
+      ],
+    },
+    {
+      kind: 'contrast',
+      title: 'Как в русском',
+      ru: 'Я_P хорошо_R знаю_V Тома_N .',
+      en: 'I_P know_V Tom_N well_R .',
+      note: 'В русском наречие гуляет по предложению: «хорошо знаю Тома» и «знаю Тома хорошо». В английском его нельзя вставить между глаголом и дополнением: know Tom well.',
+    },
+    {
+      kind: 'mistakes',
+      items: [
+        { wrong: 'I_P go_V often_R to_I the_D gym_N .', right: 'I_P often_R go_V to_I the_D gym_N .', note: 'Частота стоит перед глаголом, а не после него.' },
+        { wrong: 'He_P speaks_V well_R English_N .', right: 'He_P speaks_V English_N well_R .', note: 'Не вставляй наречие между глаголом и дополнением.' },
+        { wrong: 'Tom_N is_V late_J always_R .', right: 'Tom_N is_V always_R late_J .', note: 'После am / is / are сначала наречие частоты.' },
+        { wrong: 'She_P never_R has_A been_V to_I Rome_N .', right: 'She_P has_A never_R been_V to_I Rome_N .', note: 'Наречие — после первого вспомогательного.' },
+        { wrong: 'The_D soup_N is_V hot_J very_R .', right: 'The_D soup_N is_V very_R hot_J .', note: 'Степень стоит перед прилагательным.' },
+      ],
+    },
+    { kind: 'tip', text: 'Проверка: нет ни am / is / are, ни вспомогательного — наречие частоты перед глаголом. Есть — сразу после первого из них.' },
+  ],
+  items: [
+    {
+      id: 'adv-position.freq-always',
+      skill: 'always — «всегда», стоит перед смысловым глаголом',
+      focus: 'mid',
+      why: 'always — это 100%: всегда, каждый раз. Оно стоит перед смысловым глаголом.',
+      variants: [
+        { s: 'Anna_N [always_R] arrives_V on_I time_N .', tr: 'Анна всегда приходит вовремя.', options: ['never', 'sometimes'] },
+        { s: 'My_P dad_N [always_R] drinks_V tea_N in_I the_D evening_N .', tr: 'Мой папа всегда пьёт чай по вечерам.', options: ['rarely', 'never'] },
+        { s: 'I_P [always_R] lock_V the_D door_N when_C I_P leave_V .', tr: 'Я всегда запираю дверь, когда ухожу.', options: ['rarely', 'never'] },
+      ],
+    },
+    {
+      id: 'adv-position.freq-never',
+      skill: 'never — «никогда», уже отрицание: без not и don’t',
+      focus: 'mid',
+      why: 'never само означает «никогда не». Добавлять not или doesn’t нельзя: Max never eats meat.',
+      variants: [
+        { s: 'Max_N [never_R] eats_V meat_N .', tr: 'Макс никогда не ест мясо.', options: ['not', 'doesn’t'] },
+        { s: 'My_P brother_N [never_R] cleans_V his_P room_N .', tr: 'Мой брат никогда не убирает в своей комнате.', options: ['not', 'doesn’t'] },
+        { s: 'Kate_N [never_R] drinks_V coffee_N after_I six_M .', tr: 'Кейт никогда не пьёт кофе после шести.', options: ['not', 'don’t'] },
+      ],
+    },
+    {
+      id: 'adv-position.freq-usually',
+      skill: 'usually — «обычно», перед смысловым глаголом',
+      focus: 'mid',
+      why: 'usually — в большинстве случаев, обычно. Стоит перед смысловым глаголом: usually takes.',
+      variants: [
+        { s: 'Ben_N [usually_R] takes_V the_D train_N to_I work_N .', tr: 'Бен обычно ездит на работу на поезде.', options: ['never', 'rarely'], accept: ['normally'] },
+        { s: 'We_P [usually_R] go_V shopping_N on_I Saturdays_N .', tr: 'По субботам мы обычно ходим за покупками.', options: ['never', 'rarely'], accept: ['normally'] },
+        { s: 'Kate_N [usually_R] reads_V before_I bed_N .', tr: 'Кейт обычно читает перед сном.', options: ['rarely', 'always'], accept: ['normally'] },
+      ],
+    },
+    {
+      id: 'adv-position.freq-sometimes',
+      skill: 'sometimes — «иногда», перед смысловым глаголом',
+      focus: 'mid',
+      why: 'sometimes — иногда, не всегда и не часто. Перед смысловым глаголом: sometimes forgets.',
+      variants: [
+        { s: 'I_P [sometimes_R] work_V from_I home_N .', tr: 'Иногда я работаю из дома.', options: ['always', 'never'], accept: ['occasionally'] },
+        { s: 'Tom_N [sometimes_R] forgets_V his_P keys_N .', tr: 'Том иногда забывает ключи.', options: ['often', 'never'], accept: ['occasionally'] },
+        { s: 'My_P neighbours_N [sometimes_R] play_V loud_J music_N .', tr: 'Мои соседи иногда включают громкую музыку.', options: ['always', 'rarely'], accept: ['occasionally'] },
+      ],
+    },
+    {
+      id: 'adv-position.freq-rarely',
+      skill: 'rarely — «редко», перед смысловым глаголом',
+      focus: 'mid',
+      why: 'rarely — редко, почти никогда. Отрицание не нужно: She rarely eats sweets.',
+      variants: [
+        { s: 'She_P [rarely_R] eats_V sweets_N .', tr: 'Она редко ест сладкое.', options: ['often', 'always'], accept: ['seldom', 'hardly ever'] },
+        { s: 'We_P [rarely_R] go_V to_I the_D cinema_N .', tr: 'Мы редко ходим в кино.', options: ['often', 'usually'], accept: ['seldom', 'hardly ever'] },
+        { s: 'Tom_N [rarely_R] calls_V his_P parents_N .', tr: 'Том редко звонит родителям.', options: ['often', 'always'], accept: ['seldom', 'hardly ever'] },
+      ],
+    },
+    {
+      id: 'adv-position.freq-main',
+      mode: 'order',
+      skill: 'Частота стоит перед смысловым глаголом',
+      focus: 'mid',
+      why: 'Наречие частоты ставим прямо перед смысловым глаголом: always drinks, never eats, rarely calls.',
+      variants: [
+        { s: 'Tom_N always_R drinks_V tea_N in_I the_D morning_N .', tr: 'Том всегда пьёт чай по утрам.', accept: ['in the morning Tom always drinks tea.'] },
+        { s: 'Anna_N never_R eats_V breakfast_N .', tr: 'Анна никогда не завтракает.' },
+        { s: 'My_P brother_N rarely_R calls_V me_P .', tr: 'Мой брат редко мне звонит.' },
+      ],
+    },
+    {
+      id: 'adv-position.freq-be',
+      mode: 'order',
+      skill: 'После am / is / are — наречие частоты, потом остальное',
+      focus: 'mid-be',
+      why: 'С глаголом be наречие идёт после него: is never at home, is often tired, am usually at home.',
+      variants: [
+        { s: 'Tom_N is_V never_R at_I home_N on_I Sundays_N .', tr: 'По воскресеньям Тома никогда нет дома.', accept: ['on Sundays Tom is never at home.'] },
+        { s: 'Ben_N is_V often_R tired_J after_I work_N .', tr: 'Бен часто устаёт после работы.', accept: ['often Ben is tired after work.', 'after work Ben is often tired.'] },
+        { s: 'I_P am_V usually_R busy_J on_I Mondays_N .', tr: 'По понедельникам я обычно занят.', accept: ['usually I am busy on Mondays.', 'on Mondays I am usually busy.'] },
+      ],
+    },
+    {
+      id: 'adv-position.freq-aux',
+      mode: 'order',
+      skill: 'Со вспомогательным — наречие после первого вспомогательного',
+      focus: 'mid',
+      why: 'Вспомогательный или модальный (has, can, will) идёт первым, наречие — сразу за ним, потом смысловой глагол.',
+      variants: [
+        { s: 'She_P has_A never_R been_V to_I Scotland_N .', tr: 'Она ни разу не была в Шотландии.' },
+        { s: 'You_P can_A always_R call_V me_P .', tr: 'Ты всегда можешь мне позвонить.' },
+        { s: 'I_P will_A never_R forget_V that_D trip_N .', tr: 'Я никогда не забуду ту поездку.' },
+      ],
+    },
+    {
+      id: 'adv-position.freq-question',
+      mode: 'order',
+      skill: 'В вопросе наречие частоты — после подлежащего',
+      focus: 'mid',
+      why: 'Порядок вопроса не меняется, наречие встаёт после подлежащего: Do you often…? Does Anna usually…?',
+      variants: [
+        { s: 'Do_A you_P often_R eat_V out_R ?', tr: 'Ты часто ужинаешь в ресторанах?', accept: ['Do you eat out often?'] },
+        { s: 'Does_A Anna_N usually_R walk_V to_I work_N ?', tr: 'Анна обычно ходит на работу пешком?' },
+        { s: 'Is_V Tom_N always_R late_J for_I work_N ?', tr: 'Том всегда опаздывает на работу?' },
+      ],
+    },
+    {
+      id: 'adv-position.manner-end',
+      mode: 'order',
+      skill: 'Как? — в конце, после дополнения',
+      focus: 'end',
+      why: 'Наречие образа действия стоит после дополнения: speaks English well, а не speaks well English.',
+      variants: [
+        { s: 'He_P speaks_V English_N well_R .', tr: 'Он хорошо говорит по-английски.' },
+        { s: 'Kate_N plays_V the_D piano_N badly_R .', tr: 'Кейт плохо играет на пианино.' },
+        { s: 'Ben_N ate_V his_P breakfast_N quickly_R .', tr: 'Бен быстро съел свой завтрак.', accept: ['Ben quickly ate his breakfast'] },
+      ],
+    },
+    {
+      id: 'adv-position.place-end',
+      mode: 'order',
+      skill: 'Где? — в конце: upstairs, outside, abroad',
+      focus: 'end',
+      why: 'Наречие места ставим в конец предложения, после дополнения.',
+      variants: [
+        { s: 'Tom_N left_V his_P keys_N upstairs_R .', tr: 'Том оставил ключи наверху.' },
+        { s: 'Anna_N parked_V her_P car_N outside_R .', tr: 'Анна припарковала машину на улице.' },
+        { s: 'My_P brother_N lives_V abroad_R .', tr: 'Мой брат живёт за границей.' },
+      ],
+    },
+    {
+      id: 'adv-position.time-front-end',
+      mode: 'order',
+      skill: 'Когда? — в конце или в начале предложения',
+      focus: 'front',
+      why: 'yesterday, last week, this morning стоят в конце или в начале. Между подлежащим и глаголом их не ставим.',
+      variants: [
+        { s: 'Tom_N visited_V us_P yesterday_R .', tr: 'Том навестил нас вчера.', accept: ['yesterday Tom visited us.'] },
+        { s: 'Kate_N missed_V the_D bus_N this_D morning_N .', tr: 'Кейт опоздала на автобус сегодня утром.', accept: ['this morning Kate missed the bus.'] },
+        { s: 'Anna_N bought_V a_D new_J phone_N last_J week_N .', tr: 'Анна купила новый телефон на прошлой неделе.', accept: ['last week Anna bought a new phone.'] },
+      ],
+    },
+    {
+      id: 'adv-position.very-not-much',
+      skill: 'Перед прилагательным «очень» — very или really, не much',
+      focus: 'before-adj',
+      why: 'Степень перед прилагательным — very или really. much с прилагательным не стоит: very difficult.',
+      variants: [
+        { s: 'This_D exam_N is_V [very_R] difficult_J .', tr: 'Этот экзамен очень трудный.', options: ['much', 'well'], accept: ['really'] },
+        { s: 'Our_P new_J neighbours_N are_V [really_R] friendly_J .', tr: 'Наши новые соседи очень дружелюбные.', options: ['much', 'fast'], accept: ['very'] },
+        { s: 'The_D hotel_N was_V [very_R] expensive_J .', tr: 'Отель был очень дорогим.', options: ['much', 'well'], accept: ['really'] },
+      ],
+    },
+    {
+      id: 'adv-position.very-adj-order',
+      mode: 'order',
+      skill: 'very стоит прямо перед прилагательным',
+      focus: 'before-adj',
+      why: 'very описывает прилагательное и стоит перед ним: very small. После прилагательного very не ставят.',
+      variants: [
+        { s: 'My_P new_J flat_N is_V very_R small_J .', tr: 'Моя новая квартира очень маленькая.' },
+        { s: 'Our_P teacher_N is_V very_R kind_J .', tr: 'Наш учитель очень добрый.' },
+        { s: 'The_D tickets_N were_V very_R cheap_J .', tr: 'Билеты были очень дешёвыми.' },
+      ],
+    },
+  ],
+} satisfies TopicBody
